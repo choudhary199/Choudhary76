@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>📖 Ankul Sir (English VOD) · SSC Pratham 2026</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<style>
+:root{
+  --blue-50:#eef6ff; --blue-100:#e0f0ff; --blue-200:#c7e3ff; --blue-300:#a3d1ff;
+  --blue-500:#2f8bff; --blue-600:#1f6fe0; --blue-700:#1656b3; --blue-900:#0d3a75;
+  --ink-900:#0b1a33; --ink-700:#33455e; --ink-500:#5b6b85; --ink-300:#8a97ac;
+  --surface:#ffffff; --surface-soft:#f4f9ff; --border:#dfeaf7;
+  --pdf:#e0473e; --video:#2f8bff; --yt:#d92d20;
+  --radius-lg:22px; --radius-md:16px; --radius-sm:10px;
+  --shadow-sm:0 1px 2px rgba(13,58,117,0.06), 0 1px 1px rgba(13,58,117,0.04);
+  --shadow-md:0 6px 20px rgba(20,70,140,0.08), 0 2px 6px rgba(20,70,140,0.05);
+  --shadow-lg:0 16px 40px rgba(20,70,140,0.14), 0 4px 12px rgba(20,70,140,0.06);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body{
+  margin:0; min-height:100vh;
+  font-family:'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color:var(--ink-900);
+  background:
+    radial-gradient(1100px 600px at 90% -10%, rgba(47,139,255,0.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(47,139,255,0.08), transparent 55%),
+    linear-gradient(180deg, #f2f8ff 0%, #eaf3fd 100%);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{ background:var(--blue-200); }
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:var(--blue-200); border-radius:20px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--blue-300); }
+
+.wrap{ max-width:1180px; margin:0 auto; padding:0 1rem 3rem; }
+
+.site-header{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
+  background:rgba(244,249,255,0.86); border-bottom:1px solid rgba(47,139,255,0.14);
+}
+.header-inner{ max-width:1180px; margin:0 auto; padding:0.9rem 1rem 1rem; }
+.brand-row{ display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.6rem; }
+.brand{ display:flex; align-items:center; gap:0.65rem; min-width:0; }
+.back-btn{
+  flex:none; display:flex; align-items:center; justify-content:center; gap:0.3rem;
+  width:auto; height:40px; padding:0 0.8rem; border-radius:12px; border:1.5px solid var(--border);
+  background:var(--surface); color:var(--ink-700); font-weight:700; font-size:0.82rem;
+  text-decoration:none; box-shadow:var(--shadow-sm); transition:transform .12s var(--ease);
+}
+.back-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); }
+.back-btn svg{ width:16px; height:16px; }
+.brand-icon{
+  flex:none; width:44px; height:44px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center; font-size:1.35rem;
+  background:linear-gradient(135deg, var(--blue-500), var(--blue-700));
+  box-shadow:0 6px 16px rgba(31,111,224,0.35); color:#fff;
+}
+.brand-text{ min-width:0; }
+.brand-text h1{ margin:0; font-size:1.1rem; font-weight:800; letter-spacing:-0.01em; color:var(--ink-900); line-height:1.25; overflow-wrap:anywhere; }
+.brand-text p{ margin:0.1rem 0 0; font-size:0.76rem; color:var(--ink-500); font-weight:600; }
+
+.tab-row{ display:flex; gap:0.5rem; margin-top:0.7rem; }
+.tab-btn{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:0.4rem;
+  padding:0.65rem 0.8rem; border-radius:14px; border:1.5px solid var(--border);
+  background:var(--surface); color:var(--ink-500); font-weight:800; font-size:0.85rem;
+  cursor:pointer; transition:all .15s var(--ease); box-shadow:var(--shadow-sm);
+}
+.tab-btn.active{ background:linear-gradient(135deg, var(--blue-500), var(--blue-700)); color:#fff; border-color:transparent; box-shadow:var(--shadow-md); }
+.tab-btn .count{ font-weight:700; opacity:0.85; font-size:0.75rem; }
+
+.search-row{ display:flex; gap:0.55rem; align-items:center; margin-top:0.7rem; }
+.search-box{ position:relative; flex:1; min-width:0; }
+.search-box svg.icon-search{ position:absolute; left:14px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:var(--ink-300); pointer-events:none; }
+.search-box input{
+  width:100%; padding:0.75rem 2.6rem 0.75rem 2.6rem; font-size:0.95rem; font-weight:500;
+  border-radius:14px; border:1.5px solid var(--border); background:var(--surface);
+  color:var(--ink-900); box-shadow:var(--shadow-sm); outline:none;
+  transition:border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.search-box input::placeholder{ color:var(--ink-300); font-weight:500; }
+.search-box input:focus{ border-color:var(--blue-500); box-shadow:0 0 0 4px rgba(47,139,255,0.14), var(--shadow-sm); }
+.clear-btn{
+  position:absolute; right:8px; top:50%; transform:translateY(-50%); width:26px; height:26px;
+  border-radius:50%; border:none; background:var(--blue-100); color:var(--blue-700);
+  display:none; align-items:center; justify-content:center; cursor:pointer; transition:background .15s;
+}
+.clear-btn svg{ width:14px; height:14px; }
+.clear-btn.show{ display:flex; }
+.clear-btn:hover{ background:var(--blue-200); }
+
+.icon-btn-group{ display:flex; gap:0.4rem; flex:none; }
+.icon-btn{
+  display:flex; align-items:center; justify-content:center; gap:0.35rem;
+  padding:0 0.8rem; height:44px; border-radius:14px; border:1.5px solid var(--border);
+  background:var(--surface); color:var(--ink-700); font-weight:700; font-size:0.82rem;
+  cursor:pointer; white-space:nowrap; box-shadow:var(--shadow-sm);
+  transition:transform .12s var(--ease), box-shadow .12s var(--ease), border-color .12s;
+}
+.icon-btn svg{ width:17px; height:17px; flex:none; }
+.icon-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); border-color:var(--blue-300); }
+
+.breadcrumb{ display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap; font-size:0.8rem; color:var(--ink-500); font-weight:600; margin-top:0.65rem; min-height:1.1rem; }
+
+.folder-grid{ display:flex; flex-direction:column; gap:0.85rem; margin-top:1.4rem; }
+.folder-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm); overflow:hidden; animation:fadeIn .35s var(--ease) both;
+  transition:box-shadow .18s var(--ease), border-color .18s var(--ease);
+}
+.folder-card:hover{ box-shadow:var(--shadow-md); border-color:var(--blue-200); }
+.folder-card.hidden-card{ display:none; }
+.folder-header{
+  position:relative; display:flex; align-items:center; gap:0.8rem; padding:0.95rem 1.1rem;
+  cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+}
+.folder-header:hover{ background:var(--surface-soft); }
+.folder-icon-wrap{
+  flex:none; width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(150deg, var(--blue-100), var(--blue-50)); font-size:1.3rem;
+  transition:transform .28s var(--ease), background .28s var(--ease);
+}
+.folder-card.open .folder-icon-wrap{ background:linear-gradient(150deg, var(--blue-500), var(--blue-700)); transform:scale(1.03); }
+.folder-title-block{ flex:1; min-width:0; }
+.folder-title{ margin:0; font-size:0.98rem; font-weight:700; color:var(--ink-900); letter-spacing:-0.01em; overflow-wrap:anywhere; word-break:break-word; }
+.folder-title mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+.folder-meta{ display:flex; align-items:center; gap:0.5rem; flex:none; }
+.file-count-badge{ background:var(--blue-50); color:var(--blue-700); font-size:0.72rem; font-weight:800; padding:0.28rem 0.6rem; border-radius:20px; border:1px solid var(--blue-100); white-space:nowrap; }
+.chevron{ flex:none; width:20px; height:20px; color:var(--ink-300); transition:transform .28s var(--ease), color .2s; }
+.folder-card.open .chevron{ transform:rotate(180deg); color:var(--blue-600); }
+
+.folder-body{ max-height:0; overflow:hidden; transition:max-height .32s var(--ease); }
+.folder-body-inner{ padding:0 1.1rem 1rem; border-top:1px solid var(--border); margin-top:0; }
+.file-list{ display:flex; flex-direction:column; gap:0.5rem; padding-top:0.85rem; }
+
+.file-item{
+  display:flex; align-items:center; gap:0.7rem; padding:0.65rem 0.7rem; border-radius:var(--radius-md);
+  background:var(--surface-soft); border:1px solid transparent; flex-wrap:wrap;
+  animation:slideDown .28s var(--ease) both;
+  transition:transform .14s var(--ease), box-shadow .14s var(--ease), border-color .14s, background .14s;
+}
+.file-item:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:var(--blue-200); background:var(--surface); }
+.file-name{ flex:1 1 160px; min-width:0; font-size:0.85rem; font-weight:600; color:var(--ink-700); overflow-wrap:anywhere; word-break:break-word; line-height:1.35; }
+.file-name mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+.file-actions{ display:flex; gap:0.4rem; flex:none; flex-wrap:wrap; }
+.open-btn{
+  display:flex; align-items:center; gap:0.3rem; padding:0.42rem 0.75rem; border-radius:10px;
+  background:var(--surface); border:1.5px solid var(--border); font-size:0.75rem; font-weight:800;
+  text-decoration:none; white-space:nowrap; cursor:pointer; transition:background .15s, color .15s, border-color .15s, transform .12s;
+}
+.open-btn svg{ width:13px; height:13px; }
+.open-btn.video{ color:var(--blue-700); }
+.open-btn.video:hover{ background:linear-gradient(135deg, var(--blue-500), var(--blue-600)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+.open-btn.pdf{ color:var(--pdf); }
+.open-btn.pdf:hover{ background:linear-gradient(135deg, #ff6b61, var(--pdf)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+.open-btn.yt{ color:var(--yt); }
+.open-btn.yt:hover{ background:linear-gradient(135deg, #ff5c4d, var(--yt)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+
+.empty-state{ display:flex; flex-direction:column; align-items:center; justify-content:center; padding:3.5rem 1rem; text-align:center; color:var(--ink-500); animation:fadeIn .3s var(--ease) both; }
+.empty-state svg{ width:64px; height:64px; color:var(--blue-200); margin-bottom:1rem; }
+.empty-state h3{ margin:0 0 0.35rem; color:var(--ink-900); font-size:1.05rem; }
+.empty-state p{ margin:0; font-size:0.85rem; max-width:320px; }
+
+@keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
+@keyframes slideDown{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
+@media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; } }
+
+.wa-fab{
+  position:fixed; bottom:22px; right:22px; z-index:60; width:58px; height:58px; border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#1aa851); color:#fff; display:flex; align-items:center; justify-content:center;
+  box-shadow:var(--shadow-lg); text-decoration:none; transition:transform .15s var(--ease);
+}
+.wa-fab:hover{ transform:translateY(-2px) scale(1.05); }
+.wa-fab svg{ width:28px; height:28px; }
+
+/* Video popup */
+.popup-overlay{ position:fixed; inset:0; z-index:80; background:rgba(11,26,51,0.75); display:none; align-items:center; justify-content:center; padding:1rem; }
+.popup-overlay.show{ display:flex; }
+.popup-content{ position:relative; width:100%; max-width:900px; }
+.video-container{ position:relative; width:100%; padding-top:56.25%; background:#000; border-radius:16px; overflow:hidden; }
+.video-frame{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+.close-button{ position:absolute; top:-42px; right:0; background:rgba(255,255,255,0.15); color:#fff; border:none; width:34px; height:34px; border-radius:50%; font-size:1.3rem; cursor:pointer; }
+
+body.has-fab .wrap{ padding-bottom:2rem; }
+
+@media (max-width:640px){
+  .brand-text h1{ font-size:0.98rem; }
+  .icon-btn .label{ display:none; }
+  .icon-btn{ padding:0 0.65rem; width:44px; }
+  .folder-title{ font-size:0.9rem; }
+  .file-name{ font-size:0.8rem; }
+  .wrap{ padding:0 0.65rem 2.5rem; }
+  .header-inner{ padding:0.75rem 0.65rem 0.85rem; }
+  .file-item{ flex-direction:column; align-items:stretch; }
+  .file-actions{ justify-content:flex-start; }
+}
+</style>
+<style id="cm-theme">
+/* ---- Choudhary Mehfil theme: cream + orange, numbered chapter cards ---- */
+:root{
+  --blue-50:#fff5ee; --blue-100:#ffe9dc; --blue-200:#ffd2b8; --blue-300:#ffb68e;
+  --blue-500:#f2602a; --blue-600:#e0501c; --blue-700:#c23f10; --blue-900:#5a2208;
+  --ink-900:#1a1412; --ink-700:#3d322c; --ink-500:#6f625a; --ink-300:#a2958b;
+  --surface:#ffffff; --surface-soft:#faf5ef; --border:#eee4d8;
+  --shadow-sm:0 1px 2px rgba(60,30,10,.05); --shadow-md:0 8px 22px rgba(90,40,10,.09); --shadow-lg:0 16px 40px rgba(90,40,10,.14);
+}
+body{ background:radial-gradient(900px 500px at 100% -10%, rgba(242,96,42,.10), transparent 60%), linear-gradient(180deg,#f7f1ea 0%,#f3ebe2 100%) !important; }
+.site-header{ background:rgba(247,241,234,.9) !important; border-bottom:1px solid rgba(242,96,42,.14) !important; }
+.brand-icon{ padding:0 !important; overflow:hidden; background:#fff !important; box-shadow:0 6px 16px rgba(194,63,16,.30) !important; border:2px solid #fff; }
+.brand-icon img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:50%; }
+.brand-icon{ border-radius:50% !important; }
+
+/* chapter cards */
+.folder-grid{ counter-reset:chap; gap:.8rem !important; }
+.folder-card{ counter-increment:chap; border-radius:26px !important; border:1px solid var(--border) !important; box-shadow:0 1px 0 rgba(255,255,255,.8) inset, var(--shadow-sm) !important; }
+.folder-card.open{ border-color:#e5d3c2 !important; box-shadow:var(--shadow-md) !important; }
+.folder-header{ gap:1rem !important; padding:1.15rem 1.2rem !important; }
+.folder-header:hover{ background:#fffaf5 !important; }
+.folder-icon-wrap{ width:auto !important; height:auto !important; min-width:2.6rem; background:none !important; border-radius:0 !important; transform:none !important; font-size:0 !important; justify-content:flex-start !important; }
+.folder-icon-wrap::before{ content:counter(chap, decimal-leading-zero); font-family:Georgia,'Times New Roman',serif; font-style:italic; font-weight:400; font-size:2.1rem; line-height:1; color:#f2602a; letter-spacing:-.03em; }
+.folder-title{ font-size:1.12rem !important; font-weight:700 !important; line-height:1.25; }
+.folder-title-block .file-count-badge{ display:block; background:none !important; border:0 !important; padding:0 !important; margin-top:.3rem; font-size:.9rem !important; font-weight:500 !important; color:#9d9088 !important; }
+.folder-meta{ gap:0 !important; }
+.chevron{ box-sizing:content-box; width:20px !important; height:20px !important; padding:13px; border-radius:50%; background:#f2ece5; color:#3d322c !important; transition:all .25s var(--ease) !important; }
+.folder-header:hover .chevron, .folder-card.open .chevron{ background:#1a1412 !important; color:#fff !important; }
+.tab-btn.active{ background:linear-gradient(135deg,#f2602a,#c23f10) !important; }
+</style>
+</head>
+<body class="has-fab">
+
+<header class="site-header">
+<div class="header-inner">
+<div class="brand-row">
+<a class="back-btn" href="ssc-pratham-2026-vod.html">
+<svg fill="none" viewbox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3"></path></svg>
+        Back
+      </a>
+<div class="brand" style="flex:1; justify-content:center;">
+<div class="brand-icon"><img src="channel-dp.jpg" alt="" onerror="this.parentNode.textContent='📖';this.remove&&0"></div>
+<div class="brand-text">
+<h1>Ankul Sir (English VOD)</h1>
+<p>SSC Pratham 2026 · VOD Batch 1</p>
+</div>
+</div>
+<div style="width:70px"></div>
+</div>
+<div class="tab-row"><button class="tab-btn active" id="tabBtnClasses" onclick="showTab('classes')">🎬 Classes <span class="count">(215)</span></button><button class="tab-btn" id="tabBtnNotes" onclick="showTab('notes')">📄 Notes <span class="count">(94)</span></button></div>
+</div>
+</header>
+<div class="wrap">
+<div class="panel" id="panelClasses" style="display:block">
+<div class="search-row">
+<div class="search-box">
+<svg class="icon-search" fill="none" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input autocomplete="off" id="classesSearchInput" placeholder="Search classes…" type="text"/>
+<button aria-label="Clear search" class="clear-btn" id="classesClearBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-linecap="round" stroke-width="2.4"></path></svg>
+</button>
+</div>
+<div class="icon-btn-group">
+<button class="icon-btn" id="classesExpandAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Expand</span>
+</button>
+<button class="icon-btn" id="classesCollapseAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Collapse</span>
+</button>
+</div>
+</div>
+<div class="breadcrumb" id="classesBreadcrumb"></div>
+<div class="folder-grid" id="classesGrid"></div>
+</div>
+<div class="panel" id="panelNotes" style="display:none">
+<div class="search-row">
+<div class="search-box">
+<svg class="icon-search" fill="none" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input autocomplete="off" id="notesSearchInput" placeholder="Search notes…" type="text"/>
+<button aria-label="Clear search" class="clear-btn" id="notesClearBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-linecap="round" stroke-width="2.4"></path></svg>
+</button>
+</div>
+<div class="icon-btn-group">
+<button class="icon-btn" id="notesExpandAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Expand</span>
+</button>
+<button class="icon-btn" id="notesCollapseAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Collapse</span>
+</button>
+</div>
+</div>
+<div class="breadcrumb" id="notesBreadcrumb"></div>
+<div class="folder-grid" id="notesGrid"></div>
+</div>
+</div>
+<!-- Video Popup -->
+<div class="popup-overlay" id="videoPopup" onclick="closeVideoPopup(event)">
+<div class="popup-content" onclick="event.stopPropagation()">
+<button class="close-button" onclick="closeVideoPopup()">×</button>
+<div class="video-container"><iframe allowfullscreen="" class="video-frame" id="videoFrame" src=""></iframe></div>
+</div>
+</div>
+<script>
+
+const ICONS = {
+  video: '<svg viewBox="0 0 24 24" fill="none"><path d="M15 10.5 19.2 8a1 1 0 0 1 1.5.87v6.26a1 1 0 0 1-1.5.87L15 13.5" stroke="none" fill="currentColor"/><rect x="3" y="6.5" width="12" height="11" rx="2.2" fill="currentColor"/></svg>',
+  pdf: '<svg viewBox="0 0 24 24" fill="none"><path d="M7 3.5h7.5L19 8v11.5A1.5 1.5 0 0 1 17.5 21h-10A1.5 1.5 0 0 1 6 19.5v-14A1.5 1.5 0 0 1 7 3.5Z" fill="currentColor"/></svg>',
+  yt: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4.1-1.3.1-2.1.9-.6.7-.8 2.2-.8 2.2S2.2 9 2.2 10.8v1.4C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.2c.8.8 1.9.8 2.3.9C7 19 12 19 12 19s3.9 0 6.7-.2c.4-.1 1.3-.1 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.8.2-3.6v-1.4c0-1.8-.2-3.6-.2-3.6ZM10 14.5v-5l4.5 2.5-4.5 2.5Z"/></svg>',
+  chevron: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  emptyBox: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 8l8-4 8 4-8 4-8-4Zm0 0v8l8 4m0-12v12m8-12v8l-8 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+
+function showTab(tab){
+  const panelClasses = document.getElementById('panelClasses');
+  const panelNotes = document.getElementById('panelNotes');
+  const btnClasses = document.getElementById('tabBtnClasses');
+  const btnNotes = document.getElementById('tabBtnNotes');
+  if (panelClasses) panelClasses.style.display = (tab === 'classes') ? 'block' : 'none';
+  if (panelNotes) panelNotes.style.display = (tab === 'notes') ? 'block' : 'none';
+  if (btnClasses) btnClasses.classList.toggle('active', tab === 'classes');
+  if (btnNotes) btnNotes.classList.toggle('active', tab === 'notes');
+}
+
+window.openClassVideo = function(url, isDRM){
+  if (isDRM){
+    window.open(url, '_blank');
+  } else {
+    const popup = document.getElementById('videoPopup');
+    const frame = document.getElementById('videoFrame');
+    frame.src = url;
+    popup.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+};
+function closeVideoPopup(event){
+  if (event && event.target !== event.currentTarget) return;
+  const popup = document.getElementById('videoPopup');
+  const frame = document.getElementById('videoFrame');
+  popup.classList.remove('show');
+  frame.src = '';
+  document.body.style.overflow = 'auto';
+}
+document.addEventListener('keydown', function(event){ if (event.key === 'Escape') closeVideoPopup(); });
+
+
+(function(){
+  const rawData = [{"name": "The Sentence (5)", "items": [{"title": "(All Notes) Basic Grammar Class 01 | The Sentence", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364382812112/6364382812112.m3u8", "drm": false}, {"title": "(All Notes) Basic Grammar Class 02 | The Sentence", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364851207112/6364851207112.m3u8", "drm": false}, {"title": "(All Notes) Basic Grammar Class 03 | The Sentence", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364451629112/6364451629112.m3u8", "drm": false}, {"title": "(All Notes) Basic Grammar Class 04 | The Sentence", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364540905112/6364540905112.m3u8", "drm": false}, {"title": "(All Notes) Basic Grammar Class 05 | The Sentence", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364585244112/6364585244112.m3u8", "drm": false}]}, {"name": "Understanding Sentences (2)", "items": [{"title": "(All Notes) Basic Grammar Class 06 | Understanding Sentences", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/6364641427112/6364641427112.m3u8", "drm": false}, {"title": "(All Notes) Basic Grammar Class 07 | Understanding Sentences", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364693108112/6364693108112.m3u8", "drm": false}]}, {"name": "Adjectives and Determiners (1)", "items": [{"title": "(All Notes) Basic Grammar Class 08 | Adjectives and Determiners", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364853387112/6364853387112.m3u8", "drm": false}]}, {"name": "Types of Determiners (1)", "items": [{"title": "(All Notes) Basic Grammar Class 09 | Types of Determiners", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364895257112/6364895257112.m3u8", "drm": false}]}, {"name": "Types of Verbs (1)", "items": [{"title": "(All Notes) Basic Grammar Class 10 | Types of Verbs", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364942711112/6364942711112.m3u8", "drm": false}]}, {"name": "Linking Verbs (1)", "items": [{"title": "(All Notes) Basic Grammar Class 11 | Linking Verbs", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6364987593112/6364987593112.m3u8", "drm": false}]}, {"name": "Non-Finite Verbs (1)", "items": [{"title": "(All Notes) Basic Grammar Class-12 | Non-Finite Verbs", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6365039936112/6365039936112.m3u8", "drm": false}]}, {"name": "Participles (1)", "items": [{"title": "(All Notes) Basic Grammar Class-13 | Participles", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365154426112/6365154426112.m3u8", "drm": false}]}, {"name": "Gerund and Present Participle (1)", "items": [{"title": "(All Notes) Basic Grammar Class-14 | Gerund and Present Participle", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6365201939112/6365201939112.m3u8", "drm": false}]}, {"name": "Infinitives (1)", "items": [{"title": "(All Notes) Basic Grammar Class-15 | Infinitives", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365244347112/6365244347112.m3u8", "drm": false}]}, {"name": "Idioms and Phrases (2)", "items": [{"title": "(All Notes) Basic Grammar Class-16 | Idioms and Phrases", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365289651112/6365289651112.m3u8", "drm": false}, {"title": "(All Notes) Basic Grammar Class-17 | Idioms and Phrases", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365321404112/6365321404112.m3u8", "drm": false}]}, {"name": "Conjunction (11)", "items": [{"title": "(All Notes) Class-01 | Conjunction - 01", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/DJ6VgBs3-Qk/DJ6VgBs3-Qk.m3u8", "drm": false}, {"title": "(All Notes) Class-02 | Conjunction - 02", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/NpgP905J82g/NpgP905J82g.m3u8", "drm": false}, {"title": "(All Notes) Class-03 | Conjunction - 03", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/tPfl6ghYvPE/tPfl6ghYvPE.m3u8", "drm": false}, {"title": "(All Notes) Class-04 | Conjunction - 04", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/SlzZ-5Paybk/SlzZ-5Paybk.m3u8", "drm": false}, {"title": "(All Notes) Class-05 | Conjunction - 05", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/bcKEU8ANN4Q/bcKEU8ANN4Q.m3u8", "drm": false}, {"title": "(All Notes) Class-06 | Conjunction - 06", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/kz8lbmkcTQo/kz8lbmkcTQo.m3u8", "drm": false}, {"title": "(All Notes) Class-07 | Conjunction - 07", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/Omcb7aR1sv8/Omcb7aR1sv8.m3u8", "drm": false}, {"title": "(All Notes) Class-08 | Conjunction - 08", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/X40Tg4fFinw/X40Tg4fFinw.m3u8", "drm": false}, {"title": "(All Notes) Class-09 | Conjunction - 09", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/bGrdXfYfY9Y/bGrdXfYfY9Y.m3u8", "drm": false}, {"title": "(All Notes) Class-10 | Conjunction - 10", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/LoyCw4DnYQo/LoyCw4DnYQo.m3u8", "drm": false}, {"title": "(All Notes) Class-11 | Conjunction - 11", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/SFH5bskCA3Q/SFH5bskCA3Q.m3u8", "drm": false}]}, {"name": "Practice Class (54)", "items": [{"title": "(All Notes) Practice Class-01", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/5E567oEpIcY/5E567oEpIcY.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-02", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/XJx5khmy9I4/XJx5khmy9I4.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-03", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/aGWvfYnPwL0/aGWvfYnPwL0.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-04", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/R0S5XPoeKjI/R0S5XPoeKjI.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-05", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/H631j-wVXoA/H631j-wVXoA.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-06", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/r8LwL3arKy8/r8LwL3arKy8.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-07", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/NUIHo-x7OEE/NUIHo-x7OEE.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-08", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/oV408c9zxhI/oV408c9zxhI.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-09", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/5t-3nFFKCFw/5t-3nFFKCFw.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-10", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/3v7AA4-lZxc/3v7AA4-lZxc.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-11", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/a7aljjiq9yw/a7aljjiq9yw.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-12", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/lqxSZYcsTxA/lqxSZYcsTxA.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-13", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/Z538hPwWr3Q/Z538hPwWr3Q.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-14", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/s2UYox0ZdO4/s2UYox0ZdO4.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-15", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/K_VHeJhfe3c/K_VHeJhfe3c.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-16", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ZAweUtpyr-0/ZAweUtpyr-0.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-17", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/KfXGsrIrP3g/KfXGsrIrP3g.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-18", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/GtYZ5outRwk/GtYZ5outRwk.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-19", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/OQQukM0XAak/OQQukM0XAak.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-20", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/30uDpcSwQsQ/30uDpcSwQsQ.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-21", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/6GUrvjeAwYs/6GUrvjeAwYs.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-22", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/Z4eNBOYqkhQ/Z4eNBOYqkhQ.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-23", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/8BK99GhejwA/8BK99GhejwA.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-24", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/qX04N74WX6o/qX04N74WX6o.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-25", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/3QFOjssTC0c/3QFOjssTC0c.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-26", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/NT1fH3emtK0/NT1fH3emtK0.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-27", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/_2u7AmTxRY8/_2u7AmTxRY8.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-28", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/DmaD5dHKqgs/DmaD5dHKqgs.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-29", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/k8rO2BpihPk/k8rO2BpihPk.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-30", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/1stWv9xP1zc/1stWv9xP1zc.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-31", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/_CmRZEwzjFM/_CmRZEwzjFM.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-32", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/DNP_zKhduts/DNP_zKhduts.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-33", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/su--QseztRA/su--QseztRA.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-34", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/bX2siJ_AB1w/bX2siJ_AB1w.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-35", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/9ryGMPpSP8c/9ryGMPpSP8c.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-36", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/lKC8v16qyNA/lKC8v16qyNA.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-37", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/o-OctTu2Awk/o-OctTu2Awk.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-38", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/_ujr7KwOj9w/_ujr7KwOj9w.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-39", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/UdFULlWXN0w/UdFULlWXN0w.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-40", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/qY1BrDJ1I4U/qY1BrDJ1I4U.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-41", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ZMqDi_qLeAQ/ZMqDi_qLeAQ.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-42", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/G_w1f7WssFE/G_w1f7WssFE.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-43", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/htfAF9Gfsco/htfAF9Gfsco.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-44", "type": "youtube", "url": "https://www.youtube.com/embed/OLX6orW06hQ"}, {"title": "(All Notes) Practice Class-45", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/jtVN3WHLV8M/jtVN3WHLV8M.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-46", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/TEQiVTYlsu8/TEQiVTYlsu8.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-47", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ed6YLFCcSVY/ed6YLFCcSVY.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-48", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/bc7yug49z-k/bc7yug49z-k.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-49", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/JdrUtVWK4qU/JdrUtVWK4qU.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-50", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/WhTcykpxjp0/WhTcykpxjp0.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-51", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/6368743784112/6368743784112.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-52", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/n1qxAeCgdC0/n1qxAeCgdC0.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-53", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/_cHmSTthug0/_cHmSTthug0.m3u8", "drm": false}, {"title": "(All Notes) Practice Class-54", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/VDFmKBlG0Jg/VDFmKBlG0Jg.m3u8", "drm": false}]}, {"name": "Noun (14)", "items": [{"title": "(All Notes) Class-12 | Noun - 01", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/0BkULZoKSa0/0BkULZoKSa0.m3u8", "drm": false}, {"title": "(All Notes) Class-13 | Noun - 02", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/j-3Z7s--b7s/j-3Z7s--b7s.m3u8", "drm": false}, {"title": "(All Notes) Class-14 | Noun - 03", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/XB1OtxbA3es/XB1OtxbA3es.m3u8", "drm": false}, {"title": "(All Notes) Class-15 | Noun - 04", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/sKPXbz0kF60/sKPXbz0kF60.m3u8", "drm": false}, {"title": "(All Notes) Class-16 | Noun - 05", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/m2OOunUIjaM/m2OOunUIjaM.m3u8", "drm": false}, {"title": "(All Notes) Class-17 | Noun - 06", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/XfMWW5jtcFE/XfMWW5jtcFE.m3u8", "drm": false}, {"title": "(All Notes) Class-18 | Noun - 07", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/xx41NRq5fpM/xx41NRq5fpM.m3u8", "drm": false}, {"title": "(All Notes) Class-19 | Noun - 08", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/HnBYAG7hlmk/HnBYAG7hlmk.m3u8", "drm": false}, {"title": "(All Notes) Class-20 | Noun - 09", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/zzskimQongo/zzskimQongo.m3u8", "drm": false}, {"title": "(All Notes) Class-21 | Noun - 10", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/PklnidYgwu4/PklnidYgwu4.m3u8", "drm": false}, {"title": "(All Notes) Class-22 | Noun - 11", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/JKVq3pIye9s/JKVq3pIye9s.m3u8", "drm": false}, {"title": "(All Notes) Class-23 | Noun - 12", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ux7VS8pt3s0/ux7VS8pt3s0.m3u8", "drm": false}, {"title": "(All Notes) Class-24 | Noun - 13", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/MPxztf-mbLI/MPxztf-mbLI.m3u8", "drm": false}, {"title": "(All Notes) Class-25 | Noun - 14", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/mNECaJq8azY/mNECaJq8azY.m3u8", "drm": false}]}, {"name": "Articles (12)", "items": [{"title": "(All Notes) Class-26 | Articles - 01", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/POwi3dIT57c/POwi3dIT57c.m3u8", "drm": false}, {"title": "(All Notes) Class-27 | Articles - 02", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/6ucTUqwSaz8/6ucTUqwSaz8.m3u8", "drm": false}, {"title": "(All Notes) Class-28 | Articles - 03", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/_x13qom_zC8/_x13qom_zC8.m3u8", "drm": false}, {"title": "(All Notes) Class-29 | Articles - 04", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/LL-zhDtTFWk/LL-zhDtTFWk.m3u8", "drm": false}, {"title": "(All Notes) Class-30 | Articles - 05", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/rPVgiwraC3Q/rPVgiwraC3Q.m3u8", "drm": false}, {"title": "(All Notes) Class-31 | Articles - 06", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/A7hfEUQsjEU/A7hfEUQsjEU.m3u8", "drm": false}, {"title": "(All Notes) Class-32 | Articles - 07", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/AmN3x3NTHE8/AmN3x3NTHE8.m3u8", "drm": false}, {"title": "(All Notes) Class-33 | Articles - 08", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/DhLuRiS2nkU/DhLuRiS2nkU.m3u8", "drm": false}, {"title": "(All Notes) Class-34 | Articles - 09", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/l59N4q3q55A/l59N4q3q55A.m3u8", "drm": false}, {"title": "(All Notes) Class-35 | Articles - 10", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ye3bhk88ULA/ye3bhk88ULA.m3u8", "drm": false}, {"title": "(All Notes) Class-36 | Articles - 11", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/Zysv2IS6WsU/Zysv2IS6WsU.m3u8", "drm": false}, {"title": "(All Notes) Class-37 | Articles - 12", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/BdGZSYkFKC8/BdGZSYkFKC8.m3u8", "drm": false}]}, {"name": "Pronoun Class (13)", "items": [{"title": "(All Notes) Class-38 | Pronoun Class - 01", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/eE08hp2e57k/eE08hp2e57k.m3u8", "drm": false}, {"title": "(All Notes) Class-39 | Pronoun Class - 02", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/0oTrH2hgWSA/0oTrH2hgWSA.m3u8", "drm": false}, {"title": "(All Notes) Class-40 | Pronoun Class - 03", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/vaQlPa6AyWE/vaQlPa6AyWE.m3u8", "drm": false}, {"title": "(All Notes) Class-41 | Pronoun Class - 04", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/kDmrZc3mcDA/kDmrZc3mcDA.m3u8", "drm": false}, {"title": "(All Notes) Class-42 | Pronoun Class - 05", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/DH5dj-RVMCI/DH5dj-RVMCI.m3u8", "drm": false}, {"title": "(All Notes) Class-43 | Pronoun Class - 06", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/Y8RWZKJenz8/Y8RWZKJenz8.m3u8", "drm": false}, {"title": "(All Notes) Class-44 | Pronoun Class - 07", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/DAoNo7ffE8w/DAoNo7ffE8w.m3u8", "drm": false}, {"title": "(All Notes) Class-45 | Pronoun Class - 08", "type": "youtube", "url": "https://www.youtube.com/embed/-AQQeZvELjc"}, {"title": "(All Notes) Class-46 | Pronoun Class - 09", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/aJ_OYhTmYFs/aJ_OYhTmYFs.m3u8", "drm": false}, {"title": "(All Notes) Class-47 | Pronoun Class - 10", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/20BW933LwPA/20BW933LwPA.m3u8", "drm": false}, {"title": "(All Notes) Class-48 | Pronoun Class - 11", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/kq7_M3Wp-5g/kq7_M3Wp-5g.m3u8", "drm": false}, {"title": "(All Notes) Class-49 | Pronoun Class - 12", "type": "youtube", "url": "https://www.youtube.com/embed/UJbJuGCz-_Q"}, {"title": "(All Notes) Class-50 | Pronoun Class - 13", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/AkQHChQe5mU/AkQHChQe5mU.m3u8", "drm": false}]}, {"name": "Pronoun Practice Class (1)", "items": [{"title": "(All Notes) Class-51 | Pronoun Practice Class", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/z6SlGJF9lWk/z6SlGJF9lWk.m3u8", "drm": false}]}, {"name": "Pronoun Doubt Class (1)", "items": [{"title": "(All Notes) Class-52 | Pronoun Doubt Class", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/oa77WZSX9VQ/oa77WZSX9VQ.m3u8", "drm": false}]}, {"name": "Determiners (6)", "items": [{"title": "(All Notes) Class-53 | Determiners", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/BZgvi_hgwb4/BZgvi_hgwb4.m3u8", "drm": false}, {"title": "(All Notes) Class-54 | Determiners", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/IjbYHyerSps/IjbYHyerSps.m3u8", "drm": false}, {"title": "(All Notes) Class-55 | Determiners", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ybslAVWFNkI/ybslAVWFNkI.m3u8", "drm": false}, {"title": "(All Notes) Class-56 | Determiners", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/zoXd7nPcU8A/zoXd7nPcU8A.m3u8", "drm": false}, {"title": "(All Notes) Class-57 | Determiners", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/MDTKJL6eZzo/MDTKJL6eZzo.m3u8", "drm": false}, {"title": "(All Notes) Class-58 | Determiners", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/3lguDAT5fGQ/3lguDAT5fGQ.m3u8", "drm": false}]}, {"name": "Adjective (10)", "items": [{"title": "(All Notes) Class-59 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/HerXLrFQ0oM/HerXLrFQ0oM.m3u8", "drm": false}, {"title": "(All Notes) Class-60 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/jRyo5SCA2HI/jRyo5SCA2HI.m3u8", "drm": false}, {"title": "(All Notes) Class-61 | Adjective", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/Hu__XjQrILY/Hu__XjQrILY.m3u8", "drm": false}, {"title": "(All Notes) Class-62 | Adjective", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/bIIWc9Qp4FU/bIIWc9Qp4FU.m3u8", "drm": false}, {"title": "(All Notes) Class-63 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/hZ9j75Bnj9c/hZ9j75Bnj9c.m3u8", "drm": false}, {"title": "(All Notes) Class-64 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/m-Ofc_hO880/m-Ofc_hO880.m3u8", "drm": false}, {"title": "(All Notes) Class-65 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/VVQjTjRxSKA/VVQjTjRxSKA.m3u8", "drm": false}, {"title": "(All Notes) Class-66 | Adjective", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/e8vW58y_saw/e8vW58y_saw.m3u8", "drm": false}, {"title": "(All Notes) Class-67 | Adjective", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/4TgGQPmBLP0/4TgGQPmBLP0.m3u8", "drm": false}, {"title": "(All Notes) Class-68 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/hYmM-HOmPsI/hYmM-HOmPsI.m3u8", "drm": false}]}, {"name": "Adjective Practice Class (1)", "items": [{"title": "(All Notes) Class-69 | Adjective Practice Class", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/TX4C3C5EA_s/TX4C3C5EA_s.m3u8", "drm": false}]}, {"name": "Adverb (8)", "items": [{"title": "(All Notes) Class-70 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/vlxlXJ4kCgw/vlxlXJ4kCgw.m3u8", "drm": false}, {"title": "(All Notes) Class-71 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/2yJ0Zt0XMUY/2yJ0Zt0XMUY.m3u8", "drm": false}, {"title": "(All Notes) Class-72 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/k0ZHclAhujU/k0ZHclAhujU.m3u8", "drm": false}, {"title": "(All Notes) Class-73 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ZoMJCjwbJy4/ZoMJCjwbJy4.m3u8", "drm": false}, {"title": "(All Notes) Class-74 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/H3hyTJ7K2i8/H3hyTJ7K2i8.m3u8", "drm": false}, {"title": "(All Notes) Class-75 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/tnNtIdv60Z8/tnNtIdv60Z8.m3u8", "drm": false}, {"title": "(All Notes) Class-76 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/c4KYsI9Nc2Y/c4KYsI9Nc2Y.m3u8", "drm": false}, {"title": "(All Notes) Class-77 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/t94TvYq7rb0/t94TvYq7rb0.m3u8", "drm": false}]}, {"name": "Tense (67)", "items": [{"title": "(All Notes) Class-78 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/tgZyfRm5dRQ/tgZyfRm5dRQ.m3u8", "drm": false}, {"title": "(All Notes) Class-79 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/mWVBFbofEpo/mWVBFbofEpo.m3u8", "drm": false}, {"title": "(All Notes) Class-80 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/y_Y4B1lEGl0"}, {"title": "(All Notes) Class-81 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/fwP3M3tOMP0/fwP3M3tOMP0.m3u8", "drm": false}, {"title": "(All Notes) Class-82 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/X3L4g3bvoCE/X3L4g3bvoCE.m3u8", "drm": false}, {"title": "(All Notes) Class-83 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/rKd1uY8kE-U/rKd1uY8kE-U.m3u8", "drm": false}, {"title": "(All Notes) Class-84 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/aWVcV9-hODQ/aWVcV9-hODQ.m3u8", "drm": false}, {"title": "(All Notes) Class-85 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/SnLnJ-GcB6o/SnLnJ-GcB6o.m3u8", "drm": false}, {"title": "(All Notes) Class-86 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/q7NAGf53zfE/q7NAGf53zfE.m3u8", "drm": false}, {"title": "(All Notes) Class-87 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/XD0yBMBk4M4/XD0yBMBk4M4.m3u8", "drm": false}, {"title": "(All Notes) Class-88 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/QmHJnS3-nV8"}, {"title": "(All Notes) Class-89 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/SImK5NtWY4s/SImK5NtWY4s.m3u8", "drm": false}, {"title": "(All Notes) Class-90 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/NQsqHC5anh0/NQsqHC5anh0.m3u8", "drm": false}, {"title": "(All Notes) Class-91 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/wTCn2mgVA4Q/wTCn2mgVA4Q.m3u8", "drm": false}, {"title": "(All Notes) Class-92 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/cFH-WY9Lg68/cFH-WY9Lg68.m3u8", "drm": false}, {"title": "(All Notes) Class-93 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/mDRXADvuBgI/mDRXADvuBgI.m3u8", "drm": false}, {"title": "(All Notes) Class-94 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/6371499751112/6371499751112.m3u8", "drm": false}, {"title": "(All Notes) Class-95 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/jCVRVNht64U/jCVRVNht64U.m3u8", "drm": false}, {"title": "(All Notes) Class-96 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/XbgWWv31JMA/XbgWWv31JMA.m3u8", "drm": false}, {"title": "(All Notes) Class-97 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/wWx3Adq0Z3k/wWx3Adq0Z3k.m3u8", "drm": false}, {"title": "(All Notes) Class-98 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/g6ajanSm6Ws/g6ajanSm6Ws.m3u8", "drm": false}, {"title": "(All Notes) Class-99 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ZHLdlZL6Lpk/ZHLdlZL6Lpk.m3u8", "drm": false}, {"title": "(All Notes) Class-100 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/Gp0FaGrFREw/Gp0FaGrFREw.m3u8", "drm": false}, {"title": "(All Notes) Class-101 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/28SNFLEbNFE/28SNFLEbNFE.m3u8", "drm": false}, {"title": "(All Notes) Class-102 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/g3pNaDO1GV8/g3pNaDO1GV8.m3u8", "drm": false}, {"title": "(All Notes) Class-103 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/qxqsdETrqP4/qxqsdETrqP4.m3u8", "drm": false}, {"title": "(All Notes) Class-104 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/9bYerx_lgQg/9bYerx_lgQg.m3u8", "drm": false}, {"title": "(All Notes) Class-105 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/wrnEmOuMVTw/wrnEmOuMVTw.m3u8", "drm": false}, {"title": "(All Notes) Class-106 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/1EFHE94Yep0/1EFHE94Yep0.m3u8", "drm": false}, {"title": "(All Notes) Class-107 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/KJbAe_nJb6E"}, {"title": "(All Notes) Class-108 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/cnkmHznBEt0"}, {"title": "(All Notes) Class-109 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/Q93gOf-nNzw"}, {"title": "(All Notes) Class-110 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/aX5_B_Z1-NA"}, {"title": "(All Notes) Class-111 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/OJEr3PGpg0Q"}, {"title": "(All Notes) Class-112 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/Rj4Hflxzj60"}, {"title": "(All Notes) Class-113 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/gj_xuL6idjc"}, {"title": "(All Notes) Class-114 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/qoPQqKVWYeQ"}, {"title": "(All Notes) Class-115 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/6Ml5e3CG0TQ"}, {"title": "(All Notes) Class-116 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/BEhUv-dNATY"}, {"title": "(All Notes) Class-117 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/eWJlB4QrX4c"}, {"title": "(All Notes) Class-118 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/tnIpCn4DKy0"}, {"title": "(All Notes) Class-119 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/Xbj-im_JFIk"}, {"title": "(All Notes) Class-120 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/CVUQ4NKe1tY"}, {"title": "(All Notes) Class-121 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/HLXqnIdsB48"}, {"title": "(All Notes) Class-122 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/Zr8g7oanPsY"}, {"title": "(All Notes) Class-123 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/sI03fRRlIGI"}, {"title": "(All Notes) Class-124 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/l_HAIs7DPVg"}, {"title": "(All Notes) Class-125 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/FG28qTVJEy8"}, {"title": "(All Notes) Class-126 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/wZqX89hKonc"}, {"title": "(All Notes) Class-127 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/woNxxOqFUyo"}, {"title": "(All Notes) Class-128 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/JxGOm3yXvSY"}, {"title": "(All Notes) Class-129 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6373886686112/6373886686112.m3u8", "drm": false}, {"title": "(All Notes) Class-130 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/dnsNj4XzqfE"}, {"title": "(All Notes) Class-131 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/fr8sEW_nQuk"}, {"title": "(All Notes) Class-132 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/EQ3Yx8S1XJM"}, {"title": "(All Notes) Class-133 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/Z7nqsLZZ0_k"}, {"title": "(All Notes) Class-134 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/jXyZtoSF_40"}, {"title": "(All Notes) Class-135 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/COH-fE2074c"}, {"title": "(All Notes) Class-136 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/FX6eRWLRNWI"}, {"title": "(All Notes) Class-137 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/-zVlMzxf9Vs"}, {"title": "(All Notes) Class-138 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/jgISLxel_-o"}, {"title": "(All Notes) Class-139 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/EUj9DoXXy_Q/EUj9DoXXy_Q.m3u8", "drm": false}, {"title": "(All Notes) Class-140 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/UXn8Pp7tBjE/UXn8Pp7tBjE.m3u8", "drm": false}, {"title": "(All Notes) Class-141 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/5MaFO95CEPY/5MaFO95CEPY.m3u8", "drm": false}, {"title": "(All Notes) Class-142 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/CeIVbq4rNAE/CeIVbq4rNAE.m3u8", "drm": false}, {"title": "(All Notes) Class-143 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/u1gF901q6R4/u1gF901q6R4.m3u8", "drm": false}, {"title": "(All Notes) Class-144 | Tense", "type": "youtube", "url": "https://www.youtube.com/embed/Kxqva1A-CDY"}]}];
+  const gridEl = document.getElementById('classesGrid');
+  const searchInputEl = document.getElementById('classesSearchInput');
+  const clearBtnEl = document.getElementById('classesClearBtn');
+  const expandAllBtnEl = document.getElementById('classesExpandAllBtn');
+  const collapseAllBtnEl = document.getElementById('classesCollapseAllBtn');
+  const breadcrumbEl = document.getElementById('classesBreadcrumb');
+
+  const folders = rawData.map(function(folder, folderIndex){
+    const items = folder.items.map(function(item, itemIndex){
+      return {
+        id: folderIndex + '-' + itemIndex,
+        title: item.title,
+        lower: item.title.toLowerCase(),
+        type: item.type,
+        url: item.url,
+        drm: !!item.drm
+      };
+    });
+    return {
+      index: folderIndex, name: folder.name, lower: folder.name.toLowerCase(),
+      items: items, itemCount: items.length, open: false,
+      bodyEl: null, listEl: null, cardEl: null, built: false
+    };
+  });
+
+  function escapeHTML(str){ return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function highlight(text, query){
+    const safe = escapeHTML(text);
+    if (!query) return safe;
+    const lowerText = text.toLowerCase();
+    const idx = lowerText.indexOf(query);
+    if (idx === -1) return safe;
+    const before = escapeHTML(text.slice(0, idx));
+    const match = escapeHTML(text.slice(idx, idx + query.length));
+    const after = escapeHTML(text.slice(idx + query.length));
+    return before + '<mark>' + match + '</mark>' + after;
+  }
+
+  function createFileItemEl(item, query){
+    const el = document.createElement('div');
+    el.className = 'file-item';
+    const name = document.createElement('div');
+    name.className = 'file-name';
+    name.innerHTML = highlight(item.title, query);
+    name.title = item.title;
+    el.appendChild(name);
+    const actions = document.createElement('div');
+    actions.className = 'file-actions';
+    if (item.type === 'pdf'){
+      const a = document.createElement('a');
+      a.className = 'open-btn pdf';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.pdf + '<span>PDF</span>';
+      actions.appendChild(a);
+    } else if (item.type === 'youtube'){
+      const a = document.createElement('a');
+      a.className = 'open-btn yt';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.yt + '<span>YouTube</span>';
+      actions.appendChild(a);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'open-btn video';
+      btn.type = 'button';
+      btn.innerHTML = ICONS.video + '<span>Video</span>';
+      btn.addEventListener('click', function(){ window.openClassVideo(item.url, item.drm); });
+      actions.appendChild(btn);
+    }
+    el.appendChild(actions);
+    return el;
+  }
+
+  function populateFileList(folder, query, subsetItems){
+    const items = subsetItems || folder.items;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < items.length; i++){ frag.appendChild(createFileItemEl(items[i], query)); }
+    folder.listEl.innerHTML = '';
+    folder.listEl.appendChild(frag);
+  }
+
+  function setFolderOpen(folder, open, query, subsetItems){
+    folder.open = open;
+    folder.cardEl.classList.toggle('open', open);
+    if (open && !folder.built){ populateFileList(folder, query, subsetItems); folder.built = true; }
+    folder.bodyEl.style.maxHeight = open ? folder.bodyEl.scrollHeight + 400 + 'px' : '0px';
+  }
+
+  function toggleFolder(folder){ setFolderOpen(folder, !folder.open, searchInputEl.value.trim().toLowerCase()); }
+
+  function createFolderCardEl(folder){
+    const card = document.createElement('div');
+    card.className = 'folder-card';
+    folder.cardEl = card;
+    const header = document.createElement('div');
+    header.className = 'folder-header';
+    header.innerHTML =
+      '<div class="folder-icon-wrap">📁</div>' +
+      '<div class="folder-title-block"><h3 class="folder-title" data-title></h3></div>' +
+      '<div class="folder-meta"><span class="file-count-badge" data-count>' + folder.itemCount + ' items</span>' +
+      '<span class="chevron">' + ICONS.chevron + '</span></div>';
+    header.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+    header.addEventListener('click', function(){ toggleFolder(folder); });
+    card.appendChild(header);
+    const body = document.createElement('div');
+    body.className = 'folder-body';
+    folder.bodyEl = body;
+    const bodyInner = document.createElement('div');
+    bodyInner.className = 'folder-body-inner';
+    const list = document.createElement('div');
+    list.className = 'file-list';
+    folder.listEl = list;
+    bodyInner.appendChild(list);
+    body.appendChild(bodyInner);
+    card.appendChild(body);
+    return card;
+  }
+
+  function renderAllFolderShells(){
+    const frag = document.createDocumentFragment();
+    folders.forEach(function(folder){ frag.appendChild(createFolderCardEl(folder)); });
+    gridEl.appendChild(frag);
+  }
+  renderAllFolderShells();
+
+  function renderEmptyState(){
+    gridEl.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'empty-state';
+    el.innerHTML = ICONS.emptyBox + '<h3>No results found</h3><p>Try a different search term.</p>';
+    gridEl.appendChild(el);
+  }
+
+  let emptyShown = false;
+  function restoreFolderGrid(){
+    if (emptyShown){
+      gridEl.innerHTML = '';
+      folders.forEach(function(folder){ gridEl.appendChild(folder.cardEl); });
+      emptyShown = false;
+    }
+  }
+
+  function updateBreadcrumb(query){
+    if (!query){ breadcrumbEl.textContent = ''; return; }
+    let matches = 0;
+    folders.forEach(function(f){
+      if (f.lower.indexOf(query) !== -1) matches += f.itemCount;
+      else f.items.forEach(function(it){ if (it.lower.indexOf(query) !== -1) matches++; });
+    });
+    breadcrumbEl.textContent = matches + ' result' + (matches === 1 ? '' : 's') + ' for "' + query + '"';
+  }
+
+  function applySearch(rawQuery){
+    const query = rawQuery.trim().toLowerCase();
+    clearBtnEl.classList.toggle('show', query.length > 0);
+    updateBreadcrumb(query);
+    if (!query){
+      restoreFolderGrid();
+      folders.forEach(function(folder){
+        folder.cardEl.classList.remove('hidden-card');
+        folder.cardEl.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+        folder.cardEl.querySelector('[data-count]').textContent = folder.itemCount + ' items';
+        if (folder.built) populateFileList(folder, '');
+      });
+      return;
+    }
+    restoreFolderGrid();
+    let anyVisible = false;
+    folders.forEach(function(folder){
+      const nameMatches = folder.lower.indexOf(query) !== -1;
+      const matchedItems = folder.items.filter(function(it){ return it.lower.indexOf(query) !== -1; });
+      const show = nameMatches || matchedItems.length > 0;
+      folder.cardEl.classList.toggle('hidden-card', !show);
+      if (!show) return;
+      anyVisible = true;
+      folder.cardEl.querySelector('[data-title]').innerHTML = highlight(folder.name, query);
+      const subset = nameMatches && matchedItems.length === 0 ? folder.items : matchedItems;
+      folder.cardEl.querySelector('[data-count]').textContent = subset.length + ' items';
+      setFolderOpen(folder, true, query, subset);
+    });
+    if (!anyVisible){ renderEmptyState(); emptyShown = true; }
+  }
+
+  searchInputEl.addEventListener('input', function(){ applySearch(searchInputEl.value); });
+  clearBtnEl.addEventListener('click', function(){ searchInputEl.value = ''; applySearch(''); searchInputEl.focus(); });
+  expandAllBtnEl.addEventListener('click', function(){
+    folders.forEach(function(f){ if (!f.cardEl.classList.contains('hidden-card')) setFolderOpen(f, true, searchInputEl.value.trim().toLowerCase()); });
+  });
+  collapseAllBtnEl.addEventListener('click', function(){ folders.forEach(function(f){ setFolderOpen(f, false); }); });
+})();
+
+(function(){
+  const rawData = [{"name": "Eng (22)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Eng | 2 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/674d5ef1e6bd8_CONJUNCTIONS_CLASS1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 3 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/675169c86774e_CONJUNCTIONS_CLASS2_1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 4 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67516a15c601f_CONJUNCTIONS_CLASS3.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 5 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67516abe86afe_CONJUNCTIONS_CLASS4_1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 6 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6753e6140bd1d_CONJUNCTIONS_CLASS5.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 9 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67580dbc966b6_CONJUNCTIONS_CLASS6.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 11 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/675d0ef15d445_CONJUNCTIONS_PRACTICE_CLASS.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 12 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/675d1025d7824_CONJUNCTIONS_DOUBT_CLASS.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 13 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/675d10d7c9a88_PARTS_OF_SPEECH_IDENTIFICATION.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 28 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e661358b65a_56282795812627943715.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 31 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ea73fe35a17_56291848336672560114.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 1 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ebb17f1c064_56296063683864828096.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 02 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ecfc813d61e_56298284620043523834.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 03  April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ee542376058_56300536419857208373.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 04 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67efbd5053a32_56303044195426768602.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 8 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f4e19092c2d_ilovepdfmerged_35compressed.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 11 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f8d258118f5_ilovepdfmerged_52compressed.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 21 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682eb6ad3ac13_ilovepdfmerged_41.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 27 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68358355670cc_ilovepdfmerged_74compressed.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 29 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683841344b171_56174861639506990495.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 3 June | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683fcc02402dd_ilovepdfmerged_20250604T095944.918.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Eng | 16 June | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/684fe9fea52c7_PREPOSITIONS_CLASS6.pdf"}]}, {"name": "Miscellaneous concepts (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Miscellaneous concepts", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67630a71d6a94_MISCELLANEOUS_CONCEPTS.pdf"}]}, {"name": "Noun (8)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Noun Class-1&2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67630b3dbc518_NOUNS_CLASS1mergedcompressed.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Noun Class-3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6764d9092b85c_NOUNS_CLASS3.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Noun Class-4,5,6", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/676af239d964a_NOUNS_CLASS4mergedcompressed.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Noun Class-7,8", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/676f9d5e77ad2_NOUNS_CLASS7merged.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Noun Class-9", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67723d19ac06d_NOUNS_CLASS9.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Noun Class-10", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6773aed657bd7_NOUNS_CLASS10.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Noun Class-11", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67765efc84a5a_NOUNS_CLASS11.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Noun Class-12 & 13", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67765f72bfd4a_NOUNS_CLASS12mergedcompressed.pdf"}]}, {"name": "Phrasal Verb (2)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Phrasal Verb-1&2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67765fcd04bb2_PHRASAL_VERBS1mergedcompressed.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Phrasal Verb-3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/677f8e679cd74_PHRASAL_VERBS3.pdf"}]}, {"name": "Noun Practice Class (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Noun Practice Class", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/677bc1d5de795_NOUNS_PRACTICE_CLASS.pdf"}]}, {"name": "Articles (6)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Articles Class-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/677f8e30762e6_ARTICLES_CLASS1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Articles Class-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/677f8e4a7f7ac_ARTICLES_CLASS2.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Articles Class-3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6780eddd5a91a_ARTICLES_CLASS3.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Articles Class-4", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6780edf063ebc_ARTICLES_CLASS4.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Articles Class-5,6,7", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678788891ba5b_ilovepdfmerged_37.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Articles Class-8", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678a1be0b3360_ARTICLES_CLASS8.pdf"}]}, {"name": "One Words (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) One Words-01", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6780ee30952d8_ONE_WORDS_01.pdf"}]}, {"name": "Idioms and Phrases (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Idioms and Phrases-01", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6780ee59dbed2_IDIOMS_PHRASES_01.pdf"}]}, {"name": "Synonyms (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Synonyms Class-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678789064aa71_SYNONYMS_01compressed.pdf"}]}, {"name": "Articles Practice Class (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Articles Practice Class", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678a1c00bedd9_ARTICLES_PRACTICE_CLASS.pdf"}]}, {"name": "Additions to statements (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Additions to statements", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678f624087097_ADDITIONS_TO_STATEMENTS.pdf"}]}, {"name": "Question Tags (2)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Question Tags-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678f626ece968_QUESTION_TAGS1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Question Tags-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67930050a3a1d_QUESTION_TAGS2.pdf"}]}, {"name": "Pronoun (13)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6793008ea500a_PRONOUNS_CLASS1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67964717cef10_PRONOUNS_CLASS2.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6798827031c2b_PRONOUNS_CLASS3.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-4", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6799ec84c4966_PRONOUNS_CLASS4.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-5", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679b6700563da_PRONOUNS_CLASS5.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-6", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679b672e516a9_PRONOUNS_CLASS6_1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-7", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679c8ee8af9d0_PRONOUNS_CLASS7.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-8", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a1b99b5d413_PRONOUNS_CLASS8.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-9", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a5acdb1a7f3_PRONOUNS_CLASS9.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-10", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a5acea30d7c_PRONOUNS_CLASS10.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-11", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a88682217ff_PRONOUNS_CLASS11.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-12", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a9b8174af27_PRONOUNS_CLASS12.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Class-13", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67af0a6087751_PRONOUNS_CLASS13.pdf"}]}, {"name": "Question Tags Practice (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Question Tags Practice", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679300af3d9c1_QUESTION_TAGS_PRACTICE.pdf"}]}, {"name": "Confusing Words (3)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Confusing Words Class-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679882da8c1b6_CONFUSING_WORDS_CLASS1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Confusing Words Class-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6799ec9912563_CONFUSING_WORDS_CLASS2.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Confusing Words Class-3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679b6719a9233_ONE_WORDS_03.pdf"}]}, {"name": "Pronoun Practice (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Practice Class-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67af0ba175fe8_PRONOUNS_PRACTICE_CLASS1.pdf"}]}, {"name": "Pronoun Doubt Class (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Pronoun Doubt Class", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67af0bd82ec36_PRONOUNS_DOUBT_CLASS.pdf"}]}, {"name": "Determiner (5)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Determiner Class-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67af0c3d355b4_DETERMINERS_CLASS1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Determiner Class-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b3c2e0b14e9_DETERMINERS_CLASS2.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Determiner Class-3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b447e0f1afd_DETERMINERS_CLASS3.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Determiner Class-4", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b59a234b3d3_DETERMINERS_CLASS4.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Determiner Class-5", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b84078a995b_DETERMINERS_CLASS6.pdf"}]}, {"name": "Conjunction (2)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Conjunction Class-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b59a5f83e70_CONJUNCTIONS1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Conjunction Class-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b8408fbc6f5_CONJUNCTIONS3.pdf"}]}, {"name": "Adjectives (8)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Adjectives Class-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c00e9dc01c0_ADJECTIVES_CLASS1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Adjectives Class-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c00edf82dd3_ADJECTIVES_CLASS2.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Adjectives Class-3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c00f239e202_ADJECTIVES_CLASS3compressed.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Adjectives Class-4,5", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c175b556712_ilovepdfmerged_20250228T140620.520compressed.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Adjectives Class-6", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c69d6ebc998_ADJECTIVES_CLASS6.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Adjectives Class-7", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c6bc7e69618_56210853774685115584.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Adjectives Class-8", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c9337ea5805_56215118131749196807.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Adjectives Class-9", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67cacb6f95fa7_56219754570420065592.pdf"}]}, {"name": "Cloze Test PQRS (2)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Cloze Test PQRS Class-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c00ec90d67e_CLOZE_TEST_PQRS_CLASS1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Cloze Test PQRS Class-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c00f0593684_CLOZE_TEST_PQRS_CLASS2compressed.pdf"}]}, {"name": "RC Passages (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) RC Passages  (CGL 2019)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c00f5d8b954_RC_PASSAGES_CGL_2019.pdf"}]}, {"name": "Adjective Practice (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Adjective Practice", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67cff2bd17c50_ADJECTIVES_PRACTICE_CLASS_1.pdf"}]}, {"name": "Adverb (3)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Adverb Class Notes-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67d15ceed5a96_56235717598059698129.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Adverb Class Notes-3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67d7c1fcdcde7_56237553876967364221_1.pdf"}, {"title": "(Ankul Sir (English VOD) - All Notes) Adverb Class Notes | 21 March", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67dd55ed65508_ilovepdfmerged_3compressed.pdf"}]}, {"name": "Adverb Class Notes-4 (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Adverb Class Notes-4,5", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67da5fc169401_ilovepdfmerged_20250319T113940.568.pdf"}]}, {"name": "Tenses Class-1 to (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Tenses Class-1 to 4", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e627cdde7cc_ilovepdfmerged_27compressed.pdf"}]}, {"name": "Tenses Doubt Class (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Tenses Doubt Class", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6807346b41063_56338919473134703748.pdf"}]}, {"name": "Part-1 Class PNG (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Part-1 Class PNG  (Till 16 May)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6827050c8d3ff_ilovepdfmerged_6compressedremoved.pdf"}]}, {"name": "Part-2 Class PNG (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Part-2 Class PNG  (Till 16 May)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68270537d1bd2_ilovepdfmerged_6compressedremoved_1.pdf"}]}, {"name": "Subject-verb agreement (1)", "items": [{"title": "(Ankul Sir (English VOD) - All Notes) Subject-verb agreement -2&3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6841725b3892e_ilovepdfmerged_1compressed.pdf"}]}];
+  const gridEl = document.getElementById('notesGrid');
+  const searchInputEl = document.getElementById('notesSearchInput');
+  const clearBtnEl = document.getElementById('notesClearBtn');
+  const expandAllBtnEl = document.getElementById('notesExpandAllBtn');
+  const collapseAllBtnEl = document.getElementById('notesCollapseAllBtn');
+  const breadcrumbEl = document.getElementById('notesBreadcrumb');
+
+  const folders = rawData.map(function(folder, folderIndex){
+    const items = folder.items.map(function(item, itemIndex){
+      return {
+        id: folderIndex + '-' + itemIndex,
+        title: item.title,
+        lower: item.title.toLowerCase(),
+        type: item.type,
+        url: item.url,
+        drm: !!item.drm
+      };
+    });
+    return {
+      index: folderIndex, name: folder.name, lower: folder.name.toLowerCase(),
+      items: items, itemCount: items.length, open: false,
+      bodyEl: null, listEl: null, cardEl: null, built: false
+    };
+  });
+
+  function escapeHTML(str){ return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function highlight(text, query){
+    const safe = escapeHTML(text);
+    if (!query) return safe;
+    const lowerText = text.toLowerCase();
+    const idx = lowerText.indexOf(query);
+    if (idx === -1) return safe;
+    const before = escapeHTML(text.slice(0, idx));
+    const match = escapeHTML(text.slice(idx, idx + query.length));
+    const after = escapeHTML(text.slice(idx + query.length));
+    return before + '<mark>' + match + '</mark>' + after;
+  }
+
+  function createFileItemEl(item, query){
+    const el = document.createElement('div');
+    el.className = 'file-item';
+    const name = document.createElement('div');
+    name.className = 'file-name';
+    name.innerHTML = highlight(item.title, query);
+    name.title = item.title;
+    el.appendChild(name);
+    const actions = document.createElement('div');
+    actions.className = 'file-actions';
+    if (item.type === 'pdf'){
+      const a = document.createElement('a');
+      a.className = 'open-btn pdf';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.pdf + '<span>PDF</span>';
+      actions.appendChild(a);
+    } else if (item.type === 'youtube'){
+      const a = document.createElement('a');
+      a.className = 'open-btn yt';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.yt + '<span>YouTube</span>';
+      actions.appendChild(a);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'open-btn video';
+      btn.type = 'button';
+      btn.innerHTML = ICONS.video + '<span>Video</span>';
+      btn.addEventListener('click', function(){ window.openClassVideo(item.url, item.drm); });
+      actions.appendChild(btn);
+    }
+    el.appendChild(actions);
+    return el;
+  }
+
+  function populateFileList(folder, query, subsetItems){
+    const items = subsetItems || folder.items;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < items.length; i++){ frag.appendChild(createFileItemEl(items[i], query)); }
+    folder.listEl.innerHTML = '';
+    folder.listEl.appendChild(frag);
+  }
+
+  function setFolderOpen(folder, open, query, subsetItems){
+    folder.open = open;
+    folder.cardEl.classList.toggle('open', open);
+    if (open && !folder.built){ populateFileList(folder, query, subsetItems); folder.built = true; }
+    folder.bodyEl.style.maxHeight = open ? folder.bodyEl.scrollHeight + 400 + 'px' : '0px';
+  }
+
+  function toggleFolder(folder){ setFolderOpen(folder, !folder.open, searchInputEl.value.trim().toLowerCase()); }
+
+  function createFolderCardEl(folder){
+    const card = document.createElement('div');
+    card.className = 'folder-card';
+    folder.cardEl = card;
+    const header = document.createElement('div');
+    header.className = 'folder-header';
+    header.innerHTML =
+      '<div class="folder-icon-wrap">📁</div>' +
+      '<div class="folder-title-block"><h3 class="folder-title" data-title></h3></div>' +
+      '<div class="folder-meta"><span class="file-count-badge" data-count>' + folder.itemCount + ' items</span>' +
+      '<span class="chevron">' + ICONS.chevron + '</span></div>';
+    header.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+    header.addEventListener('click', function(){ toggleFolder(folder); });
+    card.appendChild(header);
+    const body = document.createElement('div');
+    body.className = 'folder-body';
+    folder.bodyEl = body;
+    const bodyInner = document.createElement('div');
+    bodyInner.className = 'folder-body-inner';
+    const list = document.createElement('div');
+    list.className = 'file-list';
+    folder.listEl = list;
+    bodyInner.appendChild(list);
+    body.appendChild(bodyInner);
+    card.appendChild(body);
+    return card;
+  }
+
+  function renderAllFolderShells(){
+    const frag = document.createDocumentFragment();
+    folders.forEach(function(folder){ frag.appendChild(createFolderCardEl(folder)); });
+    gridEl.appendChild(frag);
+  }
+  renderAllFolderShells();
+
+  function renderEmptyState(){
+    gridEl.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'empty-state';
+    el.innerHTML = ICONS.emptyBox + '<h3>No results found</h3><p>Try a different search term.</p>';
+    gridEl.appendChild(el);
+  }
+
+  let emptyShown = false;
+  function restoreFolderGrid(){
+    if (emptyShown){
+      gridEl.innerHTML = '';
+      folders.forEach(function(folder){ gridEl.appendChild(folder.cardEl); });
+      emptyShown = false;
+    }
+  }
+
+  function updateBreadcrumb(query){
+    if (!query){ breadcrumbEl.textContent = ''; return; }
+    let matches = 0;
+    folders.forEach(function(f){
+      if (f.lower.indexOf(query) !== -1) matches += f.itemCount;
+      else f.items.forEach(function(it){ if (it.lower.indexOf(query) !== -1) matches++; });
+    });
+    breadcrumbEl.textContent = matches + ' result' + (matches === 1 ? '' : 's') + ' for "' + query + '"';
+  }
+
+  function applySearch(rawQuery){
+    const query = rawQuery.trim().toLowerCase();
+    clearBtnEl.classList.toggle('show', query.length > 0);
+    updateBreadcrumb(query);
+    if (!query){
+      restoreFolderGrid();
+      folders.forEach(function(folder){
+        folder.cardEl.classList.remove('hidden-card');
+        folder.cardEl.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+        folder.cardEl.querySelector('[data-count]').textContent = folder.itemCount + ' items';
+        if (folder.built) populateFileList(folder, '');
+      });
+      return;
+    }
+    restoreFolderGrid();
+    let anyVisible = false;
+    folders.forEach(function(folder){
+      const nameMatches = folder.lower.indexOf(query) !== -1;
+      const matchedItems = folder.items.filter(function(it){ return it.lower.indexOf(query) !== -1; });
+      const show = nameMatches || matchedItems.length > 0;
+      folder.cardEl.classList.toggle('hidden-card', !show);
+      if (!show) return;
+      anyVisible = true;
+      folder.cardEl.querySelector('[data-title]').innerHTML = highlight(folder.name, query);
+      const subset = nameMatches && matchedItems.length === 0 ? folder.items : matchedItems;
+      folder.cardEl.querySelector('[data-count]').textContent = subset.length + ' items';
+      setFolderOpen(folder, true, query, subset);
+    });
+    if (!anyVisible){ renderEmptyState(); emptyShown = true; }
+  }
+
+  searchInputEl.addEventListener('input', function(){ applySearch(searchInputEl.value); });
+  clearBtnEl.addEventListener('click', function(){ searchInputEl.value = ''; applySearch(''); searchInputEl.focus(); });
+  expandAllBtnEl.addEventListener('click', function(){
+    folders.forEach(function(f){ if (!f.cardEl.classList.contains('hidden-card')) setFolderOpen(f, true, searchInputEl.value.trim().toLowerCase()); });
+  });
+  collapseAllBtnEl.addEventListener('click', function(){ folders.forEach(function(f){ setFolderOpen(f, false); }); });
+})();
+
+</script>
+
+
+<!-- JOIN CHANNEL FOOTER -->
+<div id="cm-join" style="text-align:center;padding:26px 16px 36px;">
+  <a href="https://whatsapp.com/channel/0029VbBqYvh2phHSBhGVGD08" target="_blank" rel="noopener" style="display:inline-block;padding:13px 26px;border-radius:999px;background:linear-gradient(180deg,#34d399,#10b981);color:#03261c;font:800 15px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 10px 24px -8px rgba(16,185,129,.7);">&#128172; 𝕁𝕠𝕚𝕟 𝕎𝕙𝕒𝕥𝕤𝕒𝕡𝕡 ℂ𝕙𝕒𝕟𝕟𝕖𝕝</a>
+</div>
+<script id="cm-theme-js">
+(function(){
+  function tidy(root){
+    var cards=(root||document).querySelectorAll('.folder-card');
+    cards.forEach(function(c){
+      var tb=c.querySelector('.folder-title-block'), badge=c.querySelector('.file-count-badge');
+      if(tb && badge && badge.parentNode!==tb){ tb.appendChild(badge); }
+      if(badge && /^1 items$/.test(badge.textContent.trim())) badge.textContent='1 item';
+      var t=c.querySelector('.folder-title');
+      if(t){
+        var n=t.lastChild;
+        if(n && n.nodeType===3){ var s=n.nodeValue.replace(/\s*\(\d+\)\s*$/,''); if(s!==n.nodeValue) n.nodeValue=s; }
+      }
+    });
+  }
+  function start(){
+    tidy();
+    ['classesGrid','notesGrid'].forEach(function(id){
+      var g=document.getElementById(id); if(!g) return;
+      new MutationObserver(function(){ tidy(g); }).observe(g,{childList:true,subtree:true});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+})();
+</script>
+</body>
+</html>

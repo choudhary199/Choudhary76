@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>📗 Gopal Sir · SSC Pratham 2026</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<style>
+:root{
+  --blue-50:#eef6ff; --blue-100:#e0f0ff; --blue-200:#c7e3ff; --blue-300:#a3d1ff;
+  --blue-500:#2f8bff; --blue-600:#1f6fe0; --blue-700:#1656b3; --blue-900:#0d3a75;
+  --ink-900:#0b1a33; --ink-700:#33455e; --ink-500:#5b6b85; --ink-300:#8a97ac;
+  --surface:#ffffff; --surface-soft:#f4f9ff; --border:#dfeaf7;
+  --pdf:#e0473e; --video:#2f8bff; --yt:#d92d20;
+  --radius-lg:22px; --radius-md:16px; --radius-sm:10px;
+  --shadow-sm:0 1px 2px rgba(13,58,117,0.06), 0 1px 1px rgba(13,58,117,0.04);
+  --shadow-md:0 6px 20px rgba(20,70,140,0.08), 0 2px 6px rgba(20,70,140,0.05);
+  --shadow-lg:0 16px 40px rgba(20,70,140,0.14), 0 4px 12px rgba(20,70,140,0.06);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body{
+  margin:0; min-height:100vh;
+  font-family:'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color:var(--ink-900);
+  background:
+    radial-gradient(1100px 600px at 90% -10%, rgba(47,139,255,0.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(47,139,255,0.08), transparent 55%),
+    linear-gradient(180deg, #f2f8ff 0%, #eaf3fd 100%);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{ background:var(--blue-200); }
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:var(--blue-200); border-radius:20px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--blue-300); }
+
+.wrap{ max-width:1180px; margin:0 auto; padding:0 1rem 3rem; }
+
+.site-header{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
+  background:rgba(244,249,255,0.86); border-bottom:1px solid rgba(47,139,255,0.14);
+}
+.header-inner{ max-width:1180px; margin:0 auto; padding:0.9rem 1rem 1rem; }
+.brand-row{ display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.6rem; }
+.brand{ display:flex; align-items:center; gap:0.65rem; min-width:0; }
+.back-btn{
+  flex:none; display:flex; align-items:center; justify-content:center; gap:0.3rem;
+  width:auto; height:40px; padding:0 0.8rem; border-radius:12px; border:1.5px solid var(--border);
+  background:var(--surface); color:var(--ink-700); font-weight:700; font-size:0.82rem;
+  text-decoration:none; box-shadow:var(--shadow-sm); transition:transform .12s var(--ease);
+}
+.back-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); }
+.back-btn svg{ width:16px; height:16px; }
+.brand-icon{
+  flex:none; width:44px; height:44px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center; font-size:1.35rem;
+  background:linear-gradient(135deg, var(--blue-500), var(--blue-700));
+  box-shadow:0 6px 16px rgba(31,111,224,0.35); color:#fff;
+}
+.brand-text{ min-width:0; }
+.brand-text h1{ margin:0; font-size:1.1rem; font-weight:800; letter-spacing:-0.01em; color:var(--ink-900); line-height:1.25; overflow-wrap:anywhere; }
+.brand-text p{ margin:0.1rem 0 0; font-size:0.76rem; color:var(--ink-500); font-weight:600; }
+
+.tab-row{ display:flex; gap:0.5rem; margin-top:0.7rem; }
+.tab-btn{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:0.4rem;
+  padding:0.65rem 0.8rem; border-radius:14px; border:1.5px solid var(--border);
+  background:var(--surface); color:var(--ink-500); font-weight:800; font-size:0.85rem;
+  cursor:pointer; transition:all .15s var(--ease); box-shadow:var(--shadow-sm);
+}
+.tab-btn.active{ background:linear-gradient(135deg, var(--blue-500), var(--blue-700)); color:#fff; border-color:transparent; box-shadow:var(--shadow-md); }
+.tab-btn .count{ font-weight:700; opacity:0.85; font-size:0.75rem; }
+
+.search-row{ display:flex; gap:0.55rem; align-items:center; margin-top:0.7rem; }
+.search-box{ position:relative; flex:1; min-width:0; }
+.search-box svg.icon-search{ position:absolute; left:14px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:var(--ink-300); pointer-events:none; }
+.search-box input{
+  width:100%; padding:0.75rem 2.6rem 0.75rem 2.6rem; font-size:0.95rem; font-weight:500;
+  border-radius:14px; border:1.5px solid var(--border); background:var(--surface);
+  color:var(--ink-900); box-shadow:var(--shadow-sm); outline:none;
+  transition:border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.search-box input::placeholder{ color:var(--ink-300); font-weight:500; }
+.search-box input:focus{ border-color:var(--blue-500); box-shadow:0 0 0 4px rgba(47,139,255,0.14), var(--shadow-sm); }
+.clear-btn{
+  position:absolute; right:8px; top:50%; transform:translateY(-50%); width:26px; height:26px;
+  border-radius:50%; border:none; background:var(--blue-100); color:var(--blue-700);
+  display:none; align-items:center; justify-content:center; cursor:pointer; transition:background .15s;
+}
+.clear-btn svg{ width:14px; height:14px; }
+.clear-btn.show{ display:flex; }
+.clear-btn:hover{ background:var(--blue-200); }
+
+.icon-btn-group{ display:flex; gap:0.4rem; flex:none; }
+.icon-btn{
+  display:flex; align-items:center; justify-content:center; gap:0.35rem;
+  padding:0 0.8rem; height:44px; border-radius:14px; border:1.5px solid var(--border);
+  background:var(--surface); color:var(--ink-700); font-weight:700; font-size:0.82rem;
+  cursor:pointer; white-space:nowrap; box-shadow:var(--shadow-sm);
+  transition:transform .12s var(--ease), box-shadow .12s var(--ease), border-color .12s;
+}
+.icon-btn svg{ width:17px; height:17px; flex:none; }
+.icon-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); border-color:var(--blue-300); }
+
+.breadcrumb{ display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap; font-size:0.8rem; color:var(--ink-500); font-weight:600; margin-top:0.65rem; min-height:1.1rem; }
+
+.folder-grid{ display:flex; flex-direction:column; gap:0.85rem; margin-top:1.4rem; }
+.folder-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm); overflow:hidden; animation:fadeIn .35s var(--ease) both;
+  transition:box-shadow .18s var(--ease), border-color .18s var(--ease);
+}
+.folder-card:hover{ box-shadow:var(--shadow-md); border-color:var(--blue-200); }
+.folder-card.hidden-card{ display:none; }
+.folder-header{
+  position:relative; display:flex; align-items:center; gap:0.8rem; padding:0.95rem 1.1rem;
+  cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+}
+.folder-header:hover{ background:var(--surface-soft); }
+.folder-icon-wrap{
+  flex:none; width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(150deg, var(--blue-100), var(--blue-50)); font-size:1.3rem;
+  transition:transform .28s var(--ease), background .28s var(--ease);
+}
+.folder-card.open .folder-icon-wrap{ background:linear-gradient(150deg, var(--blue-500), var(--blue-700)); transform:scale(1.03); }
+.folder-title-block{ flex:1; min-width:0; }
+.folder-title{ margin:0; font-size:0.98rem; font-weight:700; color:var(--ink-900); letter-spacing:-0.01em; overflow-wrap:anywhere; word-break:break-word; }
+.folder-title mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+.folder-meta{ display:flex; align-items:center; gap:0.5rem; flex:none; }
+.file-count-badge{ background:var(--blue-50); color:var(--blue-700); font-size:0.72rem; font-weight:800; padding:0.28rem 0.6rem; border-radius:20px; border:1px solid var(--blue-100); white-space:nowrap; }
+.chevron{ flex:none; width:20px; height:20px; color:var(--ink-300); transition:transform .28s var(--ease), color .2s; }
+.folder-card.open .chevron{ transform:rotate(180deg); color:var(--blue-600); }
+
+.folder-body{ max-height:0; overflow:hidden; transition:max-height .32s var(--ease); }
+.folder-body-inner{ padding:0 1.1rem 1rem; border-top:1px solid var(--border); margin-top:0; }
+.file-list{ display:flex; flex-direction:column; gap:0.5rem; padding-top:0.85rem; }
+
+.file-item{
+  display:flex; align-items:center; gap:0.7rem; padding:0.65rem 0.7rem; border-radius:var(--radius-md);
+  background:var(--surface-soft); border:1px solid transparent; flex-wrap:wrap;
+  animation:slideDown .28s var(--ease) both;
+  transition:transform .14s var(--ease), box-shadow .14s var(--ease), border-color .14s, background .14s;
+}
+.file-item:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:var(--blue-200); background:var(--surface); }
+.file-name{ flex:1 1 160px; min-width:0; font-size:0.85rem; font-weight:600; color:var(--ink-700); overflow-wrap:anywhere; word-break:break-word; line-height:1.35; }
+.file-name mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+.file-actions{ display:flex; gap:0.4rem; flex:none; flex-wrap:wrap; }
+.open-btn{
+  display:flex; align-items:center; gap:0.3rem; padding:0.42rem 0.75rem; border-radius:10px;
+  background:var(--surface); border:1.5px solid var(--border); font-size:0.75rem; font-weight:800;
+  text-decoration:none; white-space:nowrap; cursor:pointer; transition:background .15s, color .15s, border-color .15s, transform .12s;
+}
+.open-btn svg{ width:13px; height:13px; }
+.open-btn.video{ color:var(--blue-700); }
+.open-btn.video:hover{ background:linear-gradient(135deg, var(--blue-500), var(--blue-600)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+.open-btn.pdf{ color:var(--pdf); }
+.open-btn.pdf:hover{ background:linear-gradient(135deg, #ff6b61, var(--pdf)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+.open-btn.yt{ color:var(--yt); }
+.open-btn.yt:hover{ background:linear-gradient(135deg, #ff5c4d, var(--yt)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+
+.empty-state{ display:flex; flex-direction:column; align-items:center; justify-content:center; padding:3.5rem 1rem; text-align:center; color:var(--ink-500); animation:fadeIn .3s var(--ease) both; }
+.empty-state svg{ width:64px; height:64px; color:var(--blue-200); margin-bottom:1rem; }
+.empty-state h3{ margin:0 0 0.35rem; color:var(--ink-900); font-size:1.05rem; }
+.empty-state p{ margin:0; font-size:0.85rem; max-width:320px; }
+
+@keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
+@keyframes slideDown{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
+@media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; } }
+
+.wa-fab{
+  position:fixed; bottom:22px; right:22px; z-index:60; width:58px; height:58px; border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#1aa851); color:#fff; display:flex; align-items:center; justify-content:center;
+  box-shadow:var(--shadow-lg); text-decoration:none; transition:transform .15s var(--ease);
+}
+.wa-fab:hover{ transform:translateY(-2px) scale(1.05); }
+.wa-fab svg{ width:28px; height:28px; }
+
+/* Video popup */
+.popup-overlay{ position:fixed; inset:0; z-index:80; background:rgba(11,26,51,0.75); display:none; align-items:center; justify-content:center; padding:1rem; }
+.popup-overlay.show{ display:flex; }
+.popup-content{ position:relative; width:100%; max-width:900px; }
+.video-container{ position:relative; width:100%; padding-top:56.25%; background:#000; border-radius:16px; overflow:hidden; }
+.video-frame{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+.close-button{ position:absolute; top:-42px; right:0; background:rgba(255,255,255,0.15); color:#fff; border:none; width:34px; height:34px; border-radius:50%; font-size:1.3rem; cursor:pointer; }
+
+body.has-fab .wrap{ padding-bottom:2rem; }
+
+@media (max-width:640px){
+  .brand-text h1{ font-size:0.98rem; }
+  .icon-btn .label{ display:none; }
+  .icon-btn{ padding:0 0.65rem; width:44px; }
+  .folder-title{ font-size:0.9rem; }
+  .file-name{ font-size:0.8rem; }
+  .wrap{ padding:0 0.65rem 2.5rem; }
+  .header-inner{ padding:0.75rem 0.65rem 0.85rem; }
+  .file-item{ flex-direction:column; align-items:stretch; }
+  .file-actions{ justify-content:flex-start; }
+}
+</style>
+<style id="cm-theme">
+/* ---- Choudhary Mehfil theme: cream + orange, numbered chapter cards ---- */
+:root{
+  --blue-50:#fff5ee; --blue-100:#ffe9dc; --blue-200:#ffd2b8; --blue-300:#ffb68e;
+  --blue-500:#f2602a; --blue-600:#e0501c; --blue-700:#c23f10; --blue-900:#5a2208;
+  --ink-900:#1a1412; --ink-700:#3d322c; --ink-500:#6f625a; --ink-300:#a2958b;
+  --surface:#ffffff; --surface-soft:#faf5ef; --border:#eee4d8;
+  --shadow-sm:0 1px 2px rgba(60,30,10,.05); --shadow-md:0 8px 22px rgba(90,40,10,.09); --shadow-lg:0 16px 40px rgba(90,40,10,.14);
+}
+body{ background:radial-gradient(900px 500px at 100% -10%, rgba(242,96,42,.10), transparent 60%), linear-gradient(180deg,#f7f1ea 0%,#f3ebe2 100%) !important; }
+.site-header{ background:rgba(247,241,234,.9) !important; border-bottom:1px solid rgba(242,96,42,.14) !important; }
+.brand-icon{ padding:0 !important; overflow:hidden; background:#fff !important; box-shadow:0 6px 16px rgba(194,63,16,.30) !important; border:2px solid #fff; }
+.brand-icon img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:50%; }
+.brand-icon{ border-radius:50% !important; }
+
+/* chapter cards */
+.folder-grid{ counter-reset:chap; gap:.8rem !important; }
+.folder-card{ counter-increment:chap; border-radius:26px !important; border:1px solid var(--border) !important; box-shadow:0 1px 0 rgba(255,255,255,.8) inset, var(--shadow-sm) !important; }
+.folder-card.open{ border-color:#e5d3c2 !important; box-shadow:var(--shadow-md) !important; }
+.folder-header{ gap:1rem !important; padding:1.15rem 1.2rem !important; }
+.folder-header:hover{ background:#fffaf5 !important; }
+.folder-icon-wrap{ width:auto !important; height:auto !important; min-width:2.6rem; background:none !important; border-radius:0 !important; transform:none !important; font-size:0 !important; justify-content:flex-start !important; }
+.folder-icon-wrap::before{ content:counter(chap, decimal-leading-zero); font-family:Georgia,'Times New Roman',serif; font-style:italic; font-weight:400; font-size:2.1rem; line-height:1; color:#f2602a; letter-spacing:-.03em; }
+.folder-title{ font-size:1.12rem !important; font-weight:700 !important; line-height:1.25; }
+.folder-title-block .file-count-badge{ display:block; background:none !important; border:0 !important; padding:0 !important; margin-top:.3rem; font-size:.9rem !important; font-weight:500 !important; color:#9d9088 !important; }
+.folder-meta{ gap:0 !important; }
+.chevron{ box-sizing:content-box; width:20px !important; height:20px !important; padding:13px; border-radius:50%; background:#f2ece5; color:#3d322c !important; transition:all .25s var(--ease) !important; }
+.folder-header:hover .chevron, .folder-card.open .chevron{ background:#1a1412 !important; color:#fff !important; }
+.tab-btn.active{ background:linear-gradient(135deg,#f2602a,#c23f10) !important; }
+</style>
+</head>
+<body class="has-fab">
+
+<header class="site-header">
+<div class="header-inner">
+<div class="brand-row">
+<a class="back-btn" href="ssc-pratham-2026-vod.html">
+<svg fill="none" viewbox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3"></path></svg>
+        Back
+      </a>
+<div class="brand" style="flex:1; justify-content:center;">
+<div class="brand-icon"><img src="channel-dp.jpg" alt="" onerror="this.parentNode.textContent='📗';this.remove&&0"></div>
+<div class="brand-text">
+<h1>Gopal Sir</h1>
+<p>SSC Pratham 2026 · VOD Batch 1</p>
+</div>
+</div>
+<div style="width:70px"></div>
+</div>
+<div class="tab-row"><button class="tab-btn active" id="tabBtnClasses" onclick="showTab('classes')">🎬 Classes <span class="count">(369)</span></button><button class="tab-btn" id="tabBtnNotes" onclick="showTab('notes')">📄 Notes <span class="count">(131)</span></button></div>
+</div>
+</header>
+<div class="wrap">
+<div class="panel" id="panelClasses" style="display:block">
+<div class="search-row">
+<div class="search-box">
+<svg class="icon-search" fill="none" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input autocomplete="off" id="classesSearchInput" placeholder="Search classes…" type="text"/>
+<button aria-label="Clear search" class="clear-btn" id="classesClearBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-linecap="round" stroke-width="2.4"></path></svg>
+</button>
+</div>
+<div class="icon-btn-group">
+<button class="icon-btn" id="classesExpandAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Expand</span>
+</button>
+<button class="icon-btn" id="classesCollapseAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Collapse</span>
+</button>
+</div>
+</div>
+<div class="breadcrumb" id="classesBreadcrumb"></div>
+<div class="folder-grid" id="classesGrid"></div>
+</div>
+<div class="panel" id="panelNotes" style="display:none">
+<div class="search-row">
+<div class="search-box">
+<svg class="icon-search" fill="none" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input autocomplete="off" id="notesSearchInput" placeholder="Search notes…" type="text"/>
+<button aria-label="Clear search" class="clear-btn" id="notesClearBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-linecap="round" stroke-width="2.4"></path></svg>
+</button>
+</div>
+<div class="icon-btn-group">
+<button class="icon-btn" id="notesExpandAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Expand</span>
+</button>
+<button class="icon-btn" id="notesCollapseAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Collapse</span>
+</button>
+</div>
+</div>
+<div class="breadcrumb" id="notesBreadcrumb"></div>
+<div class="folder-grid" id="notesGrid"></div>
+</div>
+</div>
+<!-- Video Popup -->
+<div class="popup-overlay" id="videoPopup" onclick="closeVideoPopup(event)">
+<div class="popup-content" onclick="event.stopPropagation()">
+<button class="close-button" onclick="closeVideoPopup()">×</button>
+<div class="video-container"><iframe allowfullscreen="" class="video-frame" id="videoFrame" src=""></iframe></div>
+</div>
+</div>
+<script>
+
+const ICONS = {
+  video: '<svg viewBox="0 0 24 24" fill="none"><path d="M15 10.5 19.2 8a1 1 0 0 1 1.5.87v6.26a1 1 0 0 1-1.5.87L15 13.5" stroke="none" fill="currentColor"/><rect x="3" y="6.5" width="12" height="11" rx="2.2" fill="currentColor"/></svg>',
+  pdf: '<svg viewBox="0 0 24 24" fill="none"><path d="M7 3.5h7.5L19 8v11.5A1.5 1.5 0 0 1 17.5 21h-10A1.5 1.5 0 0 1 6 19.5v-14A1.5 1.5 0 0 1 7 3.5Z" fill="currentColor"/></svg>',
+  yt: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4.1-1.3.1-2.1.9-.6.7-.8 2.2-.8 2.2S2.2 9 2.2 10.8v1.4C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.2c.8.8 1.9.8 2.3.9C7 19 12 19 12 19s3.9 0 6.7-.2c.4-.1 1.3-.1 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.8.2-3.6v-1.4c0-1.8-.2-3.6-.2-3.6ZM10 14.5v-5l4.5 2.5-4.5 2.5Z"/></svg>',
+  chevron: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  emptyBox: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 8l8-4 8 4-8 4-8-4Zm0 0v8l8 4m0-12v12m8-12v8l-8 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+
+function showTab(tab){
+  const panelClasses = document.getElementById('panelClasses');
+  const panelNotes = document.getElementById('panelNotes');
+  const btnClasses = document.getElementById('tabBtnClasses');
+  const btnNotes = document.getElementById('tabBtnNotes');
+  if (panelClasses) panelClasses.style.display = (tab === 'classes') ? 'block' : 'none';
+  if (panelNotes) panelNotes.style.display = (tab === 'notes') ? 'block' : 'none';
+  if (btnClasses) btnClasses.classList.toggle('active', tab === 'classes');
+  if (btnNotes) btnNotes.classList.toggle('active', tab === 'notes');
+}
+
+window.openClassVideo = function(url, isDRM){
+  if (isDRM){
+    window.open(url, '_blank');
+  } else {
+    const popup = document.getElementById('videoPopup');
+    const frame = document.getElementById('videoFrame');
+    frame.src = url;
+    popup.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+};
+function closeVideoPopup(event){
+  if (event && event.target !== event.currentTarget) return;
+  const popup = document.getElementById('videoPopup');
+  const frame = document.getElementById('videoFrame');
+  popup.classList.remove('show');
+  frame.src = '';
+  document.body.style.overflow = 'auto';
+}
+document.addEventListener('keydown', function(event){ if (event.key === 'Escape') closeVideoPopup(); });
+
+
+(function(){
+  const rawData = [{"name": "Tense (12)", "items": [{"title": "(All Notes) Class-01 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6351384984112/6351384984112.m3u8", "drm": false}, {"title": "(All Notes) Class - 02 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6351444002112/6351444002112.m3u8", "drm": false}, {"title": "(All Notes) Class - 03 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6351525090112/6351525090112.m3u8", "drm": false}, {"title": "(All Notes) Class - 04 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6351683290112/6351683290112.m3u8", "drm": false}, {"title": "(All Notes) Class - 05 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6351776530112/6351776530112.m3u8", "drm": false}, {"title": "(All Notes) Class - 06 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6351951376112/6351951376112.m3u8", "drm": false}, {"title": "(All Notes) Class -07 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6352007247112/6352007247112.m3u8", "drm": false}, {"title": "(All Notes) Class - 08 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6352076962112/6352076962112.m3u8", "drm": false}, {"title": "(All Notes) Class - 09 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6352157545112/6352157545112.m3u8", "drm": false}, {"title": "(All Notes) Class - 10 | Tense", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6352217657112/6352217657112.m3u8", "drm": false}, {"title": "(All Notes) Class - 11 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6352391298112/6352391298112.m3u8", "drm": false}, {"title": "(All Notes) Class - 12 | Tense", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6352440726112/6352440726112.m3u8", "drm": false}]}, {"name": "Conditional Sentences (5)", "items": [{"title": "(All Notes) Class - 13 | Conditional Sentences", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6352564923112/6352564923112.m3u8", "drm": false}, {"title": "(All Notes) Class - 14 | Conditional Sentences", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6352631446112/6352631446112.m3u8", "drm": false}, {"title": "(All Notes) Class - 15 | Conditional Sentences", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6352708002112/6352708002112.m3u8", "drm": false}, {"title": "(All Notes) Class - 16 | Conditional Sentences", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6352825435112/6352825435112.m3u8", "drm": false}, {"title": "(All Notes) Class - 17 | Conditional Sentences", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6352875788112/6352875788112.m3u8", "drm": false}]}, {"name": "Mood (Intention Of The Speaker) (2)", "items": [{"title": "(All Notes) Class - 18 | Mood (Intention Of The Speaker)", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6352929340112/6352929340112.m3u8", "drm": false}, {"title": "(All Notes) Class - 19 | Mood (Intention Of The Speaker)", "type": "youtube", "url": "https://www.youtube.com/embed/s2YkIMBdrB0"}]}, {"name": "Modal Auxiliary (5)", "items": [{"title": "(All Notes) Class - 20 | Modal Auxiliary", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6353065141112/6353065141112.m3u8", "drm": false}, {"title": "(All Notes) Class - 21 | Modal Auxiliary", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6353148058112/6353148058112.m3u8", "drm": false}, {"title": "(All Notes) Class - 22 | Modal Auxiliary", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6353268780112/6353268780112.m3u8", "drm": false}, {"title": "(All Notes) Class - 23 | Modal Auxiliary", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6353342071112/6353342071112.m3u8", "drm": false}, {"title": "(All Notes) Class - 24 | Modal Auxiliary", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6353410020112/6353410020112.m3u8", "drm": false}]}, {"name": "Question tags (3)", "items": [{"title": "(All Notes) Class - 25 | Question tags", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6353483475112/6353483475112.m3u8", "drm": false}, {"title": "(All Notes) Class - 26 | Question tags", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6353554556112/6353554556112.m3u8", "drm": false}, {"title": "(All Notes) Class - 27 | Question tags", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6353737041112/6353737041112.m3u8", "drm": false}]}, {"name": "Voices (7)", "items": [{"title": "(All Notes) Class - 28 | Voices", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6353784376112/6353784376112.m3u8", "drm": false}, {"title": "(All Notes) Class - 29 | Voices", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6353845103112/6353845103112.m3u8", "drm": false}, {"title": "(All Notes) Class - 30 | Voices", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6353913578112/6353913578112.m3u8", "drm": false}, {"title": "(All Notes) Class - 31 | Voices", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6353989049112/6353989049112.m3u8", "drm": false}, {"title": "(All Notes) Class - 32 | Voices", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6354189907112/6354189907112.m3u8", "drm": false}, {"title": "(All Notes) Class - 33 | Voices", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6354253482112/6354253482112.m3u8", "drm": false}, {"title": "(All Notes) Class - 34 | Voices", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6354335993112/6354335993112.m3u8", "drm": false}]}, {"name": "Narration (8)", "items": [{"title": "(All Notes) Class - 35 | Narration", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6354405619112/6354405619112.m3u8", "drm": false}, {"title": "(All Notes) Class - 36 | Narration", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6354483192112/6354483192112.m3u8", "drm": false}, {"title": "(All Notes) Class - 37 | Narration", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6354705373112/6354705373112.m3u8", "drm": false}, {"title": "(All Notes) Class - 38 | Narration", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6354778247112/6354778247112.m3u8", "drm": false}, {"title": "(All Notes) Class - 39 | Narration", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6354838258112/6354838258112.m3u8", "drm": false}, {"title": "(All Notes) Class - 40 | Narration", "type": "youtube", "url": "https://www.youtube.com/embed/SaTuavJIK9I"}, {"title": "(All Notes) Class - 41 | Narration", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6354978356112/6354978356112.m3u8", "drm": false}, {"title": "(All Notes) Class - 42 | Narration", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6355055354112/6355055354112.m3u8", "drm": false}]}, {"name": "Noun (11)", "items": [{"title": "(All Notes) Class - 43 | Noun", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6355331498112/6355331498112.m3u8", "drm": false}, {"title": "(All Notes) Class - 44 | Noun", "type": "youtube", "url": "https://www.youtube.com/embed/30OdJQwf3qQ"}, {"title": "(All Notes) Class - 45 | Noun", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6355583408112/6355583408112.m3u8", "drm": false}, {"title": "(All Notes) Class - 46 | Noun", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6355635763112/6355635763112.m3u8", "drm": false}, {"title": "(All Notes) Class - 47 | Noun", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6355688422112/6355688422112.m3u8", "drm": false}, {"title": "(All Notes) Class - 48 | Noun", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6355739777112/6355739777112.m3u8", "drm": false}, {"title": "(All Notes) Class - 49 | Noun", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6355801892112/6355801892112.m3u8", "drm": false}, {"title": "(All Notes) Class - 50 | Noun", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6356112204112/6356112204112.m3u8", "drm": false}, {"title": "(All Notes) Class - 51 | Noun", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6356241300112/6356241300112.m3u8", "drm": false}, {"title": "(All Notes) Class - 52 | Noun", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6356378064112/6356378064112.m3u8", "drm": false}, {"title": "(All Notes) Class - 53 | Noun", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6356522613112/6356522613112.m3u8", "drm": false}]}, {"name": "Pronoun (8)", "items": [{"title": "(All Notes) Class - 54 | Pronoun", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6356658113112/6356658113112.m3u8", "drm": false}, {"title": "(All Notes) Class - 55 | Pronoun", "type": "youtube", "url": "https://www.youtube.com/embed/XPc5cIXz4eI"}, {"title": "(All Notes) Class - 56 | Pronoun", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6357168151112/6357168151112.m3u8", "drm": false}, {"title": "(All Notes) Class - 57 | Pronoun", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6357308638112/6357308638112.m3u8", "drm": false}, {"title": "(All Notes) Class - 58 | Pronoun", "type": "youtube", "url": "https://www.youtube.com/embed/lsnVGJoXYrI"}, {"title": "(All Notes) Class - 59 | Pronoun", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6357678506112/6357678506112.m3u8", "drm": false}, {"title": "(All Notes) Class - 60 | Pronoun", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6357803584112/6357803584112.m3u8", "drm": false}, {"title": "(All Notes) Class - 61 | Pronoun", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6358011033112/6358011033112.m3u8", "drm": false}]}, {"name": "Adjective (9)", "items": [{"title": "(All Notes) Class - 62 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6358121843112/6358121843112.m3u8", "drm": false}, {"title": "(All Notes) Class - 63 | Adjective", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6358236073112/6358236073112.m3u8", "drm": false}, {"title": "(All Notes) Class - 64 | Adjective", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6358375576112/6358375576112.m3u8", "drm": false}, {"title": "(All Notes) Class - 65 | Adjective", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6358479993112/6358479993112.m3u8", "drm": false}, {"title": "(All Notes) Class - 66 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6358801409112/6358801409112.m3u8", "drm": false}, {"title": "(All Notes) Class - 67  | Adjective", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6358913900112/6358913900112.m3u8", "drm": false}, {"title": "(All Notes) Class - 68 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6359031595112/6359031595112.m3u8", "drm": false}, {"title": "(All Notes) Class - 69 | Adjective", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6359162682112/6359162682112.m3u8", "drm": false}, {"title": "(All Notes) Class - 70 | Adjective", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6359288527112/6359288527112.m3u8", "drm": false}]}, {"name": "Verb Basic (4)", "items": [{"title": "(All Notes) Class - 71 | Verb Basic", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6359539099112/6359539099112.m3u8", "drm": false}, {"title": "(All Notes) Class - 72 | Verb Basic", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6359594729112/6359594729112.m3u8", "drm": false}, {"title": "(All Notes) Class - 73 | Verb Basic", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6359655482112/6359655482112.m3u8", "drm": false}, {"title": "(All Notes) Class - 74 | Verb Basic", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6359718751112/6359718751112.m3u8", "drm": false}]}, {"name": "Verb Advance (8)", "items": [{"title": "(All Notes) Class - 75 | Verb  Advance", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6359776032112/6359776032112.m3u8", "drm": false}, {"title": "(All Notes) Class - 76 | Verb Advance", "type": "youtube", "url": "https://www.youtube.com/embed/toryr5jRoF8"}, {"title": "(All Notes) Class - 77 | Verb Advance", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6359912366112/6359912366112.m3u8", "drm": false}, {"title": "(All Notes) Class - 78 | Verb Advance", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6359960355112/6359960355112.m3u8", "drm": false}, {"title": "(All Notes) Class - 79 | Verb Advance", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6360014791112/6360014791112.m3u8", "drm": false}, {"title": "(All Notes) Class - 80 | Verb Advance", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6360069927112/6360069927112.m3u8", "drm": false}, {"title": "(All Notes) Class - 81 | Verb Advance", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360125212112/6360125212112.m3u8", "drm": false}, {"title": "(All Notes) Class - 82 | Verb Advance", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360184540112/6360184540112.m3u8", "drm": false}]}, {"name": "Preposition (8)", "items": [{"title": "(All Notes) Class - 83 | Preposition", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360285643112/6360285643112.m3u8", "drm": false}, {"title": "(All Notes) Class - 84 | Preposition", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360333425112/6360333425112.m3u8", "drm": false}, {"title": "(All Notes) Class - 85 | Preposition", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360388633112/6360388633112.m3u8", "drm": false}, {"title": "(All Notes) Class - 86 | Preposition", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6360487206112/6360487206112.m3u8", "drm": false}, {"title": "(All Notes) Class - 87 | Preposition", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360540741112/6360540741112.m3u8", "drm": false}, {"title": "(All Notes) Class-88 | Preposition", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360591277112/6360591277112.m3u8", "drm": false}, {"title": "(All Notes) Class-89 | Preposition", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360679642112/6360679642112.m3u8", "drm": false}, {"title": "(All Notes) Class-90 | Preposition", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360730541112/6360730541112.m3u8", "drm": false}]}, {"name": "Adverb (8)", "items": [{"title": "(All Notes) Class-91 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360785570112/6360785570112.m3u8", "drm": false}, {"title": "(All Notes) Class-92 | Adverb", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6360854730112/6360854730112.m3u8", "drm": false}, {"title": "(All Notes) Class-93 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6360922105112/6360922105112.m3u8", "drm": false}, {"title": "(All Notes) Class-94 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361016537112/6361016537112.m3u8", "drm": false}, {"title": "(All Notes) Class-95 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361066205112/6361066205112.m3u8", "drm": false}, {"title": "(All Notes) Class-96 | Adverb", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361122214112/6361122214112.m3u8", "drm": false}, {"title": "(All Notes) Class-97 | Adverb", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6361175144112/6361175144112.m3u8", "drm": false}, {"title": "(All Notes) Class-98 | Adverb", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6361291055112/6361291055112.m3u8", "drm": false}]}, {"name": "Conjunction (5)", "items": [{"title": "(All Notes) Class-99 | Conjunction", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361375036112/6361375036112.m3u8", "drm": false}, {"title": "(All Notes) Class-100 | Conjunction", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361420963112/6361420963112.m3u8", "drm": false}, {"title": "(All Notes) Class-101 | Conjunction", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6361473905112/6361473905112.m3u8", "drm": false}, {"title": "(All Notes) Class-102 | Conjunction", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361529686112/6361529686112.m3u8", "drm": false}, {"title": "(All Notes) Class-103 | Conjunction", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361588132112/6361588132112.m3u8", "drm": false}]}, {"name": "Article (5)", "items": [{"title": "(All Notes) Class-104 | Article", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361635604112/6361635604112.m3u8", "drm": false}, {"title": "(All Notes) Class-105 | Article", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361715322112/6361715322112.m3u8", "drm": false}, {"title": "(All Notes) Class-106 | Article", "type": "youtube", "url": "https://www.youtube.com/embed/v2EDBeSNosE"}, {"title": "(All Notes) Class-107 | Article", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6361819672112/6361819672112.m3u8", "drm": false}, {"title": "(All Notes) Class-108 | Article", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6361859604112/6361859604112.m3u8", "drm": false}]}, {"name": "Subject Verb Agreement (3)", "items": [{"title": "(All Notes) Class-109 | Subject Verb Agreement", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361905581112/6361905581112.m3u8", "drm": false}, {"title": "(All Notes) Class-110 | Subject Verb Agreement", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6361948411112/6361948411112.m3u8", "drm": false}, {"title": "(All Notes) Class-111 | Subject Verb Agreement", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6362008112112/6362008112112.m3u8", "drm": false}]}, {"name": "Determiner (1)", "items": [{"title": "(All Notes) Class-112 | Determiner", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6362044221112/6362044221112.m3u8", "drm": false}]}, {"name": "Last Class (1)", "items": [{"title": "(All Notes) Class-113 | Last Class", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6362089058112/6362089058112.m3u8", "drm": false}]}, {"name": "By Gopal Verma Sir (2)", "items": [{"title": "(All Notes) Important Announcement | Daily Shots | By Gopal Verma Sir", "type": "youtube", "url": "https://www.youtube.com/embed/Aq3pl3a4mcc"}, {"title": "(Comprehension) Important Announcement | Daily Shots | By Gopal Verma Sir", "type": "youtube", "url": "https://www.youtube.com/embed/Aq3pl3a4mcc"}]}, {"name": "Best Approach To Solve PQRS (1)", "items": [{"title": "(All Notes) Best Approach To Solve PQRS", "type": "youtube", "url": "https://www.youtube.com/embed/meW2nI_G7b8"}]}, {"name": "Best Tips to Solve Cloze Test (1)", "items": [{"title": "(All Notes) Best Tips to Solve Cloze Test", "type": "youtube", "url": "https://www.youtube.com/embed/ytA5Z3t7vZ0"}]}, {"name": "Reading Comprehension Theory and Details (1)", "items": [{"title": "(All Notes) Reading Comprehension Theory and Details", "type": "youtube", "url": "https://www.youtube.com/embed/suABPyV3n-M"}]}, {"name": "Comp- CT, Rc & Parajumble (76)", "items": [{"title": "(All Notes) Comp- CT, Rc & Parajumble -01", "type": "youtube", "url": "https://www.youtube.com/embed/eGYgNGGsq4A"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -02", "type": "youtube", "url": "https://www.youtube.com/embed/vjdPIDafZpE"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -03", "type": "youtube", "url": "https://www.youtube.com/embed/TRcUyiOdVhg"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -04", "type": "youtube", "url": "https://www.youtube.com/embed/R330TX9yulc"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -05", "type": "youtube", "url": "https://www.youtube.com/embed/Upkox-CaA1U"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -06", "type": "youtube", "url": "https://www.youtube.com/embed/9zuMsoV-pJk"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -07", "type": "youtube", "url": "https://www.youtube.com/embed/2sbSJNBjCxM"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -08", "type": "youtube", "url": "https://www.youtube.com/embed/NYgFIAc6q_Y"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -09", "type": "youtube", "url": "https://www.youtube.com/embed/1kEVMK3pUxE"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -10", "type": "youtube", "url": "https://www.youtube.com/embed/ED0DjnQXZOw"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -11", "type": "youtube", "url": "https://www.youtube.com/embed/FpUsveVRlDo"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -12", "type": "youtube", "url": "https://www.youtube.com/embed/S-dP0b5iMmo"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -13", "type": "youtube", "url": "https://www.youtube.com/embed/W9buQWZDDco"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -14", "type": "youtube", "url": "https://www.youtube.com/embed/Y5SCxHGHmds"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -15", "type": "youtube", "url": "https://www.youtube.com/embed/VELGDlTUlOg"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -16", "type": "youtube", "url": "https://www.youtube.com/embed/uspuKUd0-1I"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -17", "type": "youtube", "url": "https://www.youtube.com/embed/SY_Wqnl78jc"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -18", "type": "youtube", "url": "https://www.youtube.com/embed/wxnU7KDwEqU"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -19", "type": "youtube", "url": "https://www.youtube.com/embed/mr9D_aL9iyM"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -20", "type": "youtube", "url": "https://www.youtube.com/embed/KGP66naDdRw"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -21", "type": "youtube", "url": "https://www.youtube.com/embed/XCN3BzNRDg0"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -22", "type": "youtube", "url": "https://www.youtube.com/embed/2WDDp4KJmC0"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -23", "type": "youtube", "url": "https://www.youtube.com/embed/v0CUKAKKOso"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -24", "type": "youtube", "url": "https://www.youtube.com/embed/fLwt-YQMVCs"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -25", "type": "youtube", "url": "https://www.youtube.com/embed/Afjtr2gZbBs"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -26", "type": "youtube", "url": "https://www.youtube.com/embed/V8tON2zEnaA"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -27", "type": "youtube", "url": "https://www.youtube.com/embed/JqWxe-Nr5tA"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -28", "type": "youtube", "url": "https://www.youtube.com/embed/GeHpVigDvaw"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -29", "type": "youtube", "url": "https://www.youtube.com/embed/vfViK7bUTyI"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -30", "type": "youtube", "url": "https://www.youtube.com/embed/S9PRxPto7XY"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -31", "type": "youtube", "url": "https://www.youtube.com/embed/NjMeen_Ud6c"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -32", "type": "youtube", "url": "https://www.youtube.com/embed/w7gTRstDF60"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -33", "type": "youtube", "url": "https://www.youtube.com/embed/znKCluak_ms"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -34", "type": "youtube", "url": "https://www.youtube.com/embed/mPV5PDQioIk"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -35", "type": "youtube", "url": "https://www.youtube.com/embed/Fy_HA-vT3-k"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -36", "type": "youtube", "url": "https://www.youtube.com/embed/flGOLGLpnEY"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -37", "type": "youtube", "url": "https://www.youtube.com/embed/SU9Kx6pa6eE"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -38", "type": "youtube", "url": "https://www.youtube.com/embed/IiIKc5Iu5Bo"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -39", "type": "youtube", "url": "https://www.youtube.com/embed/82cQ-hNCA6I"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -40", "type": "youtube", "url": "https://www.youtube.com/embed/R4UcIH8x2Ck"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -41", "type": "youtube", "url": "https://www.youtube.com/embed/bOxJ1cwGSoE"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -42", "type": "youtube", "url": "https://www.youtube.com/embed/iuecXxLsP2E"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -43", "type": "youtube", "url": "https://www.youtube.com/embed/M_45nOKYGZA"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -44", "type": "youtube", "url": "https://www.youtube.com/embed/bDmxJmxSG5A"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -45", "type": "youtube", "url": "https://www.youtube.com/embed/DXF0L7SmvXw"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -46", "type": "youtube", "url": "https://www.youtube.com/embed/nRXYGoD6xNg"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -47", "type": "youtube", "url": "https://www.youtube.com/embed/6GrV7SOtRHM"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -48", "type": "youtube", "url": "https://www.youtube.com/embed/nRCYPUxw3p0"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -49", "type": "youtube", "url": "https://www.youtube.com/embed/kfdqy35P948"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -50", "type": "youtube", "url": "https://www.youtube.com/embed/s8S3ngE9QTs"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -51", "type": "youtube", "url": "https://www.youtube.com/embed/gAB9KD7zdZc"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -52", "type": "youtube", "url": "https://www.youtube.com/embed/qhp1el7l0ow"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -53", "type": "youtube", "url": "https://www.youtube.com/embed/ODEaBn7r_Q8"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -54", "type": "youtube", "url": "https://www.youtube.com/embed/YYkiEw-vUtU"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -55", "type": "youtube", "url": "https://www.youtube.com/embed/Bo-H6yoQvmk"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -56", "type": "youtube", "url": "https://www.youtube.com/embed/lIb6ACiLFAc"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -57", "type": "youtube", "url": "https://www.youtube.com/embed/cV9aaY9qvcc"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -58", "type": "youtube", "url": "https://www.youtube.com/embed/P3zu2pdehGo"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -59", "type": "youtube", "url": "https://www.youtube.com/embed/FgtfGHgUPBg"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -60", "type": "youtube", "url": "https://www.youtube.com/embed/6pfdaGnlUUw"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -61", "type": "youtube", "url": "https://www.youtube.com/embed/lZ38w_geWKI"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -62", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/i0rnEr9EEFo/i0rnEr9EEFo.m3u8", "drm": false}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -63", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/WQl6LilLqCQ/WQl6LilLqCQ.m3u8", "drm": false}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -64", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/4AaX88n35u0/4AaX88n35u0.m3u8", "drm": false}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -65", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/7l5ftAJ7leU/7l5ftAJ7leU.m3u8", "drm": false}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -66", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/fR0SxyiNq68/fR0SxyiNq68.m3u8", "drm": false}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -67", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/nF8PwSxsENg/nF8PwSxsENg.m3u8", "drm": false}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -68", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/Za3wzbpG8Ss/Za3wzbpG8Ss.m3u8", "drm": false}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -69", "type": "youtube", "url": "https://www.youtube.com/embed/w8st8ULOObY"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -70", "type": "youtube", "url": "https://www.youtube.com/embed/Tu1pltMY2wA"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -71", "type": "youtube", "url": "https://www.youtube.com/embed/eIrJW03FJ7s"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -72", "type": "youtube", "url": "https://www.youtube.com/embed/O-PTNrPBAR4"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -73", "type": "youtube", "url": "https://www.youtube.com/embed/XThl-_DU8-Y"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -74", "type": "youtube", "url": "https://www.youtube.com/embed/4-REB1S8q8M"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -75", "type": "youtube", "url": "https://www.youtube.com/embed/6QT8Q6K8LbE"}, {"title": "(All Notes) Comp- CT, Rc & Parajumble -76", "type": "youtube", "url": "https://www.youtube.com/embed/9IvXpk-AXXs"}]}, {"name": "Root Word (24)", "items": [{"title": "(All Notes) Class - 1 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/7Eo5OJccaBk"}, {"title": "(All Notes) Class - 2 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/nPlE6a54IPY"}, {"title": "(All Notes) Class - 3 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/xTC1Ma6lSuY"}, {"title": "(All Notes) Class - 4 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/0GcoH1iYITw"}, {"title": "(All Notes) Class - 5 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/1Q-ZbRldHIk"}, {"title": "(All Notes) Class - 6  | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/_bTb3m-TGT4"}, {"title": "(All Notes) Class - 7 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/X6Hi8RyK69Y"}, {"title": "(All Notes) Class - 8 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/1s1VkRa6umY"}, {"title": "(All Notes) Class - 9 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/F6kK7TdHNDE"}, {"title": "(All Notes) Class - 10 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/joa4i1g05K4"}, {"title": "(All Notes) Class - 11  | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/GgLtxv4AlUA"}, {"title": "(All Notes) Class - 12  | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/KAQL1_GCTsA"}, {"title": "(Vocab) Class - 1 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/7Eo5OJccaBk"}, {"title": "(Vocab) Class - 2 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/nPlE6a54IPY"}, {"title": "(Vocab) Class - 3 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/xTC1Ma6lSuY"}, {"title": "(Vocab) Class - 4 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/0GcoH1iYITw"}, {"title": "(Vocab) Class - 5 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/1Q-ZbRldHIk"}, {"title": "(Vocab) Class - 6  | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/_bTb3m-TGT4"}, {"title": "(Vocab) Class - 7 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/X6Hi8RyK69Y"}, {"title": "(Vocab) Class - 8 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/1s1VkRa6umY"}, {"title": "(Vocab) Class - 9 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/F6kK7TdHNDE"}, {"title": "(Vocab) Class - 10 | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/joa4i1g05K4"}, {"title": "(Vocab) Class - 11  | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/GgLtxv4AlUA"}, {"title": "(Vocab) Class - 12  | Root Word", "type": "youtube", "url": "https://www.youtube.com/embed/KAQL1_GCTsA"}]}, {"name": "Vocab Special Class Practice Set (10)", "items": [{"title": "(All Notes) Vocab Special Class Practice Set 01", "type": "youtube", "url": "https://www.youtube.com/embed/1JzxVr_GCi4"}, {"title": "(All Notes) Vocab Special Class Practice Set 02", "type": "youtube", "url": "https://www.youtube.com/embed/r3CcDRb13xM"}, {"title": "(All Notes) Vocab Special Class Practice Set 03", "type": "youtube", "url": "https://www.youtube.com/embed/cFZVCnxt_Fo"}, {"title": "(All Notes) Vocab Special Class Practice Set 04", "type": "youtube", "url": "https://www.youtube.com/embed/K9Jw-3oXw4A"}, {"title": "(All Notes) Vocab Special Class Practice Set 05", "type": "youtube", "url": "https://www.youtube.com/embed/wq6ysa45qQU"}, {"title": "(All Notes) Vocab Special Class Practice Set 06", "type": "youtube", "url": "https://www.youtube.com/embed/eSHXn4Ymm94"}, {"title": "(All Notes) Vocab Special Class Practice Set 07", "type": "youtube", "url": "https://www.youtube.com/embed/9PclNibJ7Vo"}, {"title": "(All Notes) Vocab Special Class Practice Set 08", "type": "youtube", "url": "https://www.youtube.com/embed/xcjKYhpDckk"}, {"title": "(All Notes) Vocab Special Class Practice Set 09", "type": "youtube", "url": "https://www.youtube.com/embed/ZJEgZO9Iw0k"}, {"title": "(All Notes) Vocab Special Class Practice Set 10", "type": "youtube", "url": "https://www.youtube.com/embed/YRrLCSPHJ-E"}]}, {"name": "Synonym & Antonym Day (5)", "items": [{"title": "(All Notes) Synonym & Antonym Day - 01", "type": "youtube", "url": "https://www.youtube.com/embed/6Zb275jD5LA"}, {"title": "(All Notes) Synonym & Antonym Day - 02", "type": "youtube", "url": "https://www.youtube.com/embed/1MH3cU9nVxw"}, {"title": "(All Notes) Synonym & Antonym Day - 03", "type": "youtube", "url": "https://www.youtube.com/embed/LBBjTdICXhQ"}, {"title": "(All Notes) Synonym & Antonym Day - 04", "type": "youtube", "url": "https://www.youtube.com/embed/vRciArER0Y4"}, {"title": "(All Notes) Synonym & Antonym Day - 05", "type": "youtube", "url": "https://www.youtube.com/embed/suM9WK08f_s"}]}, {"name": "Gopal Verma#ssc (2)", "items": [{"title": "(All Notes) Spotting Error| TOP-30 Error Detection 2.0 | Eququity Pattern | SSC CGL MAINS 2025 | Gopal Verma#ssc", "type": "youtube", "url": "https://www.youtube.com/embed/LCpiZrBorGE"}, {"title": "(Eduquity Pattern Classes) Spotting Error| TOP-30 Error Detection 2.0 | Eququity Pattern | SSC CGL MAINS 2025 | Gopal Verma#ssc", "type": "youtube", "url": "https://www.youtube.com/embed/LCpiZrBorGE"}]}, {"name": "Gopal Verma #ssc (4)", "items": [{"title": "(All Notes) Spotting Error | TOP-30 Error Detection | Eququity Pattern | SSC CGL MAINS 2025 | Gopal Verma #ssc", "type": "youtube", "url": "https://www.youtube.com/embed/WGc4SC0EHV4"}, {"title": "(All Notes) Top 100 Idioms and Phrases Asked in 2025-26 | Idioms and Phrases For SSC Exams | Gopal Verma #ssc", "type": "youtube", "url": "https://www.youtube.com/embed/VozAx_bcE28"}, {"title": "(Comprehension) Top 100 Idioms and Phrases Asked in 2025-26 | Idioms and Phrases For SSC Exams | Gopal Verma #ssc", "type": "youtube", "url": "https://www.youtube.com/embed/VozAx_bcE28"}, {"title": "(Eduquity Pattern Classes) Spotting Error | TOP-30 Error Detection | Eququity Pattern | SSC CGL MAINS 2025 | Gopal Verma #ssc", "type": "youtube", "url": "https://www.youtube.com/embed/WGc4SC0EHV4"}]}, {"name": "Gopal Verma #ssc #ssccgl (2)", "items": [{"title": "(All Notes) SSC CGL MAINS 2025 | Types of Sentences & Phrses | Eduquity Based Pattern | Gopal Verma #ssc #ssccgl", "type": "youtube", "url": "https://www.youtube.com/embed/-mlyyxZSFKQ"}, {"title": "(Eduquity Pattern Classes) SSC CGL MAINS 2025 | Types of Sentences & Phrses | Eduquity Based Pattern | Gopal Verma #ssc #ssccgl", "type": "youtube", "url": "https://www.youtube.com/embed/-mlyyxZSFKQ"}]}, {"name": "Gopal Verma (8)", "items": [{"title": "(All Notes) Narration Direct & Indirect Speech| Eququity Pattern | SSC CGL MAINS 2025 | Gopal Verma", "type": "youtube", "url": "https://www.youtube.com/embed/LkuflodlLyM"}, {"title": "(All Notes) Voices | Active and Passive Voice | Eququity Pattern | SSC CGL MAINS 2025 | Gopal Verma", "type": "youtube", "url": "https://www.youtube.com/embed/vlLUDWpbHxQ"}, {"title": "(All Notes) Most Important Homonyms | SSC CGL MAINS 2025 | Eduquity Pattern | Gopal Verma", "type": "youtube", "url": "https://www.youtube.com/embed/L6pfcLohiu4"}, {"title": "(All Notes) SSC CGL MAINS 2025 | Phrases & Figure of Speech | Eduquity Pattern Roadmap| Gopal Verma", "type": "youtube", "url": "https://www.youtube.com/embed/T2tWVueVSSk"}, {"title": "(Eduquity Pattern Classes) Narration Direct & Indirect Speech| Eququity Pattern | SSC CGL MAINS 2025 | Gopal Verma", "type": "youtube", "url": "https://www.youtube.com/embed/LkuflodlLyM"}, {"title": "(Eduquity Pattern Classes) Voices | Active and Passive Voice | Eququity Pattern | SSC CGL MAINS 2025 | Gopal Verma", "type": "youtube", "url": "https://www.youtube.com/embed/vlLUDWpbHxQ"}, {"title": "(Eduquity Pattern Classes) Most Important Homonyms | SSC CGL MAINS 2025 | Eduquity Pattern | Gopal Verma", "type": "youtube", "url": "https://www.youtube.com/embed/L6pfcLohiu4"}, {"title": "(Eduquity Pattern Classes) SSC CGL MAINS 2025 | Phrases & Figure of Speech | Eduquity Pattern Roadmap| Gopal Verma", "type": "youtube", "url": "https://www.youtube.com/embed/T2tWVueVSSk"}]}, {"name": "Idiom & Phrases Day (12)", "items": [{"title": "(All Notes) Idiom & Phrases Day - 01", "type": "youtube", "url": "https://www.youtube.com/embed/f9-aK6OivyY"}, {"title": "(All Notes) Idiom & Phrases Day - 02", "type": "youtube", "url": "https://www.youtube.com/embed/DeFDSI9RZ9Y"}, {"title": "(All Notes) Idiom & Phrases Day - 03", "type": "youtube", "url": "https://www.youtube.com/embed/oHfdDFIbvJA"}, {"title": "(All Notes) Idiom & Phrases Day - 04", "type": "youtube", "url": "https://www.youtube.com/embed/S6_8GCrOkSI"}, {"title": "(All Notes) Idiom & Phrases Day - 05", "type": "youtube", "url": "https://www.youtube.com/embed/cmSFsuZlkCU"}, {"title": "(All Notes) Idiom & Phrases Day - 06", "type": "youtube", "url": "https://www.youtube.com/embed/PhPWLzzLEh8"}, {"title": "(All Notes) Idiom & Phrases Day - 07", "type": "youtube", "url": "https://www.youtube.com/embed/rwklw5nrhoE"}, {"title": "(All Notes) Idiom & Phrases Day - 08", "type": "youtube", "url": "https://www.youtube.com/embed/Y3RwxkEm76k"}, {"title": "(All Notes) Idiom & Phrases Day - 09", "type": "youtube", "url": "https://www.youtube.com/embed/3exdAkVyq_M"}, {"title": "(All Notes) Idiom & Phrases Day - 10", "type": "youtube", "url": "https://www.youtube.com/embed/5J0Vj6E8D7M"}, {"title": "(All Notes) Idiom & Phrases Day - 14", "type": "youtube", "url": "https://www.youtube.com/embed/MyIy0NyGHHs"}, {"title": "(All Notes) Idiom & Phrases Day - 13", "type": "youtube", "url": "https://www.youtube.com/embed/n-2y7FHzcXE"}]}, {"name": "Gopal Verma English #ssc (2)", "items": [{"title": "(All Notes) One Word Substitution🔥| One Word Substitution For SSC CGL, CHSL, CPO 2026 | Gopal Verma English #ssc", "type": "youtube", "url": "https://www.youtube.com/embed/uv29hWz6y00"}, {"title": "(Comprehension) One Word Substitution🔥| One Word Substitution For SSC CGL, CHSL, CPO 2026 | Gopal Verma English #ssc", "type": "youtube", "url": "https://www.youtube.com/embed/uv29hWz6y00"}]}, {"name": "(Comprehension) Best Approach To Solve PQRS (1)", "items": [{"title": "(Comprehension) Best Approach To Solve PQRS", "type": "youtube", "url": "https://www.youtube.com/embed/meW2nI_G7b8"}]}, {"name": "(Comprehension) Best Tips to Solve Cloze Test (1)", "items": [{"title": "(Comprehension) Best Tips to Solve Cloze Test", "type": "youtube", "url": "https://www.youtube.com/embed/ytA5Z3t7vZ0"}]}, {"name": "(Comprehension) Reading Comprehension Theory and Details (1)", "items": [{"title": "(Comprehension) Reading Comprehension Theory and Details", "type": "youtube", "url": "https://www.youtube.com/embed/suABPyV3n-M"}]}, {"name": "(Comprehension) Comp- CT, Rc & Parajumble (76)", "items": [{"title": "(Comprehension) Comp- CT, Rc & Parajumble -01", "type": "youtube", "url": "https://www.youtube.com/embed/eGYgNGGsq4A"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -02", "type": "youtube", "url": "https://www.youtube.com/embed/vjdPIDafZpE"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -03", "type": "youtube", "url": "https://www.youtube.com/embed/TRcUyiOdVhg"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -04", "type": "youtube", "url": "https://www.youtube.com/embed/R330TX9yulc"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -05", "type": "youtube", "url": "https://www.youtube.com/embed/Upkox-CaA1U"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -06", "type": "youtube", "url": "https://www.youtube.com/embed/9zuMsoV-pJk"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -07", "type": "youtube", "url": "https://www.youtube.com/embed/2sbSJNBjCxM"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -08", "type": "youtube", "url": "https://www.youtube.com/embed/NYgFIAc6q_Y"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -09", "type": "youtube", "url": "https://www.youtube.com/embed/1kEVMK3pUxE"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -10", "type": "youtube", "url": "https://www.youtube.com/embed/ED0DjnQXZOw"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -11", "type": "youtube", "url": "https://www.youtube.com/embed/FpUsveVRlDo"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -12", "type": "youtube", "url": "https://www.youtube.com/embed/S-dP0b5iMmo"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -13", "type": "youtube", "url": "https://www.youtube.com/embed/W9buQWZDDco"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -14", "type": "youtube", "url": "https://www.youtube.com/embed/Y5SCxHGHmds"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -15", "type": "youtube", "url": "https://www.youtube.com/embed/VELGDlTUlOg"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -16", "type": "youtube", "url": "https://www.youtube.com/embed/uspuKUd0-1I"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -17", "type": "youtube", "url": "https://www.youtube.com/embed/SY_Wqnl78jc"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -18", "type": "youtube", "url": "https://www.youtube.com/embed/wxnU7KDwEqU"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -19", "type": "youtube", "url": "https://www.youtube.com/embed/mr9D_aL9iyM"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -20", "type": "youtube", "url": "https://www.youtube.com/embed/KGP66naDdRw"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -21", "type": "youtube", "url": "https://www.youtube.com/embed/XCN3BzNRDg0"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -22", "type": "youtube", "url": "https://www.youtube.com/embed/2WDDp4KJmC0"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -23", "type": "youtube", "url": "https://www.youtube.com/embed/v0CUKAKKOso"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -24", "type": "youtube", "url": "https://www.youtube.com/embed/fLwt-YQMVCs"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -25", "type": "youtube", "url": "https://www.youtube.com/embed/Afjtr2gZbBs"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -26", "type": "youtube", "url": "https://www.youtube.com/embed/V8tON2zEnaA"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -27", "type": "youtube", "url": "https://www.youtube.com/embed/JqWxe-Nr5tA"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -28", "type": "youtube", "url": "https://www.youtube.com/embed/GeHpVigDvaw"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -29", "type": "youtube", "url": "https://www.youtube.com/embed/vfViK7bUTyI"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -30", "type": "youtube", "url": "https://www.youtube.com/embed/S9PRxPto7XY"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -31", "type": "youtube", "url": "https://www.youtube.com/embed/NjMeen_Ud6c"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -32", "type": "youtube", "url": "https://www.youtube.com/embed/w7gTRstDF60"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -33", "type": "youtube", "url": "https://www.youtube.com/embed/znKCluak_ms"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -34", "type": "youtube", "url": "https://www.youtube.com/embed/mPV5PDQioIk"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -35", "type": "youtube", "url": "https://www.youtube.com/embed/Fy_HA-vT3-k"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -36", "type": "youtube", "url": "https://www.youtube.com/embed/flGOLGLpnEY"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -37", "type": "youtube", "url": "https://www.youtube.com/embed/SU9Kx6pa6eE"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -38", "type": "youtube", "url": "https://www.youtube.com/embed/IiIKc5Iu5Bo"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -39", "type": "youtube", "url": "https://www.youtube.com/embed/82cQ-hNCA6I"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -40", "type": "youtube", "url": "https://www.youtube.com/embed/R4UcIH8x2Ck"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -41", "type": "youtube", "url": "https://www.youtube.com/embed/bOxJ1cwGSoE"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -42", "type": "youtube", "url": "https://www.youtube.com/embed/iuecXxLsP2E"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -43", "type": "youtube", "url": "https://www.youtube.com/embed/M_45nOKYGZA"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -44", "type": "youtube", "url": "https://www.youtube.com/embed/bDmxJmxSG5A"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -45", "type": "youtube", "url": "https://www.youtube.com/embed/DXF0L7SmvXw"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -46", "type": "youtube", "url": "https://www.youtube.com/embed/nRXYGoD6xNg"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -47", "type": "youtube", "url": "https://www.youtube.com/embed/6GrV7SOtRHM"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -48", "type": "youtube", "url": "https://www.youtube.com/embed/nRCYPUxw3p0"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -49", "type": "youtube", "url": "https://www.youtube.com/embed/kfdqy35P948"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -50", "type": "youtube", "url": "https://www.youtube.com/embed/s8S3ngE9QTs"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -51", "type": "youtube", "url": "https://www.youtube.com/embed/gAB9KD7zdZc"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -52", "type": "youtube", "url": "https://www.youtube.com/embed/qhp1el7l0ow"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -53", "type": "youtube", "url": "https://www.youtube.com/embed/ODEaBn7r_Q8"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -54", "type": "youtube", "url": "https://www.youtube.com/embed/YYkiEw-vUtU"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -55", "type": "youtube", "url": "https://www.youtube.com/embed/Bo-H6yoQvmk"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -56", "type": "youtube", "url": "https://www.youtube.com/embed/lIb6ACiLFAc"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -57", "type": "youtube", "url": "https://www.youtube.com/embed/cV9aaY9qvcc"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -58", "type": "youtube", "url": "https://www.youtube.com/embed/P3zu2pdehGo"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -59", "type": "youtube", "url": "https://www.youtube.com/embed/FgtfGHgUPBg"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -60", "type": "youtube", "url": "https://www.youtube.com/embed/6pfdaGnlUUw"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -61", "type": "youtube", "url": "https://www.youtube.com/embed/lZ38w_geWKI"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -62", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/i0rnEr9EEFo/i0rnEr9EEFo.m3u8", "drm": false}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -63", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/WQl6LilLqCQ/WQl6LilLqCQ.m3u8", "drm": false}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -64", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/4AaX88n35u0/4AaX88n35u0.m3u8", "drm": false}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -65", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/7l5ftAJ7leU/7l5ftAJ7leU.m3u8", "drm": false}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -66", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/fR0SxyiNq68/fR0SxyiNq68.m3u8", "drm": false}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -67", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/nF8PwSxsENg/nF8PwSxsENg.m3u8", "drm": false}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -68", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/Za3wzbpG8Ss/Za3wzbpG8Ss.m3u8", "drm": false}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -69", "type": "youtube", "url": "https://www.youtube.com/embed/w8st8ULOObY"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -70", "type": "youtube", "url": "https://www.youtube.com/embed/Tu1pltMY2wA"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -71", "type": "youtube", "url": "https://www.youtube.com/embed/eIrJW03FJ7s"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -72", "type": "youtube", "url": "https://www.youtube.com/embed/O-PTNrPBAR4"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -73", "type": "youtube", "url": "https://www.youtube.com/embed/XThl-_DU8-Y"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -74", "type": "youtube", "url": "https://www.youtube.com/embed/4-REB1S8q8M"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -75", "type": "youtube", "url": "https://www.youtube.com/embed/6QT8Q6K8LbE"}, {"title": "(Comprehension) Comp- CT, Rc & Parajumble -76", "type": "youtube", "url": "https://www.youtube.com/embed/9IvXpk-AXXs"}]}, {"name": "(Vocab) Vocab Special Class Practice Set (10)", "items": [{"title": "(Vocab) Vocab Special Class Practice Set 01", "type": "youtube", "url": "https://www.youtube.com/embed/1JzxVr_GCi4"}, {"title": "(Vocab) Vocab Special Class Practice Set 02", "type": "youtube", "url": "https://www.youtube.com/embed/r3CcDRb13xM"}, {"title": "(Vocab) Vocab Special Class Practice Set 03", "type": "youtube", "url": "https://www.youtube.com/embed/cFZVCnxt_Fo"}, {"title": "(Vocab) Vocab Special Class Practice Set 04", "type": "youtube", "url": "https://www.youtube.com/embed/K9Jw-3oXw4A"}, {"title": "(Vocab) Vocab Special Class Practice Set 05", "type": "youtube", "url": "https://www.youtube.com/embed/wq6ysa45qQU"}, {"title": "(Vocab) Vocab Special Class Practice Set 06", "type": "youtube", "url": "https://www.youtube.com/embed/eSHXn4Ymm94"}, {"title": "(Vocab) Vocab Special Class Practice Set 07", "type": "youtube", "url": "https://www.youtube.com/embed/9PclNibJ7Vo"}, {"title": "(Vocab) Vocab Special Class Practice Set 08", "type": "youtube", "url": "https://www.youtube.com/embed/xcjKYhpDckk"}, {"title": "(Vocab) Vocab Special Class Practice Set 09", "type": "youtube", "url": "https://www.youtube.com/embed/ZJEgZO9Iw0k"}, {"title": "(Vocab) Vocab Special Class Practice Set 10", "type": "youtube", "url": "https://www.youtube.com/embed/YRrLCSPHJ-E"}]}, {"name": "(Vocab) Synonym & Antonym Day (5)", "items": [{"title": "(Vocab) Synonym & Antonym Day - 01", "type": "youtube", "url": "https://www.youtube.com/embed/6Zb275jD5LA"}, {"title": "(Vocab) Synonym & Antonym Day - 02", "type": "youtube", "url": "https://www.youtube.com/embed/1MH3cU9nVxw"}, {"title": "(Vocab) Synonym & Antonym Day - 03", "type": "youtube", "url": "https://www.youtube.com/embed/LBBjTdICXhQ"}, {"title": "(Vocab) Synonym & Antonym Day - 04", "type": "youtube", "url": "https://www.youtube.com/embed/vRciArER0Y4"}, {"title": "(Vocab) Synonym & Antonym Day - 05", "type": "youtube", "url": "https://www.youtube.com/embed/suM9WK08f_s"}]}, {"name": "(Vocab) Idiom & Phrases Day (12)", "items": [{"title": "(Vocab) Idiom & Phrases Day - 01", "type": "youtube", "url": "https://www.youtube.com/embed/f9-aK6OivyY"}, {"title": "(Vocab) Idiom & Phrases Day - 02", "type": "youtube", "url": "https://www.youtube.com/embed/DeFDSI9RZ9Y"}, {"title": "(Vocab) Idiom & Phrases Day - 03", "type": "youtube", "url": "https://www.youtube.com/embed/oHfdDFIbvJA"}, {"title": "(Vocab) Idiom & Phrases Day - 04", "type": "youtube", "url": "https://www.youtube.com/embed/S6_8GCrOkSI"}, {"title": "(Vocab) Idiom & Phrases Day - 05", "type": "youtube", "url": "https://www.youtube.com/embed/cmSFsuZlkCU"}, {"title": "(Vocab) Idiom & Phrases Day - 06", "type": "youtube", "url": "https://www.youtube.com/embed/PhPWLzzLEh8"}, {"title": "(Vocab) Idiom & Phrases Day - 07", "type": "youtube", "url": "https://www.youtube.com/embed/rwklw5nrhoE"}, {"title": "(Vocab) Idiom & Phrases Day - 08", "type": "youtube", "url": "https://www.youtube.com/embed/Y3RwxkEm76k"}, {"title": "(Vocab) Idiom & Phrases Day - 09", "type": "youtube", "url": "https://www.youtube.com/embed/3exdAkVyq_M"}, {"title": "(Vocab) Idiom & Phrases Day - 10", "type": "youtube", "url": "https://www.youtube.com/embed/5J0Vj6E8D7M"}, {"title": "(Vocab) Idiom & Phrases Day - 14", "type": "youtube", "url": "https://www.youtube.com/embed/MyIy0NyGHHs"}, {"title": "(Vocab) Idiom & Phrases Day - 13", "type": "youtube", "url": "https://www.youtube.com/embed/n-2y7FHzcXE"}]}];
+  const gridEl = document.getElementById('classesGrid');
+  const searchInputEl = document.getElementById('classesSearchInput');
+  const clearBtnEl = document.getElementById('classesClearBtn');
+  const expandAllBtnEl = document.getElementById('classesExpandAllBtn');
+  const collapseAllBtnEl = document.getElementById('classesCollapseAllBtn');
+  const breadcrumbEl = document.getElementById('classesBreadcrumb');
+
+  const folders = rawData.map(function(folder, folderIndex){
+    const items = folder.items.map(function(item, itemIndex){
+      return {
+        id: folderIndex + '-' + itemIndex,
+        title: item.title,
+        lower: item.title.toLowerCase(),
+        type: item.type,
+        url: item.url,
+        drm: !!item.drm
+      };
+    });
+    return {
+      index: folderIndex, name: folder.name, lower: folder.name.toLowerCase(),
+      items: items, itemCount: items.length, open: false,
+      bodyEl: null, listEl: null, cardEl: null, built: false
+    };
+  });
+
+  function escapeHTML(str){ return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function highlight(text, query){
+    const safe = escapeHTML(text);
+    if (!query) return safe;
+    const lowerText = text.toLowerCase();
+    const idx = lowerText.indexOf(query);
+    if (idx === -1) return safe;
+    const before = escapeHTML(text.slice(0, idx));
+    const match = escapeHTML(text.slice(idx, idx + query.length));
+    const after = escapeHTML(text.slice(idx + query.length));
+    return before + '<mark>' + match + '</mark>' + after;
+  }
+
+  function createFileItemEl(item, query){
+    const el = document.createElement('div');
+    el.className = 'file-item';
+    const name = document.createElement('div');
+    name.className = 'file-name';
+    name.innerHTML = highlight(item.title, query);
+    name.title = item.title;
+    el.appendChild(name);
+    const actions = document.createElement('div');
+    actions.className = 'file-actions';
+    if (item.type === 'pdf'){
+      const a = document.createElement('a');
+      a.className = 'open-btn pdf';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.pdf + '<span>PDF</span>';
+      actions.appendChild(a);
+    } else if (item.type === 'youtube'){
+      const a = document.createElement('a');
+      a.className = 'open-btn yt';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.yt + '<span>YouTube</span>';
+      actions.appendChild(a);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'open-btn video';
+      btn.type = 'button';
+      btn.innerHTML = ICONS.video + '<span>Video</span>';
+      btn.addEventListener('click', function(){ window.openClassVideo(item.url, item.drm); });
+      actions.appendChild(btn);
+    }
+    el.appendChild(actions);
+    return el;
+  }
+
+  function populateFileList(folder, query, subsetItems){
+    const items = subsetItems || folder.items;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < items.length; i++){ frag.appendChild(createFileItemEl(items[i], query)); }
+    folder.listEl.innerHTML = '';
+    folder.listEl.appendChild(frag);
+  }
+
+  function setFolderOpen(folder, open, query, subsetItems){
+    folder.open = open;
+    folder.cardEl.classList.toggle('open', open);
+    if (open && !folder.built){ populateFileList(folder, query, subsetItems); folder.built = true; }
+    folder.bodyEl.style.maxHeight = open ? folder.bodyEl.scrollHeight + 400 + 'px' : '0px';
+  }
+
+  function toggleFolder(folder){ setFolderOpen(folder, !folder.open, searchInputEl.value.trim().toLowerCase()); }
+
+  function createFolderCardEl(folder){
+    const card = document.createElement('div');
+    card.className = 'folder-card';
+    folder.cardEl = card;
+    const header = document.createElement('div');
+    header.className = 'folder-header';
+    header.innerHTML =
+      '<div class="folder-icon-wrap">📁</div>' +
+      '<div class="folder-title-block"><h3 class="folder-title" data-title></h3></div>' +
+      '<div class="folder-meta"><span class="file-count-badge" data-count>' + folder.itemCount + ' items</span>' +
+      '<span class="chevron">' + ICONS.chevron + '</span></div>';
+    header.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+    header.addEventListener('click', function(){ toggleFolder(folder); });
+    card.appendChild(header);
+    const body = document.createElement('div');
+    body.className = 'folder-body';
+    folder.bodyEl = body;
+    const bodyInner = document.createElement('div');
+    bodyInner.className = 'folder-body-inner';
+    const list = document.createElement('div');
+    list.className = 'file-list';
+    folder.listEl = list;
+    bodyInner.appendChild(list);
+    body.appendChild(bodyInner);
+    card.appendChild(body);
+    return card;
+  }
+
+  function renderAllFolderShells(){
+    const frag = document.createDocumentFragment();
+    folders.forEach(function(folder){ frag.appendChild(createFolderCardEl(folder)); });
+    gridEl.appendChild(frag);
+  }
+  renderAllFolderShells();
+
+  function renderEmptyState(){
+    gridEl.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'empty-state';
+    el.innerHTML = ICONS.emptyBox + '<h3>No results found</h3><p>Try a different search term.</p>';
+    gridEl.appendChild(el);
+  }
+
+  let emptyShown = false;
+  function restoreFolderGrid(){
+    if (emptyShown){
+      gridEl.innerHTML = '';
+      folders.forEach(function(folder){ gridEl.appendChild(folder.cardEl); });
+      emptyShown = false;
+    }
+  }
+
+  function updateBreadcrumb(query){
+    if (!query){ breadcrumbEl.textContent = ''; return; }
+    let matches = 0;
+    folders.forEach(function(f){
+      if (f.lower.indexOf(query) !== -1) matches += f.itemCount;
+      else f.items.forEach(function(it){ if (it.lower.indexOf(query) !== -1) matches++; });
+    });
+    breadcrumbEl.textContent = matches + ' result' + (matches === 1 ? '' : 's') + ' for "' + query + '"';
+  }
+
+  function applySearch(rawQuery){
+    const query = rawQuery.trim().toLowerCase();
+    clearBtnEl.classList.toggle('show', query.length > 0);
+    updateBreadcrumb(query);
+    if (!query){
+      restoreFolderGrid();
+      folders.forEach(function(folder){
+        folder.cardEl.classList.remove('hidden-card');
+        folder.cardEl.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+        folder.cardEl.querySelector('[data-count]').textContent = folder.itemCount + ' items';
+        if (folder.built) populateFileList(folder, '');
+      });
+      return;
+    }
+    restoreFolderGrid();
+    let anyVisible = false;
+    folders.forEach(function(folder){
+      const nameMatches = folder.lower.indexOf(query) !== -1;
+      const matchedItems = folder.items.filter(function(it){ return it.lower.indexOf(query) !== -1; });
+      const show = nameMatches || matchedItems.length > 0;
+      folder.cardEl.classList.toggle('hidden-card', !show);
+      if (!show) return;
+      anyVisible = true;
+      folder.cardEl.querySelector('[data-title]').innerHTML = highlight(folder.name, query);
+      const subset = nameMatches && matchedItems.length === 0 ? folder.items : matchedItems;
+      folder.cardEl.querySelector('[data-count]').textContent = subset.length + ' items';
+      setFolderOpen(folder, true, query, subset);
+    });
+    if (!anyVisible){ renderEmptyState(); emptyShown = true; }
+  }
+
+  searchInputEl.addEventListener('input', function(){ applySearch(searchInputEl.value); });
+  clearBtnEl.addEventListener('click', function(){ searchInputEl.value = ''; applySearch(''); searchInputEl.focus(); });
+  expandAllBtnEl.addEventListener('click', function(){
+    folders.forEach(function(f){ if (!f.cardEl.classList.contains('hidden-card')) setFolderOpen(f, true, searchInputEl.value.trim().toLowerCase()); });
+  });
+  collapseAllBtnEl.addEventListener('click', function(){ folders.forEach(function(f){ setFolderOpen(f, false); }); });
+})();
+
+(function(){
+  const rawData = [{"name": "Parts of Speech (2)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Parts of Speech (Important Vocabulary)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65b0cf481bc48_Parts%20of%20Speech%20(Important%20Vocabulary)%20(1).pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Parts of Speech (Important Vocabulary)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65b0cf481bc48_Parts%20of%20Speech%20(Important%20Vocabulary)%20(1).pdf"}]}, {"name": "Important Vocabulary (2)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Important Vocabulary (Different Places)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65b0cf61b391e_Important%20Vocabulary%20(Different%20Places).pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Important Vocabulary (Different Places)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65b0cf61b391e_Important%20Vocabulary%20(Different%20Places).pdf"}]}, {"name": "Important Verbs (2)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Important Verbs (Regular)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65b0cf77335d8_Important%20Verbs%20(Regular).pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Important Verbs (Regular)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65b0cf8a3613c_Important%20Verbs%20(Irregular).pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -01 PDF (4)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -01 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a7e24be2d_RcClozetestPQRSSheet1.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -01 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682584e4ca035_RcClozetestPQRSSheet1.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -01 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a7e24be2d_RcClozetestPQRSSheet1.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -01 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682584e4ca035_RcClozetestPQRSSheet1.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -02 PDF (4)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -02 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a800296bc_RCClozeTestPQRSSet02.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -02 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6825850852c18_RCClozeTestPQRSSet02.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -02 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a800296bc_RCClozeTestPQRSSet02.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -02 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6825850852c18_RCClozeTestPQRSSet02.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -03 PDF (4)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -03 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a81e53881_RCClozeTestPQRSSet03.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -03 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6825853875788_RCClozeTestPQRSSet03.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -03 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a81e53881_RCClozeTestPQRSSet03.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -03 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6825853875788_RCClozeTestPQRSSet03.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -04 PDF (4)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -04 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a83e6969f_RCClozeTestPQRSSet04.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -04 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683192a721fda_RCClozeTestPQRSSet04.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -04 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a83e6969f_RCClozeTestPQRSSet04.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -04 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683192a721fda_RCClozeTestPQRSSet04.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -05 PDF (4)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -05 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b4b49173f1_RCClozeTestPQRSSet05.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -05 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683192c418769_RCClozeTestPQRSSet05.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -05 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b4b49173f1_RCClozeTestPQRSSet05.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -05 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683192c418769_RCClozeTestPQRSSet05.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -06 PDF (4)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -06 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b4b65938e5_RCClozeTestPQRSSet06.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -06 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683192df61d9d_RCClozeTestPQRSSet06.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -06 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b4b65938e5_RCClozeTestPQRSSet06.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -06 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683192df61d9d_RCClozeTestPQRSSet06.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -07 PDF (3)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -07 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b4b8118eb4_DailyShotsSheet7.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -07 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b4b8118eb4_DailyShotsSheet7.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -07 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68440d8243e97_DailyShotsSheet7.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -08 PDF (3)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -08 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b4ba040cc7_RCClozeTestPQRSSet8.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -08 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b4ba040cc7_RCClozeTestPQRSSet8.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -08 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68440da402c07_RCClozeTestPQRSSet8.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -09 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -09 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68440dbcef3bb_DailyShotsSheet09.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -10 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -10 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fdc0d9b5e9_DailyShotsSheet10.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -11 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -11 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fdc3a02ba4_DailyShotsSheet11.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -12 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -12 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fdc5ed3785_DailyShots12.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -13 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -13 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fdc9083f6d_DailyShots13.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -14 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -14 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fdcac1f953_DailyShotsSheet14.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -15 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -15 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fdcbf5d632_DailyShots15.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -16 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -16 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fdcd4139a4_DailyShots16.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -17 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -17 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fdcf8ba35a_RCClozeTestPQRSSet17.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -19 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -19 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68440c3842f89_DailyShots19.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -20 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -20 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68440c78a95cf_DailyShots20.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -21 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -21 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68440c94d1e39_DailyShots21.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -22 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -22 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fd17bcf1e9_DailyShots....22.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -23 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -23 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fd1a1e546d_DAILYSHOTS23.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -24 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -24 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fd1c8cfa2c_DAILYSHOTS24.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -25 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -25 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a3e3b47e7_DAILYSHOTS25.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -26 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -26 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800a401d335c_DAILYSHOTS26.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -27 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -27 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b49a52c9ee_DAILYSHOTS37.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -28 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -28 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b49c14be60_DAILYSHOTS28.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -29 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -29 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b49e292fb4_DAILYSHOTS29.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -30 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -30 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680b4a03c4e04_DAILYSHOTS30.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -31 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -31 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b20218c762_DAILYSHOTS31.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -32 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -32 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b20409ab9b_DAILYSHOTS32.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -33 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -33 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b205db28e0_DAILYSHOTS33.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -34 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -34 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b207c6b3ce_DAILYSHOTS34.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -35 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -35 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682582b033c92_DAILYSHOTS35.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -36 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -36 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682582ce015dd_DAILYSHOTS36.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -37 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -37 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682582f1c6ea0_DAILYSHOTS37.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -38 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -38 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683190881ccc7_DAILYSHOTS38.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -39 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -39 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683190ec2e6cd_DAILYSHOTS39.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -40 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -40 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683191079beda_DAILYSHOTS40.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -41 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -41 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68440a794ee43_DAILYSHOTS41.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -42 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -42 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68440a9c45933_DAILYSHOTS42.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -43 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -43 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcf71df5a3_Dailyshots43pdf.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -44 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -44 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcfa8c7da7_Dailyshots44.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -45 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -45 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcfc5305f9_Dailyshots45.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -46 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -46 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcfe5a638e_Dailyshots46.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -47 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -47 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcffeb7066_Dailyshots47PNG.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -48 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -48 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fd01630420_dailyshot48.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -49 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -49 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fd029ce89a_dailyshot49PDF.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -50 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -50 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fd03f0d25c_DAILYSHOTS50.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -51 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -51 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fd056442f1_DailyShots51PDF.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -52 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -52 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6844097021b65_Dailyshots52PDF.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -53 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -53 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6844098cbe4f7_DAILYSHOTS53.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -54 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -54 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/684409c1e0735_DailyShots54.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -55 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -55 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fce61174dd_DAILYSHOTS55.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -56 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -56 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fce7e6c0df_DAILYSHOTS56.pdf"}]}, {"name": "Comp- CT, Rc & Parajumble -57 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Comp- CT, Rc & Parajumble -57 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcea11fc23_DAILYSHOTS57.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set -58 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set -58 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcd96a7576_DAILYSHOTS58.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set -59 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set -59 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcdb727138_DAILYSHOTS59.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set -60 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set -60 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcde2d33cd_DAILYSHOTS60.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 61 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 61 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b1ddc48fce_DAILYSHOTS61.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 62 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 62 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b1df2e850c_DAILYSHOTS62.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 63 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 63 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b1e072180f_DAILYSHOTS63.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 64 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 64 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b1e1b0f8f4_DAILYSHOTS64.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 65 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 65 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b1e2c34735_DAILYSHOTS65.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 66 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 66 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682580863da9b_DAILYSHOTS66.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 67 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 67 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6825809c44297_DAILYSHOTS67.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 68 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 68 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682580b41d721_DAILYSHOTS68.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 69 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 69 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68318ea8e07ba_DAILYSHOTS69.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 70 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 70 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68318ec1a3953_DAILYSHOTS70.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 71 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 71 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68318ede6e8a8_DAILYSHOTS71.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 72 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 72 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/684407281eaa3_DAILYSHOTS72.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 73 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 73 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6844074225e23_DAILYSHOTS73.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 74 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 74 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcd0961d5a_DAILYSHOTS74.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 75 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 75 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcd1b2ecb2_DAILYSHOTS75.pdf"}]}, {"name": "RC + Cloze Test + PQRS Set - 76 PDF (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) RC + Cloze Test + PQRS Set - 76 PDF", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/685fcd3e2a62c_DAILYSHOTS76.pdf"}]}, {"name": "Adjective (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Adjective", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698eeb3cb2762_Adjective.pdf"}]}, {"name": "Adverb (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Adverb", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698eebc150432_Adverb.pdf"}]}, {"name": "Articles (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Articles", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698eeeb637b47_Articles.pdf"}]}, {"name": "Conditional Sentences (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Conditional Sentences", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698eeede91f8b_Conditional_Sentences.pdf"}]}, {"name": "Conjunction (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Conjunction", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698eef06559c5_Conjunction.pdf"}]}, {"name": "Determiner (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Determiner", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698eefbfac419_Determiner.pdf"}]}, {"name": "Modal Auxiliary (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Modal Auxiliary", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698eefd5729ef_Modal_Auxiliary.pdf"}]}, {"name": "Mood & Intension of Speaker (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Mood & Intension of Speaker", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698eefe7f0320_Mood_Intension_of_Speaker.pdf"}]}, {"name": "Narration (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Narration", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef0087262e_Narration.pdf"}]}, {"name": "Noun (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Noun", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef0a1592fb_Noun.pdf"}]}, {"name": "Prepositions (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Prepositions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef0df3d1f9_Prepositions.pdf"}]}, {"name": "Pronoun (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Pronoun", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef116850b0_Pronoun.pdf"}]}, {"name": "Question Tag (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Question Tag", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef13d541dc_Question_Tag.pdf"}]}, {"name": "Subject Verb Agreement (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Subject Verb Agreement", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef171a5194_Subject_Verb_Agreement.pdf"}]}, {"name": "Tense (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Tense", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef18fc6da6_Tense.pdf"}]}, {"name": "Verb Advance (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Verb Advance", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef1f53b757_Verb_Advance.pdf"}]}, {"name": "Voices Errors (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Voices Errors", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef20a1fd2e_Voices_Errors.pdf"}]}, {"name": "VOICES (1)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) VOICES MCQS", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1770921000/698ef2282f81a_VOICES_MCQS.pdf"}]}, {"name": "Mock Test (10)", "items": [{"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test -01", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/659faace7e01f_Mock%20Test%201.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test -02", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65a0cd276cbef_Mock%20Test%202.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test -03", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65a4c00a148d9_Mock%20Test%203.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test -04", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65a5fdb402ff6_MOCK%20TEST-4...pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test -05", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65a74132d07f4_Mock%20Test%205+.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test -06", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65adf7755d637_Mock%20Test%206++.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test- 07", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65af4d738ce0d_Mock%20Test%207.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test -08", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65b0768f3d936_Mock%20Test%208.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test -09", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65b71105de54d_Mock%20Test-9.pdf"}, {"title": "(Gopal Sir - English (VOD) - All Notes) Mock Test -10", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/65b860dc52865_Mock%20Test%2010..pdf"}]}];
+  const gridEl = document.getElementById('notesGrid');
+  const searchInputEl = document.getElementById('notesSearchInput');
+  const clearBtnEl = document.getElementById('notesClearBtn');
+  const expandAllBtnEl = document.getElementById('notesExpandAllBtn');
+  const collapseAllBtnEl = document.getElementById('notesCollapseAllBtn');
+  const breadcrumbEl = document.getElementById('notesBreadcrumb');
+
+  const folders = rawData.map(function(folder, folderIndex){
+    const items = folder.items.map(function(item, itemIndex){
+      return {
+        id: folderIndex + '-' + itemIndex,
+        title: item.title,
+        lower: item.title.toLowerCase(),
+        type: item.type,
+        url: item.url,
+        drm: !!item.drm
+      };
+    });
+    return {
+      index: folderIndex, name: folder.name, lower: folder.name.toLowerCase(),
+      items: items, itemCount: items.length, open: false,
+      bodyEl: null, listEl: null, cardEl: null, built: false
+    };
+  });
+
+  function escapeHTML(str){ return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function highlight(text, query){
+    const safe = escapeHTML(text);
+    if (!query) return safe;
+    const lowerText = text.toLowerCase();
+    const idx = lowerText.indexOf(query);
+    if (idx === -1) return safe;
+    const before = escapeHTML(text.slice(0, idx));
+    const match = escapeHTML(text.slice(idx, idx + query.length));
+    const after = escapeHTML(text.slice(idx + query.length));
+    return before + '<mark>' + match + '</mark>' + after;
+  }
+
+  function createFileItemEl(item, query){
+    const el = document.createElement('div');
+    el.className = 'file-item';
+    const name = document.createElement('div');
+    name.className = 'file-name';
+    name.innerHTML = highlight(item.title, query);
+    name.title = item.title;
+    el.appendChild(name);
+    const actions = document.createElement('div');
+    actions.className = 'file-actions';
+    if (item.type === 'pdf'){
+      const a = document.createElement('a');
+      a.className = 'open-btn pdf';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.pdf + '<span>PDF</span>';
+      actions.appendChild(a);
+    } else if (item.type === 'youtube'){
+      const a = document.createElement('a');
+      a.className = 'open-btn yt';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.yt + '<span>YouTube</span>';
+      actions.appendChild(a);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'open-btn video';
+      btn.type = 'button';
+      btn.innerHTML = ICONS.video + '<span>Video</span>';
+      btn.addEventListener('click', function(){ window.openClassVideo(item.url, item.drm); });
+      actions.appendChild(btn);
+    }
+    el.appendChild(actions);
+    return el;
+  }
+
+  function populateFileList(folder, query, subsetItems){
+    const items = subsetItems || folder.items;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < items.length; i++){ frag.appendChild(createFileItemEl(items[i], query)); }
+    folder.listEl.innerHTML = '';
+    folder.listEl.appendChild(frag);
+  }
+
+  function setFolderOpen(folder, open, query, subsetItems){
+    folder.open = open;
+    folder.cardEl.classList.toggle('open', open);
+    if (open && !folder.built){ populateFileList(folder, query, subsetItems); folder.built = true; }
+    folder.bodyEl.style.maxHeight = open ? folder.bodyEl.scrollHeight + 400 + 'px' : '0px';
+  }
+
+  function toggleFolder(folder){ setFolderOpen(folder, !folder.open, searchInputEl.value.trim().toLowerCase()); }
+
+  function createFolderCardEl(folder){
+    const card = document.createElement('div');
+    card.className = 'folder-card';
+    folder.cardEl = card;
+    const header = document.createElement('div');
+    header.className = 'folder-header';
+    header.innerHTML =
+      '<div class="folder-icon-wrap">📁</div>' +
+      '<div class="folder-title-block"><h3 class="folder-title" data-title></h3></div>' +
+      '<div class="folder-meta"><span class="file-count-badge" data-count>' + folder.itemCount + ' items</span>' +
+      '<span class="chevron">' + ICONS.chevron + '</span></div>';
+    header.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+    header.addEventListener('click', function(){ toggleFolder(folder); });
+    card.appendChild(header);
+    const body = document.createElement('div');
+    body.className = 'folder-body';
+    folder.bodyEl = body;
+    const bodyInner = document.createElement('div');
+    bodyInner.className = 'folder-body-inner';
+    const list = document.createElement('div');
+    list.className = 'file-list';
+    folder.listEl = list;
+    bodyInner.appendChild(list);
+    body.appendChild(bodyInner);
+    card.appendChild(body);
+    return card;
+  }
+
+  function renderAllFolderShells(){
+    const frag = document.createDocumentFragment();
+    folders.forEach(function(folder){ frag.appendChild(createFolderCardEl(folder)); });
+    gridEl.appendChild(frag);
+  }
+  renderAllFolderShells();
+
+  function renderEmptyState(){
+    gridEl.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'empty-state';
+    el.innerHTML = ICONS.emptyBox + '<h3>No results found</h3><p>Try a different search term.</p>';
+    gridEl.appendChild(el);
+  }
+
+  let emptyShown = false;
+  function restoreFolderGrid(){
+    if (emptyShown){
+      gridEl.innerHTML = '';
+      folders.forEach(function(folder){ gridEl.appendChild(folder.cardEl); });
+      emptyShown = false;
+    }
+  }
+
+  function updateBreadcrumb(query){
+    if (!query){ breadcrumbEl.textContent = ''; return; }
+    let matches = 0;
+    folders.forEach(function(f){
+      if (f.lower.indexOf(query) !== -1) matches += f.itemCount;
+      else f.items.forEach(function(it){ if (it.lower.indexOf(query) !== -1) matches++; });
+    });
+    breadcrumbEl.textContent = matches + ' result' + (matches === 1 ? '' : 's') + ' for "' + query + '"';
+  }
+
+  function applySearch(rawQuery){
+    const query = rawQuery.trim().toLowerCase();
+    clearBtnEl.classList.toggle('show', query.length > 0);
+    updateBreadcrumb(query);
+    if (!query){
+      restoreFolderGrid();
+      folders.forEach(function(folder){
+        folder.cardEl.classList.remove('hidden-card');
+        folder.cardEl.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+        folder.cardEl.querySelector('[data-count]').textContent = folder.itemCount + ' items';
+        if (folder.built) populateFileList(folder, '');
+      });
+      return;
+    }
+    restoreFolderGrid();
+    let anyVisible = false;
+    folders.forEach(function(folder){
+      const nameMatches = folder.lower.indexOf(query) !== -1;
+      const matchedItems = folder.items.filter(function(it){ return it.lower.indexOf(query) !== -1; });
+      const show = nameMatches || matchedItems.length > 0;
+      folder.cardEl.classList.toggle('hidden-card', !show);
+      if (!show) return;
+      anyVisible = true;
+      folder.cardEl.querySelector('[data-title]').innerHTML = highlight(folder.name, query);
+      const subset = nameMatches && matchedItems.length === 0 ? folder.items : matchedItems;
+      folder.cardEl.querySelector('[data-count]').textContent = subset.length + ' items';
+      setFolderOpen(folder, true, query, subset);
+    });
+    if (!anyVisible){ renderEmptyState(); emptyShown = true; }
+  }
+
+  searchInputEl.addEventListener('input', function(){ applySearch(searchInputEl.value); });
+  clearBtnEl.addEventListener('click', function(){ searchInputEl.value = ''; applySearch(''); searchInputEl.focus(); });
+  expandAllBtnEl.addEventListener('click', function(){
+    folders.forEach(function(f){ if (!f.cardEl.classList.contains('hidden-card')) setFolderOpen(f, true, searchInputEl.value.trim().toLowerCase()); });
+  });
+  collapseAllBtnEl.addEventListener('click', function(){ folders.forEach(function(f){ setFolderOpen(f, false); }); });
+})();
+
+</script>
+
+
+<!-- JOIN CHANNEL FOOTER -->
+<div id="cm-join" style="text-align:center;padding:26px 16px 36px;">
+  <a href="https://whatsapp.com/channel/0029VbBqYvh2phHSBhGVGD08" target="_blank" rel="noopener" style="display:inline-block;padding:13px 26px;border-radius:999px;background:linear-gradient(180deg,#34d399,#10b981);color:#03261c;font:800 15px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 10px 24px -8px rgba(16,185,129,.7);">&#128172; 𝕁𝕠𝕚𝕟 𝕎𝕙𝕒𝕥𝕤𝕒𝕡𝕡 ℂ𝕙𝕒𝕟𝕟𝕖𝕝</a>
+</div>
+<script id="cm-theme-js">
+(function(){
+  function tidy(root){
+    var cards=(root||document).querySelectorAll('.folder-card');
+    cards.forEach(function(c){
+      var tb=c.querySelector('.folder-title-block'), badge=c.querySelector('.file-count-badge');
+      if(tb && badge && badge.parentNode!==tb){ tb.appendChild(badge); }
+      if(badge && /^1 items$/.test(badge.textContent.trim())) badge.textContent='1 item';
+      var t=c.querySelector('.folder-title');
+      if(t){
+        var n=t.lastChild;
+        if(n && n.nodeType===3){ var s=n.nodeValue.replace(/\s*\(\d+\)\s*$/,''); if(s!==n.nodeValue) n.nodeValue=s; }
+      }
+    });
+  }
+  function start(){
+    tidy();
+    ['classesGrid','notesGrid'].forEach(function(id){
+      var g=document.getElementById(id); if(!g) return;
+      new MutationObserver(function(){ tidy(g); }).observe(g,{childList:true,subtree:true});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+})();
+</script>
+</body>
+</html>

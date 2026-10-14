@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>🧩 Piyush Sir · SSC Pratham 2026</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+<style>
+:root{
+  --blue-50:#eef6ff; --blue-100:#e0f0ff; --blue-200:#c7e3ff; --blue-300:#a3d1ff;
+  --blue-500:#2f8bff; --blue-600:#1f6fe0; --blue-700:#1656b3; --blue-900:#0d3a75;
+  --ink-900:#0b1a33; --ink-700:#33455e; --ink-500:#5b6b85; --ink-300:#8a97ac;
+  --surface:#ffffff; --surface-soft:#f4f9ff; --border:#dfeaf7;
+  --pdf:#e0473e; --video:#2f8bff; --yt:#d92d20;
+  --radius-lg:22px; --radius-md:16px; --radius-sm:10px;
+  --shadow-sm:0 1px 2px rgba(13,58,117,0.06), 0 1px 1px rgba(13,58,117,0.04);
+  --shadow-md:0 6px 20px rgba(20,70,140,0.08), 0 2px 6px rgba(20,70,140,0.05);
+  --shadow-lg:0 16px 40px rgba(20,70,140,0.14), 0 4px 12px rgba(20,70,140,0.06);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body{
+  margin:0; min-height:100vh;
+  font-family:'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color:var(--ink-900);
+  background:
+    radial-gradient(1100px 600px at 90% -10%, rgba(47,139,255,0.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(47,139,255,0.08), transparent 55%),
+    linear-gradient(180deg, #f2f8ff 0%, #eaf3fd 100%);
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{ background:var(--blue-200); }
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:var(--blue-200); border-radius:20px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--blue-300); }
+
+.wrap{ max-width:1180px; margin:0 auto; padding:0 1rem 3rem; }
+
+.site-header{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
+  background:rgba(244,249,255,0.86); border-bottom:1px solid rgba(47,139,255,0.14);
+}
+.header-inner{ max-width:1180px; margin:0 auto; padding:0.9rem 1rem 1rem; }
+.brand-row{ display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.6rem; }
+.brand{ display:flex; align-items:center; gap:0.65rem; min-width:0; }
+.back-btn{
+  flex:none; display:flex; align-items:center; justify-content:center; gap:0.3rem;
+  width:auto; height:40px; padding:0 0.8rem; border-radius:12px; border:1.5px solid var(--border);
+  background:var(--surface); color:var(--ink-700); font-weight:700; font-size:0.82rem;
+  text-decoration:none; box-shadow:var(--shadow-sm); transition:transform .12s var(--ease);
+}
+.back-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); }
+.back-btn svg{ width:16px; height:16px; }
+.brand-icon{
+  flex:none; width:44px; height:44px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center; font-size:1.35rem;
+  background:linear-gradient(135deg, var(--blue-500), var(--blue-700));
+  box-shadow:0 6px 16px rgba(31,111,224,0.35); color:#fff;
+}
+.brand-text{ min-width:0; }
+.brand-text h1{ margin:0; font-size:1.1rem; font-weight:800; letter-spacing:-0.01em; color:var(--ink-900); line-height:1.25; overflow-wrap:anywhere; }
+.brand-text p{ margin:0.1rem 0 0; font-size:0.76rem; color:var(--ink-500); font-weight:600; }
+
+.tab-row{ display:flex; gap:0.5rem; margin-top:0.7rem; }
+.tab-btn{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:0.4rem;
+  padding:0.65rem 0.8rem; border-radius:14px; border:1.5px solid var(--border);
+  background:var(--surface); color:var(--ink-500); font-weight:800; font-size:0.85rem;
+  cursor:pointer; transition:all .15s var(--ease); box-shadow:var(--shadow-sm);
+}
+.tab-btn.active{ background:linear-gradient(135deg, var(--blue-500), var(--blue-700)); color:#fff; border-color:transparent; box-shadow:var(--shadow-md); }
+.tab-btn .count{ font-weight:700; opacity:0.85; font-size:0.75rem; }
+
+.search-row{ display:flex; gap:0.55rem; align-items:center; margin-top:0.7rem; }
+.search-box{ position:relative; flex:1; min-width:0; }
+.search-box svg.icon-search{ position:absolute; left:14px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:var(--ink-300); pointer-events:none; }
+.search-box input{
+  width:100%; padding:0.75rem 2.6rem 0.75rem 2.6rem; font-size:0.95rem; font-weight:500;
+  border-radius:14px; border:1.5px solid var(--border); background:var(--surface);
+  color:var(--ink-900); box-shadow:var(--shadow-sm); outline:none;
+  transition:border-color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.search-box input::placeholder{ color:var(--ink-300); font-weight:500; }
+.search-box input:focus{ border-color:var(--blue-500); box-shadow:0 0 0 4px rgba(47,139,255,0.14), var(--shadow-sm); }
+.clear-btn{
+  position:absolute; right:8px; top:50%; transform:translateY(-50%); width:26px; height:26px;
+  border-radius:50%; border:none; background:var(--blue-100); color:var(--blue-700);
+  display:none; align-items:center; justify-content:center; cursor:pointer; transition:background .15s;
+}
+.clear-btn svg{ width:14px; height:14px; }
+.clear-btn.show{ display:flex; }
+.clear-btn:hover{ background:var(--blue-200); }
+
+.icon-btn-group{ display:flex; gap:0.4rem; flex:none; }
+.icon-btn{
+  display:flex; align-items:center; justify-content:center; gap:0.35rem;
+  padding:0 0.8rem; height:44px; border-radius:14px; border:1.5px solid var(--border);
+  background:var(--surface); color:var(--ink-700); font-weight:700; font-size:0.82rem;
+  cursor:pointer; white-space:nowrap; box-shadow:var(--shadow-sm);
+  transition:transform .12s var(--ease), box-shadow .12s var(--ease), border-color .12s;
+}
+.icon-btn svg{ width:17px; height:17px; flex:none; }
+.icon-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); border-color:var(--blue-300); }
+
+.breadcrumb{ display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap; font-size:0.8rem; color:var(--ink-500); font-weight:600; margin-top:0.65rem; min-height:1.1rem; }
+
+.folder-grid{ display:flex; flex-direction:column; gap:0.85rem; margin-top:1.4rem; }
+.folder-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm); overflow:hidden; animation:fadeIn .35s var(--ease) both;
+  transition:box-shadow .18s var(--ease), border-color .18s var(--ease);
+}
+.folder-card:hover{ box-shadow:var(--shadow-md); border-color:var(--blue-200); }
+.folder-card.hidden-card{ display:none; }
+.folder-header{
+  position:relative; display:flex; align-items:center; gap:0.8rem; padding:0.95rem 1.1rem;
+  cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+}
+.folder-header:hover{ background:var(--surface-soft); }
+.folder-icon-wrap{
+  flex:none; width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(150deg, var(--blue-100), var(--blue-50)); font-size:1.3rem;
+  transition:transform .28s var(--ease), background .28s var(--ease);
+}
+.folder-card.open .folder-icon-wrap{ background:linear-gradient(150deg, var(--blue-500), var(--blue-700)); transform:scale(1.03); }
+.folder-title-block{ flex:1; min-width:0; }
+.folder-title{ margin:0; font-size:0.98rem; font-weight:700; color:var(--ink-900); letter-spacing:-0.01em; overflow-wrap:anywhere; word-break:break-word; }
+.folder-title mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+.folder-meta{ display:flex; align-items:center; gap:0.5rem; flex:none; }
+.file-count-badge{ background:var(--blue-50); color:var(--blue-700); font-size:0.72rem; font-weight:800; padding:0.28rem 0.6rem; border-radius:20px; border:1px solid var(--blue-100); white-space:nowrap; }
+.chevron{ flex:none; width:20px; height:20px; color:var(--ink-300); transition:transform .28s var(--ease), color .2s; }
+.folder-card.open .chevron{ transform:rotate(180deg); color:var(--blue-600); }
+
+.folder-body{ max-height:0; overflow:hidden; transition:max-height .32s var(--ease); }
+.folder-body-inner{ padding:0 1.1rem 1rem; border-top:1px solid var(--border); margin-top:0; }
+.file-list{ display:flex; flex-direction:column; gap:0.5rem; padding-top:0.85rem; }
+
+.file-item{
+  display:flex; align-items:center; gap:0.7rem; padding:0.65rem 0.7rem; border-radius:var(--radius-md);
+  background:var(--surface-soft); border:1px solid transparent; flex-wrap:wrap;
+  animation:slideDown .28s var(--ease) both;
+  transition:transform .14s var(--ease), box-shadow .14s var(--ease), border-color .14s, background .14s;
+}
+.file-item:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:var(--blue-200); background:var(--surface); }
+.file-name{ flex:1 1 160px; min-width:0; font-size:0.85rem; font-weight:600; color:var(--ink-700); overflow-wrap:anywhere; word-break:break-word; line-height:1.35; }
+.file-name mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+.file-actions{ display:flex; gap:0.4rem; flex:none; flex-wrap:wrap; }
+.open-btn{
+  display:flex; align-items:center; gap:0.3rem; padding:0.42rem 0.75rem; border-radius:10px;
+  background:var(--surface); border:1.5px solid var(--border); font-size:0.75rem; font-weight:800;
+  text-decoration:none; white-space:nowrap; cursor:pointer; transition:background .15s, color .15s, border-color .15s, transform .12s;
+}
+.open-btn svg{ width:13px; height:13px; }
+.open-btn.video{ color:var(--blue-700); }
+.open-btn.video:hover{ background:linear-gradient(135deg, var(--blue-500), var(--blue-600)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+.open-btn.pdf{ color:var(--pdf); }
+.open-btn.pdf:hover{ background:linear-gradient(135deg, #ff6b61, var(--pdf)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+.open-btn.yt{ color:var(--yt); }
+.open-btn.yt:hover{ background:linear-gradient(135deg, #ff5c4d, var(--yt)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+
+.empty-state{ display:flex; flex-direction:column; align-items:center; justify-content:center; padding:3.5rem 1rem; text-align:center; color:var(--ink-500); animation:fadeIn .3s var(--ease) both; }
+.empty-state svg{ width:64px; height:64px; color:var(--blue-200); margin-bottom:1rem; }
+.empty-state h3{ margin:0 0 0.35rem; color:var(--ink-900); font-size:1.05rem; }
+.empty-state p{ margin:0; font-size:0.85rem; max-width:320px; }
+
+@keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
+@keyframes slideDown{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
+@media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; } }
+
+.wa-fab{
+  position:fixed; bottom:22px; right:22px; z-index:60; width:58px; height:58px; border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#1aa851); color:#fff; display:flex; align-items:center; justify-content:center;
+  box-shadow:var(--shadow-lg); text-decoration:none; transition:transform .15s var(--ease);
+}
+.wa-fab:hover{ transform:translateY(-2px) scale(1.05); }
+.wa-fab svg{ width:28px; height:28px; }
+
+/* Video popup */
+.popup-overlay{ position:fixed; inset:0; z-index:80; background:rgba(11,26,51,0.75); display:none; align-items:center; justify-content:center; padding:1rem; }
+.popup-overlay.show{ display:flex; }
+.popup-content{ position:relative; width:100%; max-width:900px; }
+.video-container{ position:relative; width:100%; padding-top:56.25%; background:#000; border-radius:16px; overflow:hidden; }
+.video-frame{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+.close-button{ position:absolute; top:-42px; right:0; background:rgba(255,255,255,0.15); color:#fff; border:none; width:34px; height:34px; border-radius:50%; font-size:1.3rem; cursor:pointer; }
+
+body.has-fab .wrap{ padding-bottom:2rem; }
+
+@media (max-width:640px){
+  .brand-text h1{ font-size:0.98rem; }
+  .icon-btn .label{ display:none; }
+  .icon-btn{ padding:0 0.65rem; width:44px; }
+  .folder-title{ font-size:0.9rem; }
+  .file-name{ font-size:0.8rem; }
+  .wrap{ padding:0 0.65rem 2.5rem; }
+  .header-inner{ padding:0.75rem 0.65rem 0.85rem; }
+  .file-item{ flex-direction:column; align-items:stretch; }
+  .file-actions{ justify-content:flex-start; }
+}
+</style>
+<style id="cm-theme">
+/* ---- Choudhary Mehfil theme: cream + orange, numbered chapter cards ---- */
+:root{
+  --blue-50:#fff5ee; --blue-100:#ffe9dc; --blue-200:#ffd2b8; --blue-300:#ffb68e;
+  --blue-500:#f2602a; --blue-600:#e0501c; --blue-700:#c23f10; --blue-900:#5a2208;
+  --ink-900:#1a1412; --ink-700:#3d322c; --ink-500:#6f625a; --ink-300:#a2958b;
+  --surface:#ffffff; --surface-soft:#faf5ef; --border:#eee4d8;
+  --shadow-sm:0 1px 2px rgba(60,30,10,.05); --shadow-md:0 8px 22px rgba(90,40,10,.09); --shadow-lg:0 16px 40px rgba(90,40,10,.14);
+}
+body{ background:radial-gradient(900px 500px at 100% -10%, rgba(242,96,42,.10), transparent 60%), linear-gradient(180deg,#f7f1ea 0%,#f3ebe2 100%) !important; }
+.site-header{ background:rgba(247,241,234,.9) !important; border-bottom:1px solid rgba(242,96,42,.14) !important; }
+.brand-icon{ padding:0 !important; overflow:hidden; background:#fff !important; box-shadow:0 6px 16px rgba(194,63,16,.30) !important; border:2px solid #fff; }
+.brand-icon img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:50%; }
+.brand-icon{ border-radius:50% !important; }
+
+/* chapter cards */
+.folder-grid{ counter-reset:chap; gap:.8rem !important; }
+.folder-card{ counter-increment:chap; border-radius:26px !important; border:1px solid var(--border) !important; box-shadow:0 1px 0 rgba(255,255,255,.8) inset, var(--shadow-sm) !important; }
+.folder-card.open{ border-color:#e5d3c2 !important; box-shadow:var(--shadow-md) !important; }
+.folder-header{ gap:1rem !important; padding:1.15rem 1.2rem !important; }
+.folder-header:hover{ background:#fffaf5 !important; }
+.folder-icon-wrap{ width:auto !important; height:auto !important; min-width:2.6rem; background:none !important; border-radius:0 !important; transform:none !important; font-size:0 !important; justify-content:flex-start !important; }
+.folder-icon-wrap::before{ content:counter(chap, decimal-leading-zero); font-family:Georgia,'Times New Roman',serif; font-style:italic; font-weight:400; font-size:2.1rem; line-height:1; color:#f2602a; letter-spacing:-.03em; }
+.folder-title{ font-size:1.12rem !important; font-weight:700 !important; line-height:1.25; }
+.folder-title-block .file-count-badge{ display:block; background:none !important; border:0 !important; padding:0 !important; margin-top:.3rem; font-size:.9rem !important; font-weight:500 !important; color:#9d9088 !important; }
+.folder-meta{ gap:0 !important; }
+.chevron{ box-sizing:content-box; width:20px !important; height:20px !important; padding:13px; border-radius:50%; background:#f2ece5; color:#3d322c !important; transition:all .25s var(--ease) !important; }
+.folder-header:hover .chevron, .folder-card.open .chevron{ background:#1a1412 !important; color:#fff !important; }
+.tab-btn.active{ background:linear-gradient(135deg,#f2602a,#c23f10) !important; }
+</style>
+</head>
+<body class="has-fab">
+
+<header class="site-header">
+<div class="header-inner">
+<div class="brand-row">
+<a class="back-btn" href="ssc-pratham-2026-vod.html">
+<svg fill="none" viewbox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3"></path></svg>
+        Back
+      </a>
+<div class="brand" style="flex:1; justify-content:center;">
+<div class="brand-icon"><img src="channel-dp.jpg" alt="" onerror="this.parentNode.textContent='🧩';this.remove&&0"></div>
+<div class="brand-text">
+<h1>Piyush Sir</h1>
+<p>SSC Pratham 2026 · VOD Batch 1</p>
+</div>
+</div>
+<div style="width:70px"></div>
+</div>
+<div class="tab-row"><button class="tab-btn active" id="tabBtnClasses" onclick="showTab('classes')">🎬 Classes <span class="count">(130)</span></button><button class="tab-btn" id="tabBtnNotes" onclick="showTab('notes')">📄 Notes <span class="count">(196)</span></button></div>
+</div>
+</header>
+<div class="wrap">
+<div class="panel" id="panelClasses" style="display:block">
+<div class="search-row">
+<div class="search-box">
+<svg class="icon-search" fill="none" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input autocomplete="off" id="classesSearchInput" placeholder="Search classes…" type="text"/>
+<button aria-label="Clear search" class="clear-btn" id="classesClearBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-linecap="round" stroke-width="2.4"></path></svg>
+</button>
+</div>
+<div class="icon-btn-group">
+<button class="icon-btn" id="classesExpandAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Expand</span>
+</button>
+<button class="icon-btn" id="classesCollapseAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Collapse</span>
+</button>
+</div>
+</div>
+<div class="breadcrumb" id="classesBreadcrumb"></div>
+<div class="folder-grid" id="classesGrid"></div>
+</div>
+<div class="panel" id="panelNotes" style="display:none">
+<div class="search-row">
+<div class="search-box">
+<svg class="icon-search" fill="none" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input autocomplete="off" id="notesSearchInput" placeholder="Search notes…" type="text"/>
+<button aria-label="Clear search" class="clear-btn" id="notesClearBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-linecap="round" stroke-width="2.4"></path></svg>
+</button>
+</div>
+<div class="icon-btn-group">
+<button class="icon-btn" id="notesExpandAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Expand</span>
+</button>
+<button class="icon-btn" id="notesCollapseAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Collapse</span>
+</button>
+</div>
+</div>
+<div class="breadcrumb" id="notesBreadcrumb"></div>
+<div class="folder-grid" id="notesGrid"></div>
+</div>
+</div>
+<!-- Video Popup -->
+<div class="popup-overlay" id="videoPopup" onclick="closeVideoPopup(event)">
+<div class="popup-content" onclick="event.stopPropagation()">
+<button class="close-button" onclick="closeVideoPopup()">×</button>
+<div class="video-container"><iframe allowfullscreen="" class="video-frame" id="videoFrame" src=""></iframe></div>
+</div>
+</div>
+<script>
+
+const ICONS = {
+  video: '<svg viewBox="0 0 24 24" fill="none"><path d="M15 10.5 19.2 8a1 1 0 0 1 1.5.87v6.26a1 1 0 0 1-1.5.87L15 13.5" stroke="none" fill="currentColor"/><rect x="3" y="6.5" width="12" height="11" rx="2.2" fill="currentColor"/></svg>',
+  pdf: '<svg viewBox="0 0 24 24" fill="none"><path d="M7 3.5h7.5L19 8v11.5A1.5 1.5 0 0 1 17.5 21h-10A1.5 1.5 0 0 1 6 19.5v-14A1.5 1.5 0 0 1 7 3.5Z" fill="currentColor"/></svg>',
+  yt: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4.1-1.3.1-2.1.9-.6.7-.8 2.2-.8 2.2S2.2 9 2.2 10.8v1.4C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.2c.8.8 1.9.8 2.3.9C7 19 12 19 12 19s3.9 0 6.7-.2c.4-.1 1.3-.1 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.8.2-3.6v-1.4c0-1.8-.2-3.6-.2-3.6ZM10 14.5v-5l4.5 2.5-4.5 2.5Z"/></svg>',
+  chevron: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  emptyBox: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 8l8-4 8 4-8 4-8-4Zm0 0v8l8 4m0-12v12m8-12v8l-8 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+
+function showTab(tab){
+  const panelClasses = document.getElementById('panelClasses');
+  const panelNotes = document.getElementById('panelNotes');
+  const btnClasses = document.getElementById('tabBtnClasses');
+  const btnNotes = document.getElementById('tabBtnNotes');
+  if (panelClasses) panelClasses.style.display = (tab === 'classes') ? 'block' : 'none';
+  if (panelNotes) panelNotes.style.display = (tab === 'notes') ? 'block' : 'none';
+  if (btnClasses) btnClasses.classList.toggle('active', tab === 'classes');
+  if (btnNotes) btnNotes.classList.toggle('active', tab === 'notes');
+}
+
+window.openClassVideo = function(url, isDRM){
+  if (isDRM){
+    window.open(url, '_blank');
+  } else {
+    const popup = document.getElementById('videoPopup');
+    const frame = document.getElementById('videoFrame');
+    frame.src = url;
+    popup.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+};
+function closeVideoPopup(event){
+  if (event && event.target !== event.currentTarget) return;
+  const popup = document.getElementById('videoPopup');
+  const frame = document.getElementById('videoFrame');
+  popup.classList.remove('show');
+  frame.src = '';
+  document.body.style.overflow = 'auto';
+}
+document.addEventListener('keydown', function(event){ if (event.key === 'Escape') closeVideoPopup(); });
+
+
+(function(){
+  const rawData = [{"name": "Intro (1)", "items": [{"title": "(All Notes) Class-01 | Intro", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6364940486112/6364940486112.m3u8", "drm": false}]}, {"name": "Alphabetical Series (6)", "items": [{"title": "(All Notes) Class-02 | Alphabetical Series", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6364984115112/6364984115112.m3u8", "drm": false}, {"title": "(All Notes) Class-03 | Alphabetical Series", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365037809112/6365037809112.m3u8", "drm": false}, {"title": "(All Notes) Class-04 | Alphabetical Series", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365081061112/6365081061112.m3u8", "drm": false}, {"title": "(All Notes) Class-05 | Alphabetical Series", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365241384112/6365241384112.m3u8", "drm": false}, {"title": "(All Notes) Class-06 | Alphabetical Series", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/uzcvPKV_tf0/uzcvPKV_tf0.m3u8", "drm": false}, {"title": "(All Notes) Class-07 | Alphabetical Series", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/a0ZXcgie2Og/a0ZXcgie2Og.m3u8", "drm": false}]}, {"name": "Letter Series (2)", "items": [{"title": "(All Notes) Class-08 | Letter Series", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6365410469112/6365410469112.m3u8", "drm": false}, {"title": "(All Notes) Class-09 | Letter Series", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6365461406112/6365461406112.m3u8", "drm": false}]}, {"name": "Pair Formation (2)", "items": [{"title": "(All Notes) Class-10 | Pair Formation", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365515512112/6365515512112.m3u8", "drm": false}, {"title": "(All Notes) Class-11 | Pair Formation", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6365573650112/6365573650112.m3u8", "drm": false}]}, {"name": "Dictionary, Word Formation, Jumbling (1)", "items": [{"title": "(All Notes) Class-12 | Dictionary, Word Formation, Jumbling", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365626265112/6365626265112.m3u8", "drm": false}]}, {"name": "Coding Decoding (8)", "items": [{"title": "(All Notes) Class-13 | Coding Decoding", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365749759112/6365749759112.m3u8", "drm": false}, {"title": "(All Notes) Class-14 | Coding Decoding", "type": "youtube", "url": "https://www.youtube.com/embed/ZTtfuiybOaY"}, {"title": "(All Notes) Class-15 | Coding Decoding", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6365838898112/6365838898112.m3u8", "drm": false}, {"title": "(All Notes) Class-16 | Coding Decoding", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6365893814112/6365893814112.m3u8", "drm": false}, {"title": "(All Notes) Class-17 | Coding Decoding", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6365940699112/6365940699112.m3u8", "drm": false}, {"title": "(All Notes) Class-18 | Coding Decoding", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6366057193112/6366057193112.m3u8", "drm": false}, {"title": "(All Notes) Class-19 | Coding Decoding", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/6366101687112/6366101687112.m3u8", "drm": false}, {"title": "(All Notes) Class-20 | Coding Decoding", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366173838112/6366173838112.m3u8", "drm": false}]}, {"name": "Matrix (1)", "items": [{"title": "(All Notes) Class-21 | Matrix", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/QfF1BFTSkQg/QfF1BFTSkQg.m3u8", "drm": false}]}, {"name": "Live Test (2)", "items": [{"title": "(All Notes) Class-22 | Live Test", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366269589112/6366269589112.m3u8", "drm": false}, {"title": "(All Notes) Class-93 | Live Test", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6371348360112/6371348360112.m3u8", "drm": false}]}, {"name": "Counting Figures (7)", "items": [{"title": "(All Notes) Class-23 | Counting Figures", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366367575112/6366367575112.m3u8", "drm": false}, {"title": "(All Notes) Class-24 | Reas | Counting Figures", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366401758112/6366401758112.m3u8", "drm": false}, {"title": "(All Notes) Class-25 | Reas | Counting Figures", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366426592112/6366426592112.m3u8", "drm": false}, {"title": "(All Notes) Class-26 | Reas | Counting Figures", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6366445878112/6366445878112.m3u8", "drm": false}, {"title": "(All Notes) Class-27 | Reas | Counting Figures", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6366473381112/6366473381112.m3u8", "drm": false}, {"title": "(All Notes) Class-28 | Reas | Counting Figures", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366544534112/6366544534112.m3u8", "drm": false}, {"title": "(All Notes) Class-29 | Reas | Counting Figures", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366570568112/6366570568112.m3u8", "drm": false}]}, {"name": "Blood Relations (6)", "items": [{"title": "(All Notes) Class-30 | Blood Relations", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6366614899112/6366614899112.m3u8", "drm": false}, {"title": "(All Notes) Class-31 | Blood Relations", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6366645640112/6366645640112.m3u8", "drm": false}, {"title": "(All Notes) Class-32 | Blood Relations", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366728565112/6366728565112.m3u8", "drm": false}, {"title": "(All Notes) Class-33 | Blood Relations", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366762536112/6366762536112.m3u8", "drm": false}, {"title": "(All Notes) Class-34 | Blood Relations", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6366807363112/6366807363112.m3u8", "drm": false}, {"title": "(All Notes) Class-35 | Blood Relations", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/umwMsT5V-5s/umwMsT5V-5s.m3u8", "drm": false}]}, {"name": "Calendar (7)", "items": [{"title": "(All Notes) Class-36 | Calendar", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6367116725112/6367116725112.m3u8", "drm": false}, {"title": "(All Notes) Class-37 | Calendar", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6367166139112/6367166139112.m3u8", "drm": false}, {"title": "(All Notes) Class-38 | Calendar", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/oMp6P85B3SQ/oMp6P85B3SQ.m3u8", "drm": false}, {"title": "(All Notes) Class-39 | Calendar", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6367285495112/6367285495112.m3u8", "drm": false}, {"title": "(All Notes) Class-40 | Calendar", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6367432774112/6367432774112.m3u8", "drm": false}, {"title": "(All Notes) Class-41 | Calendar", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6367487167112/6367487167112.m3u8", "drm": false}, {"title": "(All Notes) Class-42 | Calendar", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6367548752112/6367548752112.m3u8", "drm": false}]}, {"name": "Inequalities (3)", "items": [{"title": "(All Notes) Class-43 | Inequalities", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6367614921112/6367614921112.m3u8", "drm": false}, {"title": "(All Notes) Class-44 | Inequalities", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6367820938112/6367820938112.m3u8", "drm": false}, {"title": "(All Notes) Class-45 | Inequalities", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6367872404112/6367872404112.m3u8", "drm": false}]}, {"name": "Ranking (3)", "items": [{"title": "(All Notes) Class-46 | Ranking", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6367931148112/6367931148112.m3u8", "drm": false}, {"title": "(All Notes) Class-47 | Ranking", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/FMcEkvJ0MB4/FMcEkvJ0MB4.m3u8", "drm": false}, {"title": "(All Notes) Class-48 | Ranking", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6368038541112/6368038541112.m3u8", "drm": false}]}, {"name": "Number Series (3)", "items": [{"title": "(All Notes) Class-49 | Number Series", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6368187869112/6368187869112.m3u8", "drm": false}, {"title": "(All Notes) Class-50 | Number Series", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/6E1qy1cPcH0/6E1qy1cPcH0.m3u8", "drm": false}, {"title": "(All Notes) Class-51 | Number Series", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6368357993112/6368357993112.m3u8", "drm": false}]}, {"name": "Missing Number (1)", "items": [{"title": "(All Notes) Class-52 | Missing Number", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6368420979112/6368420979112.m3u8", "drm": false}]}, {"name": "Analogy (2)", "items": [{"title": "(All Notes) Class-53 | Analogy", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6368590488112/6368590488112.m3u8", "drm": false}, {"title": "(All Notes) Class-54 | Analogy", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6368638079112/6368638079112.m3u8", "drm": false}]}, {"name": "Classification (2)", "items": [{"title": "(All Notes) Class-55 | Classification", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6368692897112/6368692897112.m3u8", "drm": false}, {"title": "(All Notes) Class-56 | Classification", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6368747869112/6368747869112.m3u8", "drm": false}]}, {"name": "Coded Equation (1)", "items": [{"title": "(All Notes) Class-57 | Coded Equation", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6368809602112/6368809602112.m3u8", "drm": false}]}, {"name": "PYQ Practice (3)", "items": [{"title": "(All Notes) Class-58 | PYQ Practice", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6369039206112/6369039206112.m3u8", "drm": false}, {"title": "(All Notes) Class-59 | PYQ Practice", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6369082612112/6369082612112.m3u8", "drm": false}, {"title": "(All Notes) Class-60 | PYQ Practice", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6369135944112/6369135944112.m3u8", "drm": false}]}, {"name": "Clock (6)", "items": [{"title": "(All Notes) Class-61 | Clock", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6369247830112/6369247830112.m3u8", "drm": false}, {"title": "(All Notes) Class-62 | Clock", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6369289855112/6369289855112.m3u8", "drm": false}, {"title": "(All Notes) Class-63 | Clock", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6369334493112/6369334493112.m3u8", "drm": false}, {"title": "(All Notes) Class-64 | Clock", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6369382592112/6369382592112.m3u8", "drm": false}, {"title": "(All Notes) Class-65 | Clock", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6369432335112/6369432335112.m3u8", "drm": false}, {"title": "(All Notes) Class-66 | Clock", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/SZ80rQB_CKI/SZ80rQB_CKI.m3u8", "drm": false}]}, {"name": "Syllogism (9)", "items": [{"title": "(All Notes) Class-67 | Syllogism", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6369582264112/6369582264112.m3u8", "drm": false}, {"title": "(All Notes) Class-68 | Syllogism", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6369625722112/6369625722112.m3u8", "drm": false}, {"title": "(All Notes) Class-69 | Syllogism", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6369667395112/6369667395112.m3u8", "drm": false}, {"title": "(All Notes) Class-70 | Syllogism", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6369715013112/6369715013112.m3u8", "drm": false}, {"title": "(All Notes) Class-71 | Syllogism", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6369833627112/6369833627112.m3u8", "drm": false}, {"title": "(All Notes) Class-72 | Syllogism", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6369871728112/6369871728112.m3u8", "drm": false}, {"title": "(All Notes) Class-73 | Syllogism", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6369912770112/6369912770112.m3u8", "drm": false}, {"title": "(All Notes) Class-74 | Syllogism", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6370135509112/6370135509112.m3u8", "drm": false}, {"title": "(All Notes) Class-75 | Syllogism", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6370179348112/6370179348112.m3u8", "drm": false}]}, {"name": "Dice ( पासा ) (6)", "items": [{"title": "(All Notes) Class-76 | Dice ( पासा )", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6370222539112/6370222539112.m3u8", "drm": false}, {"title": "(All Notes) Class-77 | Dice ( पासा )", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6370261791112/6370261791112.m3u8", "drm": false}, {"title": "(All Notes) Class-78 | Dice ( पासा )", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6370315668112/6370315668112.m3u8", "drm": false}, {"title": "(All Notes) Class-79 | Dice ( पासा )", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6370456272112/6370456272112.m3u8", "drm": false}, {"title": "(All Notes) Class-80 | Dice ( पासा )", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6370510547112/6370510547112.m3u8", "drm": false}, {"title": "(All Notes) Class-81 | Dice ( पासा )", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6370572024112/6370572024112.m3u8", "drm": false}]}, {"name": "Dice PYQs Practice (1)", "items": [{"title": "(All Notes) Class-82 | Dice PYQs Practice", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/UD2wrZrznL0/UD2wrZrznL0.m3u8", "drm": false}]}, {"name": "Cube and Cuboid (5)", "items": [{"title": "(All Notes) Class-83 | Cube and Cuboid", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6370673790112/6370673790112.m3u8", "drm": false}, {"title": "(All Notes) Class-84 | Cube and Cuboid", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6370817667112/6370817667112.m3u8", "drm": false}, {"title": "(All Notes) Class-85 | Cube and Cuboid", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6370863917112/6370863917112.m3u8", "drm": false}, {"title": "(All Notes) Class-86 | Cube and Cuboid", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6370914028112/6370914028112.m3u8", "drm": false}, {"title": "(All Notes) Class-87 | Cube and Cuboid", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6370967524112/6370967524112.m3u8", "drm": false}]}, {"name": "Venn Diagram (3)", "items": [{"title": "(All Notes) Class-88 | Venn Diagram", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6371024967112/6371024967112.m3u8", "drm": false}, {"title": "(All Notes) Class-89 | Venn Diagram", "type": "youtube", "url": "https://www.youtube.com/embed/-bimQdG_Fj4"}, {"title": "(All Notes) Class-90 | Venn Diagram", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6371212627112/6371212627112.m3u8", "drm": false}]}, {"name": "Venn Diagram PYQs Practice (1)", "items": [{"title": "(All Notes) Class-91 | Venn Diagram PYQs Practice", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6371256042112/6371256042112.m3u8", "drm": false}]}, {"name": "Cube and Cuboid PYQs Practice (1)", "items": [{"title": "(All Notes) Class-92 | Cube and Cuboid PYQs Practice", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6371299558112/6371299558112.m3u8", "drm": false}]}, {"name": "Directions and Distance (5)", "items": [{"title": "(All Notes) Class-94 | Directions and Distance", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6371464495112/6371464495112.m3u8", "drm": false}, {"title": "(All Notes) Class-95 | Directions and Distance", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6371507872112/6371507872112.m3u8", "drm": false}, {"title": "(All Notes) Class-96 | Directions and Distance", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/qdaXC2XUVO8/qdaXC2XUVO8.m3u8", "drm": false}, {"title": "(All Notes) Class-97 | Directions and Distance", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6371744156112/6371744156112.m3u8", "drm": false}, {"title": "(All Notes) Class-98 | Directions and Distance", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6371780617112/6371780617112.m3u8", "drm": false}]}, {"name": "Directions and Distance PYQ Practice (1)", "items": [{"title": "(All Notes) Class-99 | Directions and Distance PYQ Practice", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6371820322112/6371820322112.m3u8", "drm": false}]}, {"name": "Doubt Class (1)", "items": [{"title": "(All Notes) Class-100 | Doubt Class", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6371866401112/6371866401112.m3u8", "drm": false}]}, {"name": "Sitting Arrangements (4)", "items": [{"title": "(All Notes) Class-101 | Sitting Arrangements", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372020061112/6372020061112.m3u8", "drm": false}, {"title": "(All Notes) Class-102 | Sitting Arrangements", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372056906112/6372056906112.m3u8", "drm": false}, {"title": "(All Notes) Class-103 | Sitting Arrangements", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372103999112/6372103999112.m3u8", "drm": false}, {"title": "(All Notes) Class-104 | Sitting Arrangements", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6372158034112/6372158034112.m3u8", "drm": false}]}, {"name": "Sitting Arrangements PYQs Practice (1)", "items": [{"title": "(All Notes) Class-105 | Sitting Arrangements PYQs Practice", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372211627112/6372211627112.m3u8", "drm": false}]}, {"name": "Puzzle (6)", "items": [{"title": "(All Notes) Class-106 | Puzzle", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ZNuVUL4bNZI/ZNuVUL4bNZI.m3u8", "drm": false}, {"title": "(All Notes) Class-107 | Puzzle", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372408858112/6372408858112.m3u8", "drm": false}, {"title": "(All Notes) Class-108 | Puzzle", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372460285112/6372460285112.m3u8", "drm": false}, {"title": "(All Notes) Class-109 | Puzzle", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372511938112/6372511938112.m3u8", "drm": false}, {"title": "(All Notes) Class-110 | Puzzle", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372564660112/6372564660112.m3u8", "drm": false}, {"title": "(All Notes) Class-111 | Puzzle", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372739780112/6372739780112.m3u8", "drm": false}]}, {"name": "Non Verbal (6)", "items": [{"title": "(All Notes) Class-112 | Non Verbal", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6372786775112/6372786775112.m3u8", "drm": false}, {"title": "(All Notes) Class-113 | Non Verbal", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6372837224112/6372837224112.m3u8", "drm": false}, {"title": "(All Notes) Class-114 | Non Verbal", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6372893209112/6372893209112.m3u8", "drm": false}, {"title": "(All Notes) Class-115 | Non Verbal", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6373051649112/6373051649112.m3u8", "drm": false}, {"title": "(All Notes) Class-116 | Non Verbal", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6373106064112/6373106064112.m3u8", "drm": false}, {"title": "(All Notes) Class-117 | Non Verbal", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6373218054112/6373218054112.m3u8", "drm": false}]}, {"name": "Statement and Assumptions (2)", "items": [{"title": "(All Notes) Class-118 | Statement and Assumptions", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6373489612112/6373489612112.m3u8", "drm": false}, {"title": "(All Notes) Class-119 | Statement and Assumptions", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/B75oakA9-Jk/B75oakA9-Jk.m3u8", "drm": false}]}, {"name": "Cause and Effect (1)", "items": [{"title": "(All Notes) Class-120 | Cause and Effect", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/XojYD7kMjjI/XojYD7kMjjI.m3u8", "drm": false}]}, {"name": "Course of Action (1)", "items": [{"title": "(All Notes) Class-121 | Course of Action", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/vod_non_drm_hls/migration/ZXCOEzrpRSc/ZXCOEzrpRSc.m3u8", "drm": false}]}, {"name": "Statement and Argument (1)", "items": [{"title": "(All Notes) Class-122 | Statement and Argument", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6373777053112/6373777053112.m3u8", "drm": false}]}, {"name": "Reason Assertion (1)", "items": [{"title": "(All Notes) Class-123 | Reason Assertion", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6373819729112/6373819729112.m3u8", "drm": false}]}, {"name": "Decision Making (1)", "items": [{"title": "(All Notes) Class-124 | Decision Making", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6373857438112/6373857438112.m3u8", "drm": false}]}, {"name": "Data Sufficiency (1)", "items": [{"title": "(All Notes) Class-125 | Data Sufficiency", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6373896545112/6373896545112.m3u8", "drm": false}]}, {"name": "Machine Input (4)", "items": [{"title": "(All Notes) Class-126  |  Machine Input", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366053804112/6366053804112.m3u8", "drm": false}, {"title": "(All Notes) Class-127 | Machine Input", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366100047112/6366100047112.m3u8", "drm": false}, {"title": "(All Notes) Class-128 | Machine Input", "type": "video", "url": "https://d14v4v80cpjht7.cloudfront.net/file_library/videos/migration/brightcove/6366170816112/6366170816112.m3u8", "drm": false}, {"title": "(All Notes) Class-129 | Machine Input", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6366218711112/6366218711112.m3u8", "drm": false}]}, {"name": "Last Class (1)", "items": [{"title": "(All Notes) Class-130 | Last Class", "type": "video", "url": "https://d3vlg4qjb80h8n.cloudfront.net/file_library/videos/migration/brightcove/6373936508112/6373936508112.m3u8", "drm": false}]}];
+  const gridEl = document.getElementById('classesGrid');
+  const searchInputEl = document.getElementById('classesSearchInput');
+  const clearBtnEl = document.getElementById('classesClearBtn');
+  const expandAllBtnEl = document.getElementById('classesExpandAllBtn');
+  const collapseAllBtnEl = document.getElementById('classesCollapseAllBtn');
+  const breadcrumbEl = document.getElementById('classesBreadcrumb');
+
+  const folders = rawData.map(function(folder, folderIndex){
+    const items = folder.items.map(function(item, itemIndex){
+      return {
+        id: folderIndex + '-' + itemIndex,
+        title: item.title,
+        lower: item.title.toLowerCase(),
+        type: item.type,
+        url: item.url,
+        drm: !!item.drm
+      };
+    });
+    return {
+      index: folderIndex, name: folder.name, lower: folder.name.toLowerCase(),
+      items: items, itemCount: items.length, open: false,
+      bodyEl: null, listEl: null, cardEl: null, built: false
+    };
+  });
+
+  function escapeHTML(str){ return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function highlight(text, query){
+    const safe = escapeHTML(text);
+    if (!query) return safe;
+    const lowerText = text.toLowerCase();
+    const idx = lowerText.indexOf(query);
+    if (idx === -1) return safe;
+    const before = escapeHTML(text.slice(0, idx));
+    const match = escapeHTML(text.slice(idx, idx + query.length));
+    const after = escapeHTML(text.slice(idx + query.length));
+    return before + '<mark>' + match + '</mark>' + after;
+  }
+
+  function createFileItemEl(item, query){
+    const el = document.createElement('div');
+    el.className = 'file-item';
+    const name = document.createElement('div');
+    name.className = 'file-name';
+    name.innerHTML = highlight(item.title, query);
+    name.title = item.title;
+    el.appendChild(name);
+    const actions = document.createElement('div');
+    actions.className = 'file-actions';
+    if (item.type === 'pdf'){
+      const a = document.createElement('a');
+      a.className = 'open-btn pdf';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.pdf + '<span>PDF</span>';
+      actions.appendChild(a);
+    } else if (item.type === 'youtube'){
+      const a = document.createElement('a');
+      a.className = 'open-btn yt';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.yt + '<span>YouTube</span>';
+      actions.appendChild(a);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'open-btn video';
+      btn.type = 'button';
+      btn.innerHTML = ICONS.video + '<span>Video</span>';
+      btn.addEventListener('click', function(){ window.openClassVideo(item.url, item.drm); });
+      actions.appendChild(btn);
+    }
+    el.appendChild(actions);
+    return el;
+  }
+
+  function populateFileList(folder, query, subsetItems){
+    const items = subsetItems || folder.items;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < items.length; i++){ frag.appendChild(createFileItemEl(items[i], query)); }
+    folder.listEl.innerHTML = '';
+    folder.listEl.appendChild(frag);
+  }
+
+  function setFolderOpen(folder, open, query, subsetItems){
+    folder.open = open;
+    folder.cardEl.classList.toggle('open', open);
+    if (open && !folder.built){ populateFileList(folder, query, subsetItems); folder.built = true; }
+    folder.bodyEl.style.maxHeight = open ? folder.bodyEl.scrollHeight + 400 + 'px' : '0px';
+  }
+
+  function toggleFolder(folder){ setFolderOpen(folder, !folder.open, searchInputEl.value.trim().toLowerCase()); }
+
+  function createFolderCardEl(folder){
+    const card = document.createElement('div');
+    card.className = 'folder-card';
+    folder.cardEl = card;
+    const header = document.createElement('div');
+    header.className = 'folder-header';
+    header.innerHTML =
+      '<div class="folder-icon-wrap">📁</div>' +
+      '<div class="folder-title-block"><h3 class="folder-title" data-title></h3></div>' +
+      '<div class="folder-meta"><span class="file-count-badge" data-count>' + folder.itemCount + ' items</span>' +
+      '<span class="chevron">' + ICONS.chevron + '</span></div>';
+    header.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+    header.addEventListener('click', function(){ toggleFolder(folder); });
+    card.appendChild(header);
+    const body = document.createElement('div');
+    body.className = 'folder-body';
+    folder.bodyEl = body;
+    const bodyInner = document.createElement('div');
+    bodyInner.className = 'folder-body-inner';
+    const list = document.createElement('div');
+    list.className = 'file-list';
+    folder.listEl = list;
+    bodyInner.appendChild(list);
+    body.appendChild(bodyInner);
+    card.appendChild(body);
+    return card;
+  }
+
+  function renderAllFolderShells(){
+    const frag = document.createDocumentFragment();
+    folders.forEach(function(folder){ frag.appendChild(createFolderCardEl(folder)); });
+    gridEl.appendChild(frag);
+  }
+  renderAllFolderShells();
+
+  function renderEmptyState(){
+    gridEl.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'empty-state';
+    el.innerHTML = ICONS.emptyBox + '<h3>No results found</h3><p>Try a different search term.</p>';
+    gridEl.appendChild(el);
+  }
+
+  let emptyShown = false;
+  function restoreFolderGrid(){
+    if (emptyShown){
+      gridEl.innerHTML = '';
+      folders.forEach(function(folder){ gridEl.appendChild(folder.cardEl); });
+      emptyShown = false;
+    }
+  }
+
+  function updateBreadcrumb(query){
+    if (!query){ breadcrumbEl.textContent = ''; return; }
+    let matches = 0;
+    folders.forEach(function(f){
+      if (f.lower.indexOf(query) !== -1) matches += f.itemCount;
+      else f.items.forEach(function(it){ if (it.lower.indexOf(query) !== -1) matches++; });
+    });
+    breadcrumbEl.textContent = matches + ' result' + (matches === 1 ? '' : 's') + ' for "' + query + '"';
+  }
+
+  function applySearch(rawQuery){
+    const query = rawQuery.trim().toLowerCase();
+    clearBtnEl.classList.toggle('show', query.length > 0);
+    updateBreadcrumb(query);
+    if (!query){
+      restoreFolderGrid();
+      folders.forEach(function(folder){
+        folder.cardEl.classList.remove('hidden-card');
+        folder.cardEl.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+        folder.cardEl.querySelector('[data-count]').textContent = folder.itemCount + ' items';
+        if (folder.built) populateFileList(folder, '');
+      });
+      return;
+    }
+    restoreFolderGrid();
+    let anyVisible = false;
+    folders.forEach(function(folder){
+      const nameMatches = folder.lower.indexOf(query) !== -1;
+      const matchedItems = folder.items.filter(function(it){ return it.lower.indexOf(query) !== -1; });
+      const show = nameMatches || matchedItems.length > 0;
+      folder.cardEl.classList.toggle('hidden-card', !show);
+      if (!show) return;
+      anyVisible = true;
+      folder.cardEl.querySelector('[data-title]').innerHTML = highlight(folder.name, query);
+      const subset = nameMatches && matchedItems.length === 0 ? folder.items : matchedItems;
+      folder.cardEl.querySelector('[data-count]').textContent = subset.length + ' items';
+      setFolderOpen(folder, true, query, subset);
+    });
+    if (!anyVisible){ renderEmptyState(); emptyShown = true; }
+  }
+
+  searchInputEl.addEventListener('input', function(){ applySearch(searchInputEl.value); });
+  clearBtnEl.addEventListener('click', function(){ searchInputEl.value = ''; applySearch(''); searchInputEl.focus(); });
+  expandAllBtnEl.addEventListener('click', function(){
+    folders.forEach(function(f){ if (!f.cardEl.classList.contains('hidden-card')) setFolderOpen(f, true, searchInputEl.value.trim().toLowerCase()); });
+  });
+  collapseAllBtnEl.addEventListener('click', function(){ folders.forEach(function(f){ setFolderOpen(f, false); }); });
+})();
+
+(function(){
+  const rawData = [{"name": "Number Series (4)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Number Series | 4 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a1f3a1e20ec_4_Feb_Number_Series_293031353840Pratham123_1.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Number Series | 6 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a49329cb7eb_6_Feb_Number_Series_293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Number Series | 3 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a0af0f4f2f3_3_Feb_Number_Series_293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Number Series Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a5a36cba6ee_NUMBER_SERIES_Practice_Set_Final_2025.pdf"}]}, {"name": "Missing Number (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Missing Number | 7 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a87370752d7_7_Feb_Number_Series_293031353840Pratham123compressed.pdf"}]}, {"name": "Analogy (3)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Analogy | 10 Feb | Class", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67aa078953c95_10Feb_Analogy_293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Analogy | 11 Feb | Class", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ab2c010bcfa_11Feb_Analogy_293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Analogy PYQ Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67af033263f6c_Analogy_PYQ_Practice_Set_Final_2025compressed.pdf"}]}, {"name": "Classification (2)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Classification | 12 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ac8a1ccf408_12Feb_Classification_293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Classification (PYQ Practice Set) 2025", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ae89a07aaaf_Classification_PYQ_Practice_Set_2025compressed.pdf"}]}, {"name": "Coded Equation (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coded Equation | 14 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b026b7de58a_14Feb_Coded_Equations3031353840Pratham123compressed.pdf"}]}, {"name": "PYQ Practice (3)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) PYQ Practice | 20 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b7e09010737_20_Feb_SSC_CGL_2024_Practice293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) PYQ Practice | 21 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b8689287683_21_Feb_SSC_CGL_2024_Practice293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) PYQ Practice | 19 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67b5b7d0e6ed8_19_Feb_Series_SSC_CGL_2024_Practice293031353840Pratham123compressed.pdf"}]}, {"name": "Clock (8)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Clock | 21 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67bc8e5e906fa_24Feb_Clock_29303135384042Pratham1234.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Clock | 24 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67bcc0bd66953_24Feb_Clock_29303135384042Pratham1234_1.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Clock | 25 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67be9c22c9f1f_25Feb_Clock_29303135384042Pratham1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Clock | 26 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c0015d8a292_26Feb_Clock_29303135384042Pratham1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Clock | 27 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c11c9f670b3_27Feb_Clock_29303135384042Pratham1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Clock | 28 Feb | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c1925ef2bfe_28Feb_Clock_29303135384042Pratham1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Clock | 3 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c5864f265ce_3_Mar_Clock_29303135384042Pratham1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Clock Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c18c09eb1bc_CLOCK_Practice_Set_Final_pdf_2025_3.pdf"}]}, {"name": "Syllogism (11)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism | 4 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c6d8a56ac7b_4_Mar_Syllogism29303135384042Pratham1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism | 5 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c927706c887_5_Mar_Syllogism29303135384042Pratham1234.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism | 6 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c97c41a1319_6_Mar_Syllogism29303135384042Pratham1234.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism | 10 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67cfd888b4f01_10_Mar_Syllogism29303135384042Pratham1234.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism | 7 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67d00c7e7622c_7_Mar_Syllogism29303135384042Pratham1234_1compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism | 11 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67d00dc620ca0_11_Mar_Syllogism29303135384042Pratham1234.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism | 12 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67d1462430851_12_Mar_Syllogism29303135384042Pratham1234.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism | 17 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67d8fc4427dcc_17_Mar_Syllogism29303135384042Pratham1234.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism Part-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67dbf4c613248_SYLLOGISM_PYQ_PRACTICE_SET_2025Part1.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism Part-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67dbf55bc1e4f_SYLLOGISM_PYQ_PRACTICE_SET_2025Part2.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Syllogism Part-3", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67dbf5c5ea0b6_SYLLOGISM_PYQ_PRACTICE_SET_2025Part3.pdf"}]}, {"name": "Dice (7)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice | 19 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67dab2d3607ac_19_Mar_DICE_Spl3538404245_Pratham12345.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice | 20 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67dcf2e9909e9_20_Mar_DICE_Spl3538404245_Pratham12345compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice | 21 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e1489a3c2a0_21_Mar_DICE_Spl3538404245_Pratham12345compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice | 24 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e14a7f40a7c_24_Mar_DICE_Spl3538404245_Pratham12345compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice | 25 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e298bbcd442_25Mar_DICE_Spl3538404245_Pratham12345compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice | 26 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e4d2b063175_26Mar_DICE_Spl3538404245_Pratham12345compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e5446ab88e4_Dice_Practice_Set.pdf"}]}, {"name": "Dice Short (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice Short Notes | 27 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e5430ba20a9_27Mar_DICE_SHORT_NOTES_Spl3538404245_Pratham12345.pdf"}]}, {"name": "Dice Class Question (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice Class Question", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e543ac3824b_Dice_Class_Question.pdf"}]}, {"name": "Dice PYQs Set (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice PYQs Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e5440fc0b60_Dice_PYQs_Set.pdf"}]}, {"name": "Dice Test Question (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dice Test Question", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e544e02519d_Dice_Test_Question_Student_File.pdf"}]}, {"name": "Cube and Cuboid (5)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cube and Cuboid | 27 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67e68950bd08e_28Mar_CubeCuboid_Spl3538404245_Pratham12345.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cube and Cuboid | 1 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ebcf362dff1_1APR_Cube_and_Cuboid_Spl3538404245andPratham12345compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cube and Cuboid | 2 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ed2657ce8b2_2APR_Cube_and_Cuboid_Spl3538404245andPratham12345compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cube and Cuboid | 3 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ee768db43fd_3APR_Cube_and_Cuboid_Spl3538404245andPratham12345compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cube and Cuboid Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ee77005dade_Cube_and_Cuboid_Practice_Set.pdf"}]}, {"name": "Cube & Cuboid (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cube & Cuboid | 31 March | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ea7f85bc9fb_31Mar_CubeCuboid_Spl3538404245_Pratham12345compressed.pdf"}]}, {"name": "Venn Diagram (6)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Venn Diagram | 4 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67efc85600b42_4APR_Venn_Diagram_Spl3538404245andPratham12345.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Venn Diagram  | 7 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f3bd333515b_7APR_Venn_Diagram_Spl3538404245andPratham12345compressed_1.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Venn Diagram | 8 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f50a0d5e817_8APR_Venn_Diagram_Spl3538404245andPratham12345compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Venn Diagram PYQ", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f8ab411c6c8_Venn_Diagram_PYQ.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Venn Diagram (Class Question)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f8abb8de1ea_Venn_Diagram_Class_Question.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Venn Diagram Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f8ac150dfbf_Venn_Diagram_Practice_Set.pdf"}]}, {"name": "Venn Diagram Short (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Venn Diagram Short Notes | 9 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f65a47a9b06_9APR_Venn_Diagram_Short_Notes_Spl3538404245andPratham12345.pdf"}]}, {"name": "Cube PYQs Practice (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cube PYQs Practice | 10 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f7aabcdb93b_10APR_Cube_PYQs_Practice_Spl3538404245andPratham12345.pdf"}]}, {"name": "Directions and Distance (5)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Directions and Distance | 14 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67fceb8a606b6_14APR_Directions_and_Distance_Spl31353840424548andPratham123456compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Directions and Distance | 15 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68006c7badbfa_15APR_Directions_and_Distance_Spl31353840424548andPratham123456compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Directions and Distance | 16 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6800719a80a25_16APR_Directions_and_Distance_Spl31353840424548andPratham123456compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Directions and Distance | 21 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68061e107260f_21APR_Directions_and_Distance_Spl31353840424548andPratham123456compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Directions and Distance | 22 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/680783a6b6900_22APR_Directions_and_Distance_Spl31353840424548andPratham123456compressed.pdf"}]}, {"name": "Assumptions (2)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Assumptions | 27 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6836ce5472410_27_may_spl3538_and_pratham12_Assumptionscompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Assumptions | 26 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6835389bad641_26_may_spl3538_and_pratham12_Assumptionscompressed.pdf"}]}, {"name": "Ranking (5)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Ranking PYQ Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a06ca18efe8_RANKING_PYQ_Practice_Set_Final_pdf_2025.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Ranking | 29 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679a1a0a7e4ba_29janRanking_293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Ranking | 30 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679b5c61763ef_30janRanking_293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Ranking | 31 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679cb2fb86d79_31janRanking_293031353840Pratham123compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Ranking Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a08f8d8282d_Ranking_Practice_Set_Final_pdf_2025.pdf"}]}, {"name": "Ranking Class Questions (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Ranking Class Questions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a874622cab3_Ranking_Class_Que_Final_pdf_2025.pdf"}]}, {"name": "Reasoning Full (2)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Reasoning Full Class Notes (Hand Written)  Part-1", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a1ab85b9bce_Reasoning_Full_Class_Notes_Hand_Written_PART1.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Reasoning Full Class Notes (Hand Written) Part-2", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a1abd74e72e_Reasoning_Full_Class_Notes_Hand_Written_PART2.pdf"}]}, {"name": "Classification (Class Que) Final (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Classification (Class Que) Final 2025", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ae8a1695494_CLASSIFICATION_Class_Que_Final_2025.pdf"}]}, {"name": "Analogy Class Questions Final (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Analogy Class Questions Final", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67af03af5904b_Analogy_Class_Que_Final_2025_1.pdf"}]}, {"name": "Missing Number Class Questions Final (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Missing Number Class Questions Final", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67af044d13c23_MISSING_NUMBER_Class_Que_Final_Pdf_2025.pdf"}]}, {"name": "Clock Class Question (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Clock Class Question", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c18c834ca91_Clock_Class_Que_Final_Pdf_2025_3.pdf"}]}, {"name": "Word-Based-Problems (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Word-Based-Problems (Hindi)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c6c5a114a5b_WordBasedProblems_Hindi.pdf"}]}, {"name": "Word-Based Problems (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Word-Based Problems (English)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67c6c628c8b4b_WordBased_Problems_English.pdf"}]}, {"name": "Cube and Cuboid Test (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cube and Cuboid Test", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ee77745f40e_Cube_and_Cuboid_Test.pdf"}]}, {"name": "Cube and Cuboid Class Question (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cube and Cuboid Class Question", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67ee77f37b08c_CUBE_AND_CUBOID_Class_Question.pdf"}]}, {"name": "SSC 2025 Reasoning Syllabus (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) SSC 2025 Reasoning Syllabus", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/673db5136d64c_SSC_2025_Reasoning_Syllabus_S.pdf"}]}, {"name": "Alphabetical Series Class Questions (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Alphabetical Series Class Questions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/673db54f31a7d_ALPHABETICAL_SERIES_S.pdf"}]}, {"name": "Intro (2)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Intro | 20 Nov | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/673db6d5bc8cd_20novSSC_PRATHAMcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Intro | 21 Nov | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/673f1cbe3a4ee_21novSSC_PRATHAMcompressed.pdf"}]}, {"name": "Piyush Sir Book Link (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Piyush Sir Book Link", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/673db73d6bbf5_66e3fec589736Piyush_Sir2.pdf"}]}, {"name": "Alphabetical Series (5)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Alphabetical Series | 22 Nov | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67405c6c2df12_22novSSC_PRATHAMcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Alphabetical Series | 23 Nov | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6746b93be26cb_23novSSC_PRATHAMcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Alphabetical Series | 28 Nov | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67490eba79222_28novSSC_PRATHAMcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Alphabetical Series | 29 Nov | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6749b5079e9c1_29novSSC_PRATHAMcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Alphabetical Series Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/674d77e0a776b_ALPHABETICAL_SERIES_NEW_PDF.pdf"}]}, {"name": "Alphabetical (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Alphabetical | 27 Nov | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6748382bb3859_27novSSC_PRATHAMcompressed.pdf"}]}, {"name": "Letter Series (3)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Letter Series | 2 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/674da512b01a1_2decSSC_PRATHAMcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Letter Series | 3 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/674efabb3bf64_3decSSC_PRATHAMcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Letter Series Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/674fe342968c7_LETTER_SERIES_FINAL_PDF_60_Que.pdf"}]}, {"name": "Letter Series Class Questions (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Letter Series Class Questions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/675005600bbc7_LETTER_SERIES_FINAL_PDF_50_Que_1.pdf"}]}, {"name": "Pair Formation Class Questions (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Pair Formation Class Questions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/674fe43a53ef5_PAIR_FORMATION_S_2024Piyush_sir.pdf"}]}, {"name": "Pair Formation (3)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Pair Formation | 4 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67504e1d16bcc_4decSSC_PRATHAMcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Pair Formation | 5 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67518d8ad34f1_5decSSC_PRATHAMcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Pair Formation | 6 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6753df463cbba_6decSSC_PRATHAMcompressed.pdf"}]}, {"name": "Dictionary , Word formation, Jumbling WBP Class Questions (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Dictionary ,  Word formation, Jumbling WBP Class Questions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6753dde21d936_DICTIONARY_WORD_FORMATION_JUMBLING_WBP_FINAL_STUDENT_PDF_2024.pdf"}]}, {"name": "Coding Decoding (10)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding Decoding | 9 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67579085922b5_9decSSC_PRATHAM35.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding Decoding | 10 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6758259f12e1f_10decSSC_PRATHAM35compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding Decoding | 11 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/675a808a05697_11decSSC_PRATHAM35compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding Decoding | 12 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/675bb6c1b8bf9_12decSSC_PRATHAM35compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding Decoding | 13 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/675fcdf66f097_13decSSC_PRATHAM35.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding Decoding | 16 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67610320e39d2_16decpratham.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding Decoding | 17 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67625cfebfc8e_17decSSC_PRATHAM35compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding Decoding | 18 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/676306e8aa69f_18decSSC_PRATHAM35compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding Decoding  Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6764d885e63b7_Ch_1Coding_Decoding_Student_Final.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Coding  Decoding PYQ Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6764d8b0cf85a_CODING_DECODING_PIYUSH_SIR_S.pdf"}]}, {"name": "Alphabet (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Alphabet PYQ Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6764d86788c55_Reasoning_Book_Chapter_wise_Alphabet_Test_CLASS02_Student.pdf"}]}, {"name": "Matrix (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Matrix | 19 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6764eb45bf413_19decSSC_PRATHAM35compressed.pdf"}]}, {"name": "Live Test (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Live Test | 20 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6768e80e241a7_20decSSC_PRATHAM35compressed.pdf"}]}, {"name": "Counting Figures Class Questions (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Counting Figures Class Questions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6768f30fc7084_COUNTING_FIGURES_FINAL_PDF_2024.pdf"}]}, {"name": "Counting Figures (6)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Counting Figures | 23 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/676a3d8012790_23Dec_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Counting Figures | 24 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/676aec01aff1f_24Dec_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Counting Figures | 25 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/676ce6f64fcf7_25Dec_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Counting Figures | 26 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/676e45b25c39c_26Dec_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Counting Figures | 27 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/676f943437679_27Dec_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Counting Figures | 30 Dec | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67738c8278cd6_30Dec_2829303135Prathamcompressed.pdf"}]}, {"name": "Counting of Figures (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Counting of Figures Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67762f3035c9b_COUNTING_OF_FIGURES_NEW_STUDENT_PDF.pdf"}]}, {"name": "Blood Relations (7)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relations | 2 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67775a940be72_2jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relations | 3 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6777d07855ab4_3jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relations | 6 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/677bc699ace52_6jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relations | 7 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/677e045104955_7jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relations | 08 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/677f63f397e1d_8jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relations | 14 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67874eba2b2f6_14jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relations (Class Que)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678a44ef3fafb_BLOOD_RELATION_Class_Que_Student_Final_File_2024.pdf"}]}, {"name": "Blood Relation (3)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relation Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678786cb29778_BLOOD_RELATION_STUDENT_FILE_FINAL_2025_NEW_FORMAT.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relation PYQ Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6787946a2b0c2_BLOOD_RELATION_PYQ_PRACTICE_SET_DONE.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Blood Relation | 14 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68256e5dac41b_14may_Non_Verbal_35384042_and_pratham_1234compressed.pdf"}]}, {"name": "Calendar (9)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar | 15 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6788971d13846_15jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar | 16 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6788ee5086efd_16jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar (Class Que)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678a45528a10f_Calendar_Pdf_CQ_Studdent_Final_2025.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar | 17 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678a461a42bf1_17jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar | 18 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678d3b6b1f03a_18jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar | 21 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/678f864736899_21jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar | 22 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6790da68ec539_22jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar | 23 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67934f471c881_23jan_2829303135Prathamcompressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67970f8e35026_Calendar_Practice_Set.pdf"}]}, {"name": "Inequalities (3)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Inequalities | 24 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6794731b1047f_20250124154505964compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Inequalities | 27 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6797669ca1f17_27jan_28293031353840Pratham123.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Inequalities | 28 Jan | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6798b12a47f0c_28janInequalities_28293031353840Pratham123compressed.pdf"}]}, {"name": "Calendar Class Questions (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Calendar Class Questions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67970f0b59f10_Calendar_Class_Questions.pdf"}]}, {"name": "Inequality (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Inequality Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6798b1b347fa8_Inequality_SSC_Mains_2025.pdf"}]}, {"name": "Inequality Class Questions (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Inequality Class Questions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/679ae7d5eba10_Inequality_Final_pdf_2025_Class_Que.pdf"}]}, {"name": "Number Series Class Questions (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Number Series Class Questions", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a5a46a29f9a_NUMBER_SERIES_Class_Que_FINAL_FILE_2025.pdf"}]}, {"name": "Series (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Series PYQ Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67a5a7dfd8b4e_NUMBER_SERIES_PYQ_Practice_Set_2025_done.pdf"}]}, {"name": "Teaching Dice, Cube and Cuboid (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Teaching Dice, Cube and Cuboid PYQs", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f7a08250ba7_Teaching_Dice_Cube_and_Cuboid_PYQs.pdf"}]}, {"name": "Police Dice, Cube and Cuboid (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Police Dice,  Cube and Cuboid PYQs", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f7a0f2c2d1a_Police_Dice_Cube_and_Cuboid_PYQs.pdf"}]}, {"name": "UPSC CSAT Dice, Cube and Cuboid (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) UPSC CSAT Dice, Cube and Cuboid PYQs", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f7a18e4460a_UPSC_CSAT_Dice_Cube_and_Cuboid_PYQs.pdf"}]}, {"name": "Venn Diagram Test (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Venn Diagram Test", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f8ad7104064_Venn_Diagram_Test.pdf"}]}, {"name": "Live Class Test (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Live Class Test  | 11 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/67f9ab74e4095_11APR_Live_Class_Test_Spl3538404245andPratham12345.pdf"}]}, {"name": "Direction And Distance Class Question (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Direction And Distance Class Question", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6808cd1615b62_Direction_And_Distance_Class_Question_1.pdf"}]}, {"name": "Direction And Distance (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Direction And Distance Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6808cd9720076_Direction_And_Distance_Practice_Set_1.pdf"}]}, {"name": "Direction and Distance (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Direction and Distance PYQ", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6808cdfb40cf7_Direction_and_Distance_PYQ_1.pdf"}]}, {"name": "Direction And Distance Test (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Direction And Distance Test", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6808ce5cf3d96_Direction_And_Distance_Test_1.pdf"}]}, {"name": "Sitting Arrangements (3)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Sitting Arrangements | 30 April | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6812f7157e877_30APR_Sitting_Arrangements_Spl3135andPratham1compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Sitting Arrangements | 1 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681474b41c834_1MAY_Sitting_Arrangements_Spl3135andPratham1compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Sitting Arrangements | 2 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6814b4b1191b5_2MAY_Sitting_Arrangements_PYQs_Practice_Spl3135andPratham1compressed.pdf"}]}, {"name": "Puzzle (6)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Puzzle | 5 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6818a7efd5b3d_5MAY_Puzzle_Spl3135andPratham1compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Puzzle | 6 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6819fde8b6844_6MAY_Puzzle_Spl3135andPratham1compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Puzzle | 7 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681c4dec3b1be_7may_Puzzle_3135_and_pratham_1compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Puzzle | 8 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681d96e49c040_8may_Puzzle_3135_and_pratham_1compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Puzzle | 9 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681edf7461d76_9may_Puzzle_3135_and_pratham_1compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Puzzle | 13 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68243f0e29f9a_13may_Puzzle_35_and_pratham_1compressed.pdf"}]}, {"name": "Seating Arrangement (2)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Seating Arrangement (Class Question)", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b0550a7d22_Seating_Arrangement_Class_Question.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Seating Arrangement Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b060f3d289_Seating_Arrangement_Practice_Set.pdf"}]}, {"name": "Seating Arrangement And Puzzle (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Seating Arrangement And Puzzle PYQ Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/681b07458484a_Seating_Arrangement_And_Puzzle_PYQ_Practice_Setcompressed.pdf"}]}, {"name": "Non Verbal Reasoning (2)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal Reasoning | 15 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6825d2aec635c_15may_Non_Verbal_35384042_and_pratham_1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal Reasoning | 16 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682725b49be97_16may_Non_Verbal_35384042_and_pratham_1234compressed.pdf"}]}, {"name": "Non Verbal (4)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal | 19 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682b1a8b2396c_19may_Non_Verbal_35384042_and_pratham_1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal | 20 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682d577948e84_20may_Non_Verbal_35384042_and_pratham_1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal | 22 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682ffbd4d87c7_22may_Non_Verbal_35384042_and_pratham_1234compressed.pdf"}, {"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal Practice Set", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682fff72ae6f3_Non_Verbal_Practice_Setcompressed.pdf"}]}, {"name": "Non Verbal Test (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal Test", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/682fff1b25145_Non_Verbal_Test_pdf.pdf"}]}, {"name": "Non Verbal PYQs [Part-01] (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal PYQs [Part-01]", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68300156f036d_Non_Verbal_PYQs_PART01.pdf"}]}, {"name": "Non Verbal PYQs [Part-02] (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal PYQs [Part-02]", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683001b731fd5_Non_Verbal_PYQs_PART02.pdf"}]}, {"name": "Non Verbal PYQs [Part-03] (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal PYQs [Part-03]", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683001faaafb9_Non_Verbal_PYQs_PART03.pdf"}]}, {"name": "Non Verbal PYQs [Part-04] (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Non Verbal PYQs [Part-04]", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68300263c2b27_Non_Verbal_PYQs_PART04.pdf"}]}, {"name": "Cause and Effect (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cause and Effect | 29 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68384a751ef12_29_may_spl3538_and_pratham12_Cause_and_Effectcompressed.pdf"}]}, {"name": "Course of Action (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Course of Action | 30 May | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683997f178d97_30_may_spl3538_and_pratham12_Course_of_Actioncompressed.pdf"}]}, {"name": "Statement and Argument (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Statement and Argument | 2 June | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683d913737361_2June_spl3538_and_pratham12_Argumentcompressed.pdf"}]}, {"name": "Assertion and Reason (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Assertion and Reason | 3 June | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/683ee3724d536_3June_spl3538_and_pratham12_Assertion_and_Reasoncompressed.pdf"}]}, {"name": "Decision making (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Decision making | 4 June | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68402c302d5e1_4June_spl3538_and_pratham12_Decision_Makingcompressed.pdf"}]}, {"name": "Analytical Reasoning (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Analytical Reasoning PYQ", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68402cd65fc04_Analytical_Reasoning_PYQ.pdf"}]}, {"name": "Analytical Reasoning Test (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Analytical Reasoning Test", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68402cfb6534c_Analytical_Reasoning_Test.pdf"}]}, {"name": "Assertion And Reason Class Question (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Assertion And Reason Class Question", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68402d570cd9f_Assertion_And_Reason_Class_Question.pdf"}]}, {"name": "Cause And Effect (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Cause And  Effect", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68402de04b370_Cause_And_Effect_pdf.pdf"}]}, {"name": "Course of Action Class Question (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Course of Action Class Question", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68402fd7ca7e9_Course_of_Action_Class_Question.pdf"}]}, {"name": "Statement Argument Class Question (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Statement Argument Class Question", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6840300a0fb21_Statement_Argument_Class_Question.pdf"}]}, {"name": "Statement Assumption And Conclusion Class Question (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Statement Assumption And Conclusion Class Question", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6840303326d1f_Statement_Assumption_And_Conclusion_Class_Question.pdf"}]}, {"name": "Data Sufficiency (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Data Sufficiency | 5 June | Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/68417d09b4751_5June_spl3538_and_pratham12_Data_Sufficiencycompressed.pdf"}]}, {"name": "Machine Input Class PNG (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Machine Input Class PNG", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/class-attachment/6841852cb39fe_682336ec16ae3ilovepdfmerged.pdf"}]}, {"name": "Puzzle Short (1)", "items": [{"title": "(Piyush Sir - Reasoning (VOD) - All Notes) Puzzle Short Notes", "type": "pdf", "url": "https://cwmediabkt99.crwilladmin.com/92013a99927c4842b0a70fbd6f064a95:crwilladmin/batch-notes/1778697000/6a056b55a34c0_69ea0e9a9fdc7_Puzzle_Short_Notes.pdf"}]}];
+  const gridEl = document.getElementById('notesGrid');
+  const searchInputEl = document.getElementById('notesSearchInput');
+  const clearBtnEl = document.getElementById('notesClearBtn');
+  const expandAllBtnEl = document.getElementById('notesExpandAllBtn');
+  const collapseAllBtnEl = document.getElementById('notesCollapseAllBtn');
+  const breadcrumbEl = document.getElementById('notesBreadcrumb');
+
+  const folders = rawData.map(function(folder, folderIndex){
+    const items = folder.items.map(function(item, itemIndex){
+      return {
+        id: folderIndex + '-' + itemIndex,
+        title: item.title,
+        lower: item.title.toLowerCase(),
+        type: item.type,
+        url: item.url,
+        drm: !!item.drm
+      };
+    });
+    return {
+      index: folderIndex, name: folder.name, lower: folder.name.toLowerCase(),
+      items: items, itemCount: items.length, open: false,
+      bodyEl: null, listEl: null, cardEl: null, built: false
+    };
+  });
+
+  function escapeHTML(str){ return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function highlight(text, query){
+    const safe = escapeHTML(text);
+    if (!query) return safe;
+    const lowerText = text.toLowerCase();
+    const idx = lowerText.indexOf(query);
+    if (idx === -1) return safe;
+    const before = escapeHTML(text.slice(0, idx));
+    const match = escapeHTML(text.slice(idx, idx + query.length));
+    const after = escapeHTML(text.slice(idx + query.length));
+    return before + '<mark>' + match + '</mark>' + after;
+  }
+
+  function createFileItemEl(item, query){
+    const el = document.createElement('div');
+    el.className = 'file-item';
+    const name = document.createElement('div');
+    name.className = 'file-name';
+    name.innerHTML = highlight(item.title, query);
+    name.title = item.title;
+    el.appendChild(name);
+    const actions = document.createElement('div');
+    actions.className = 'file-actions';
+    if (item.type === 'pdf'){
+      const a = document.createElement('a');
+      a.className = 'open-btn pdf';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.pdf + '<span>PDF</span>';
+      actions.appendChild(a);
+    } else if (item.type === 'youtube'){
+      const a = document.createElement('a');
+      a.className = 'open-btn yt';
+      a.href = item.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.yt + '<span>YouTube</span>';
+      actions.appendChild(a);
+    } else {
+      const btn = document.createElement('button');
+      btn.className = 'open-btn video';
+      btn.type = 'button';
+      btn.innerHTML = ICONS.video + '<span>Video</span>';
+      btn.addEventListener('click', function(){ window.openClassVideo(item.url, item.drm); });
+      actions.appendChild(btn);
+    }
+    el.appendChild(actions);
+    return el;
+  }
+
+  function populateFileList(folder, query, subsetItems){
+    const items = subsetItems || folder.items;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < items.length; i++){ frag.appendChild(createFileItemEl(items[i], query)); }
+    folder.listEl.innerHTML = '';
+    folder.listEl.appendChild(frag);
+  }
+
+  function setFolderOpen(folder, open, query, subsetItems){
+    folder.open = open;
+    folder.cardEl.classList.toggle('open', open);
+    if (open && !folder.built){ populateFileList(folder, query, subsetItems); folder.built = true; }
+    folder.bodyEl.style.maxHeight = open ? folder.bodyEl.scrollHeight + 400 + 'px' : '0px';
+  }
+
+  function toggleFolder(folder){ setFolderOpen(folder, !folder.open, searchInputEl.value.trim().toLowerCase()); }
+
+  function createFolderCardEl(folder){
+    const card = document.createElement('div');
+    card.className = 'folder-card';
+    folder.cardEl = card;
+    const header = document.createElement('div');
+    header.className = 'folder-header';
+    header.innerHTML =
+      '<div class="folder-icon-wrap">📁</div>' +
+      '<div class="folder-title-block"><h3 class="folder-title" data-title></h3></div>' +
+      '<div class="folder-meta"><span class="file-count-badge" data-count>' + folder.itemCount + ' items</span>' +
+      '<span class="chevron">' + ICONS.chevron + '</span></div>';
+    header.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+    header.addEventListener('click', function(){ toggleFolder(folder); });
+    card.appendChild(header);
+    const body = document.createElement('div');
+    body.className = 'folder-body';
+    folder.bodyEl = body;
+    const bodyInner = document.createElement('div');
+    bodyInner.className = 'folder-body-inner';
+    const list = document.createElement('div');
+    list.className = 'file-list';
+    folder.listEl = list;
+    bodyInner.appendChild(list);
+    body.appendChild(bodyInner);
+    card.appendChild(body);
+    return card;
+  }
+
+  function renderAllFolderShells(){
+    const frag = document.createDocumentFragment();
+    folders.forEach(function(folder){ frag.appendChild(createFolderCardEl(folder)); });
+    gridEl.appendChild(frag);
+  }
+  renderAllFolderShells();
+
+  function renderEmptyState(){
+    gridEl.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'empty-state';
+    el.innerHTML = ICONS.emptyBox + '<h3>No results found</h3><p>Try a different search term.</p>';
+    gridEl.appendChild(el);
+  }
+
+  let emptyShown = false;
+  function restoreFolderGrid(){
+    if (emptyShown){
+      gridEl.innerHTML = '';
+      folders.forEach(function(folder){ gridEl.appendChild(folder.cardEl); });
+      emptyShown = false;
+    }
+  }
+
+  function updateBreadcrumb(query){
+    if (!query){ breadcrumbEl.textContent = ''; return; }
+    let matches = 0;
+    folders.forEach(function(f){
+      if (f.lower.indexOf(query) !== -1) matches += f.itemCount;
+      else f.items.forEach(function(it){ if (it.lower.indexOf(query) !== -1) matches++; });
+    });
+    breadcrumbEl.textContent = matches + ' result' + (matches === 1 ? '' : 's') + ' for "' + query + '"';
+  }
+
+  function applySearch(rawQuery){
+    const query = rawQuery.trim().toLowerCase();
+    clearBtnEl.classList.toggle('show', query.length > 0);
+    updateBreadcrumb(query);
+    if (!query){
+      restoreFolderGrid();
+      folders.forEach(function(folder){
+        folder.cardEl.classList.remove('hidden-card');
+        folder.cardEl.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+        folder.cardEl.querySelector('[data-count]').textContent = folder.itemCount + ' items';
+        if (folder.built) populateFileList(folder, '');
+      });
+      return;
+    }
+    restoreFolderGrid();
+    let anyVisible = false;
+    folders.forEach(function(folder){
+      const nameMatches = folder.lower.indexOf(query) !== -1;
+      const matchedItems = folder.items.filter(function(it){ return it.lower.indexOf(query) !== -1; });
+      const show = nameMatches || matchedItems.length > 0;
+      folder.cardEl.classList.toggle('hidden-card', !show);
+      if (!show) return;
+      anyVisible = true;
+      folder.cardEl.querySelector('[data-title]').innerHTML = highlight(folder.name, query);
+      const subset = nameMatches && matchedItems.length === 0 ? folder.items : matchedItems;
+      folder.cardEl.querySelector('[data-count]').textContent = subset.length + ' items';
+      setFolderOpen(folder, true, query, subset);
+    });
+    if (!anyVisible){ renderEmptyState(); emptyShown = true; }
+  }
+
+  searchInputEl.addEventListener('input', function(){ applySearch(searchInputEl.value); });
+  clearBtnEl.addEventListener('click', function(){ searchInputEl.value = ''; applySearch(''); searchInputEl.focus(); });
+  expandAllBtnEl.addEventListener('click', function(){
+    folders.forEach(function(f){ if (!f.cardEl.classList.contains('hidden-card')) setFolderOpen(f, true, searchInputEl.value.trim().toLowerCase()); });
+  });
+  collapseAllBtnEl.addEventListener('click', function(){ folders.forEach(function(f){ setFolderOpen(f, false); }); });
+})();
+
+</script>
+
+
+<!-- JOIN CHANNEL FOOTER -->
+<div id="cm-join" style="text-align:center;padding:26px 16px 36px;">
+  <a href="https://whatsapp.com/channel/0029VbBqYvh2phHSBhGVGD08" target="_blank" rel="noopener" style="display:inline-block;padding:13px 26px;border-radius:999px;background:linear-gradient(180deg,#34d399,#10b981);color:#03261c;font:800 15px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 10px 24px -8px rgba(16,185,129,.7);">&#128172; 𝕁𝕠𝕚𝕟 𝕎𝕙𝕒𝕥𝕤𝕒𝕡𝕡 ℂ𝕙𝕒𝕟𝕟𝕖𝕝</a>
+</div>
+<script id="cm-theme-js">
+(function(){
+  function tidy(root){
+    var cards=(root||document).querySelectorAll('.folder-card');
+    cards.forEach(function(c){
+      var tb=c.querySelector('.folder-title-block'), badge=c.querySelector('.file-count-badge');
+      if(tb && badge && badge.parentNode!==tb){ tb.appendChild(badge); }
+      if(badge && /^1 items$/.test(badge.textContent.trim())) badge.textContent='1 item';
+      var t=c.querySelector('.folder-title');
+      if(t){
+        var n=t.lastChild;
+        if(n && n.nodeType===3){ var s=n.nodeValue.replace(/\s*\(\d+\)\s*$/,''); if(s!==n.nodeValue) n.nodeValue=s; }
+      }
+    });
+  }
+  function start(){
+    tidy();
+    ['classesGrid','notesGrid'].forEach(function(id){
+      var g=document.getElementById(id); if(!g) return;
+      new MutationObserver(function(){ tidy(g); }).observe(g,{childList:true,subtree:true});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+})();
+</script>
+</body>
+</html>
