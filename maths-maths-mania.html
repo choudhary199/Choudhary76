@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>🌸 Maths Mania · 100 Hour Batch</title>
+<meta content="Maths Mania 100 Hour — VOD, IMR 1.0, IMR 2.0 &amp; Art of Skipping, organized section-wise with videos and PDFs." name="description"/>
+<style>
+  :root{
+    --pink-50:#fff5f9;  --pink-100:#ffe6f0; --pink-200:#ffcfe3; --pink-300:#ffabce;
+    --pink-500:#ff6fa8; --pink-600:#f2508f; --pink-700:#c93b74;
+    --sky-50:#f0faff;   --sky-100:#e0f4ff;  --sky-200:#bfe8ff;  --sky-300:#8fd8ff;
+    --sky-500:#37b3f5;  --sky-600:#1c99dd;  --sky-700:#147ab3;
+    --brown-50:#fbf4ec; --brown-100:#f3e3cf; --brown-200:#e8cba6;
+    --brown-400:#c99a63; --brown-600:#a4703c; --brown-700:#7d5228;
+    --ink-900:#3a2a3a; --ink-700:#5d4b5c; --ink-500:#8c7789; --ink-300:#c6b3c3;
+    --surface:#fffdfd; --surface-soft:#fff5f9; --border:#ffdcec;
+    --pdf:var(--brown-600); --video:var(--sky-600);
+    --radius-lg:22px; --radius-md:16px; --radius-sm:10px;
+    --shadow-sm:0 1px 2px rgba(150,60,110,0.08), 0 1px 1px rgba(150,60,110,0.05);
+    --shadow-md:0 6px 20px rgba(150,60,110,0.10), 0 2px 6px rgba(150,60,110,0.06);
+    --shadow-lg:0 16px 40px rgba(120,60,110,0.16), 0 4px 12px rgba(120,60,110,0.07);
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  body{
+    margin:0; min-height:100vh;
+    font-family:'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color:var(--ink-900);
+    background:
+      radial-gradient(1100px 600px at 92% -10%, rgba(55,179,245,0.14), transparent 60%),
+      radial-gradient(900px 520px at -10% 8%, rgba(255,111,168,0.14), transparent 55%),
+      radial-gradient(700px 500px at 50% 100%, rgba(201,154,99,0.08), transparent 60%),
+      linear-gradient(180deg, #fff7fb 0%, #f2f9ff 100%);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  ::selection{ background:var(--pink-200); }
+  ::-webkit-scrollbar{ width:10px; height:10px; }
+  ::-webkit-scrollbar-track{ background:transparent; }
+  ::-webkit-scrollbar-thumb{ background:var(--pink-200); border-radius:20px; }
+  ::-webkit-scrollbar-thumb:hover{ background:var(--sky-300); }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 1rem 3rem; }
+
+  /* HEADER */
+  .site-header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(14px) saturate(160%); -webkit-backdrop-filter:blur(14px) saturate(160%);
+    background:rgba(255,247,251,0.86); border-bottom:1px solid rgba(255,111,168,0.16);
+  }
+  .header-inner{ max-width:1180px; margin:0 auto; padding:0.9rem 1rem 1rem; }
+  .brand-row{ display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.85rem; }
+  .brand{ display:flex; align-items:center; gap:0.65rem; min-width:0; }
+  .brand-icon{
+    flex:none; width:44px; height:44px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center; font-size:1.35rem;
+    background:linear-gradient(135deg, var(--pink-400,#ff9ec2), var(--sky-500));
+    box-shadow:0 6px 16px rgba(242,80,143,0.35); color:#fff; overflow:hidden;
+  }
+  .brand-icon img{ width:100%; height:100%; object-fit:cover; border-radius:14px; display:block; }
+  .brand-text{ min-width:0; }
+  .brand-text h1{ margin:0; font-size:1.15rem; font-weight:800; letter-spacing:-0.01em; color:var(--ink-900); line-height:1.25; overflow-wrap:anywhere; }
+  .brand-text p{ margin:0.1rem 0 0; font-size:0.78rem; color:var(--ink-500); font-weight:600; }
+
+  .stat-pills{ display:flex; gap:0.5rem; flex:none; }
+  .pill{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:0.3rem 0.7rem; border-radius:12px; background:var(--surface);
+    border:1px solid var(--border); box-shadow:var(--shadow-sm); min-width:56px;
+  }
+  .pill b{ font-size:0.95rem; color:var(--pink-700); line-height:1.1; }
+  .pill span{ font-size:0.62rem; color:var(--ink-500); font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+
+  .search-row{ display:flex; gap:0.55rem; align-items:center; }
+  .search-box{ position:relative; flex:1; min-width:0; }
+  .search-box svg.icon-search{ position:absolute; left:14px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:var(--ink-300); pointer-events:none; }
+  .search-box input{
+    width:100%; padding:0.75rem 2.6rem 0.75rem 2.6rem; font-size:0.95rem; font-weight:500;
+    border-radius:14px; border:1.5px solid var(--border); background:var(--surface);
+    color:var(--ink-900); box-shadow:var(--shadow-sm); outline:none;
+    transition:border-color .18s var(--ease), box-shadow .18s var(--ease);
+  }
+  .search-box input::placeholder{ color:var(--ink-300); font-weight:500; }
+  .search-box input:focus{ border-color:var(--pink-300); box-shadow:0 0 0 4px rgba(255,111,168,0.16), var(--shadow-sm); }
+  .clear-btn{
+    position:absolute; right:8px; top:50%; transform:translateY(-50%); width:26px; height:26px;
+    border-radius:50%; border:none; background:var(--pink-100); color:var(--pink-700);
+    display:none; align-items:center; justify-content:center; cursor:pointer; transition:background .15s;
+  }
+  .clear-btn svg{ width:14px; height:14px; }
+  .clear-btn.show{ display:flex; }
+  .clear-btn:hover{ background:var(--pink-200); }
+
+  .icon-btn-group{ display:flex; gap:0.4rem; flex:none; }
+  .icon-btn{
+    display:flex; align-items:center; justify-content:center; gap:0.35rem;
+    padding:0 0.8rem; height:44px; border-radius:14px; border:1.5px solid var(--border);
+    background:var(--surface); color:var(--ink-700); font-weight:700; font-size:0.82rem;
+    cursor:pointer; white-space:nowrap; box-shadow:var(--shadow-sm);
+    transition:transform .12s var(--ease), box-shadow .12s var(--ease), border-color .12s;
+  }
+  .icon-btn svg{ width:17px; height:17px; flex:none; }
+  .icon-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); border-color:var(--sky-300); }
+  .icon-btn:active{ transform:translateY(0); }
+
+  .breadcrumb{ display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap; font-size:0.8rem; color:var(--ink-500); font-weight:600; margin-top:0.65rem; min-height:1.1rem; }
+
+  /* FOLDER GRID (sections) */
+  .folder-grid{ display:flex; flex-direction:column; gap:0.85rem; margin-top:1.4rem; }
+  .folder-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm); overflow:hidden; animation:fadeIn .35s var(--ease) both;
+    transition:box-shadow .18s var(--ease), border-color .18s var(--ease);
+  }
+  .folder-card:hover{ box-shadow:var(--shadow-md); border-color:var(--pink-200); }
+  .folder-card.hidden-card{ display:none; }
+  .folder-header{
+    position:relative; display:flex; align-items:center; gap:0.8rem; padding:0.95rem 1.1rem;
+    cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+  }
+  .folder-header:hover{ background:var(--surface-soft); }
+  .folder-icon-wrap{
+    flex:none; width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(150deg, var(--pink-100), var(--sky-50)); font-size:1.3rem;
+    transition:transform .28s var(--ease), background .28s var(--ease);
+  }
+  .folder-card.open .folder-icon-wrap{ background:linear-gradient(150deg, var(--pink-500), var(--sky-600)); transform:scale(1.03); }
+  .folder-title-block{ flex:1; min-width:0; }
+  .folder-title{ margin:0; font-size:0.98rem; font-weight:700; color:var(--ink-900); letter-spacing:-0.01em; overflow-wrap:anywhere; word-break:break-word; }
+  .folder-title mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+  .folder-meta{ display:flex; align-items:center; gap:0.5rem; flex:none; }
+  .file-count-badge{ background:var(--pink-50); color:var(--pink-700); font-size:0.72rem; font-weight:800; padding:0.28rem 0.6rem; border-radius:20px; border:1px solid var(--pink-100); white-space:nowrap; }
+  .chevron{ flex:none; width:20px; height:20px; color:var(--ink-300); transition:transform .28s var(--ease), color .2s; }
+  .folder-card.open .chevron{ transform:rotate(180deg); color:var(--sky-600); }
+
+  .folder-body{ max-height:0; overflow:hidden; transition:max-height .32s var(--ease); }
+  .folder-body-inner{ padding:0 1.1rem 1.1rem; }
+  .file-list{ display:flex; flex-direction:column; gap:0.55rem; }
+  .file-item{
+    display:flex; align-items:center; gap:0.7rem; flex-wrap:wrap;
+    padding:0.7rem 0.85rem; border-radius:var(--radius-md); background:var(--surface-soft); border:1px solid var(--border);
+    animation:slideDown .28s var(--ease) both;
+    transition:transform .14s var(--ease), box-shadow .14s var(--ease), border-color .14s, background .14s;
+  }
+  .file-item:hover{ transform:translateY(-2px); box-shadow:var(--shadow-md); border-color:var(--pink-200); background:var(--surface); }
+  .file-name-block{ flex:1 1 200px; min-width:0; display:flex; flex-direction:column; gap:0.3rem; }
+  .file-name{ font-size:0.86rem; font-weight:600; color:var(--ink-700); overflow-wrap:anywhere; word-break:break-word; line-height:1.35; }
+  .file-name mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+  .quality-badge{
+    display:inline-flex; align-items:center; width:fit-content; font-size:0.62rem; font-weight:800;
+    letter-spacing:.03em; text-transform:uppercase; padding:0.16rem 0.5rem; border-radius:20px;
+    background:var(--brown-50); color:var(--brown-700); border:1px solid var(--brown-100);
+  }
+  .file-actions{ display:flex; gap:0.4rem; flex:none; flex-wrap:wrap; }
+  .open-btn{
+    display:flex; align-items:center; gap:0.3rem; padding:0.42rem 0.75rem; border-radius:10px;
+    background:var(--surface); border:1.5px solid var(--border); font-size:0.75rem; font-weight:800;
+    text-decoration:none; white-space:nowrap; transition:background .15s, color .15s, border-color .15s, transform .12s;
+  }
+  .open-btn svg{ width:13px; height:13px; }
+  .open-btn.video{ color:var(--sky-700); }
+  .open-btn.video:hover{ background:linear-gradient(135deg, var(--sky-500), var(--sky-600)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+  .open-btn.pdf{ color:var(--brown-600); }
+  .open-btn.pdf:hover{ background:linear-gradient(135deg, var(--brown-400), var(--brown-600)); color:#fff; border-color:transparent; transform:translateY(-1px); }
+  .no-pdf-note{ font-size:0.72rem; color:var(--ink-300); font-weight:700; font-style:italic; }
+
+  .empty-state{ display:flex; flex-direction:column; align-items:center; justify-content:center; padding:3.5rem 1rem; text-align:center; color:var(--ink-500); animation:fadeIn .3s var(--ease) both; }
+  .empty-state svg{ width:64px; height:64px; color:var(--pink-200); margin-bottom:1rem; }
+  .empty-state h3{ margin:0 0 0.35rem; color:var(--ink-900); font-size:1.05rem; }
+  .empty-state p{ margin:0; font-size:0.85rem; max-width:320px; }
+
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
+  @keyframes slideDown{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; } }
+
+  /* social row */
+  .social-row{ display:flex; gap:0.6rem; margin-top:0.85rem; }
+  .social-btn{
+    position:relative; overflow:hidden; flex:1; display:flex; align-items:center; justify-content:center; gap:0.45rem;
+    height:46px; border-radius:14px; border:none; cursor:pointer; color:#fff; font-weight:800; font-size:0.82rem;
+    text-decoration:none; box-shadow:var(--shadow-sm); transition:transform .12s var(--ease), box-shadow .12s var(--ease);
+  }
+  .social-btn svg{ width:18px; height:18px; flex:none; }
+  .social-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); }
+  .social-btn.wa{ background:linear-gradient(135deg,#25d366,#1aa851); }
+
+  /* floating WA button */
+  .wa-fab{
+    position:fixed; bottom:22px; right:22px; z-index:60; width:58px; height:58px; border-radius:50%;
+    background:linear-gradient(135deg,#25d366,#1aa851); color:#fff; display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow-lg); text-decoration:none; transition:transform .15s var(--ease);
+  }
+  .wa-fab:hover{ transform:translateY(-2px) scale(1.05); }
+  .wa-fab svg{ width:28px; height:28px; }
+
+  /* modal overlay */
+  .overlay{ position:fixed; inset:0; z-index:70; background:rgba(58,42,58,0.45); display:flex; align-items:center; justify-content:center; padding:1rem; backdrop-filter:blur(2px); }
+  .overlay.hidden{ display:none; }
+  .modal-card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); max-width:380px; width:100%; padding:1.6rem 1.4rem; text-align:center; animation:fadeIn .3s var(--ease) both; }
+  .modal-card .emoji{ font-size:2.6rem; margin-bottom:0.5rem; }
+  .modal-card h3{ margin:0 0 0.35rem; font-size:1.05rem; color:var(--ink-900); }
+  .modal-card p{ margin:0 0 1.1rem; font-size:0.85rem; color:var(--ink-500); line-height:1.5; }
+  .modal-card .dismiss{ margin-top:0.8rem; background:none; border:none; color:var(--ink-300); font-size:0.78rem; font-weight:700; text-decoration:underline; cursor:pointer; }
+
+  body.has-fab .wrap{ padding-bottom:2rem; }
+
+  @media (max-width:640px){
+    .brand-text h1{ font-size:1rem; }
+    .stat-pills{ display:none; }
+    .icon-btn .label{ display:none; }
+    .icon-btn{ padding:0 0.65rem; width:44px; }
+    .folder-title{ font-size:0.9rem; }
+    .file-name{ font-size:0.8rem; }
+    .wrap{ padding:0 0.65rem 2.5rem; }
+    .header-inner{ padding:0.75rem 0.65rem 0.85rem; }
+    .file-item{ flex-direction:column; align-items:stretch; }
+    .file-actions{ justify-content:flex-start; }
+  }
+</style>
+<style id="cm-theme">
+:root{
+  --blue-50:#fff5ee; --blue-100:#ffe9dc; --blue-200:#ffd2b8; --blue-300:#ffb68e;
+  --blue-500:#f2602a; --blue-600:#e0501c; --blue-700:#c23f10; --blue-900:#5a2208;
+  --ink-900:#1a1412; --ink-700:#3d322c; --ink-500:#6f625a; --ink-300:#a2958b;
+  --surface:#ffffff; --surface-soft:#faf5ef; --border:#eee4d8;
+  --shadow-sm:0 1px 2px rgba(60,30,10,.05); --shadow-md:0 8px 22px rgba(90,40,10,.09); --shadow-lg:0 16px 40px rgba(90,40,10,.14);
+}
+body{ background:radial-gradient(900px 500px at 100% -10%, rgba(242,96,42,.10), transparent 60%), linear-gradient(180deg,#f7f1ea 0%,#f3ebe2 100%) !important; }
+.site-header{ background:rgba(247,241,234,.9) !important; border-bottom:1px solid rgba(242,96,42,.14) !important; }
+.brand-icon{ padding:0 !important; overflow:hidden; background:#fff !important; box-shadow:0 6px 16px rgba(194,63,16,.30) !important; border:2px solid #fff; border-radius:50% !important; display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+.brand-icon img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:50%; }
+.folder-grid{ counter-reset:chap; gap:.8rem !important; }
+.folder-card{ counter-increment:chap; border-radius:26px !important; border:1px solid var(--border) !important; box-shadow:0 1px 0 rgba(255,255,255,.8) inset, var(--shadow-sm) !important; }
+.folder-card.open{ border-color:#e5d3c2 !important; box-shadow:var(--shadow-md) !important; }
+.folder-header{ gap:1rem !important; padding:1.15rem 1.2rem !important; }
+.folder-header:hover{ background:#fffaf5 !important; }
+.folder-icon-wrap{ width:auto !important; height:auto !important; min-width:2.6rem; background:none !important; border-radius:0 !important; transform:none !important; font-size:0 !important; justify-content:flex-start !important; box-shadow:none !important; }
+.folder-icon-wrap svg{ display:none !important; }
+.folder-icon-wrap::before{ content:counter(chap, decimal-leading-zero); font-family:Georgia,'Times New Roman',serif; font-style:italic; font-weight:400; font-size:2.1rem; line-height:1; color:#f2602a; letter-spacing:-.03em; }
+.folder-title{ font-size:1.12rem !important; font-weight:700 !important; line-height:1.25; }
+.folder-title-block .file-count-badge{ display:block; background:none !important; border:0 !important; padding:0 !important; margin-top:.3rem; font-size:.9rem !important; font-weight:500 !important; color:#9d9088 !important; }
+.folder-meta{ gap:0 !important; }
+.chevron{ box-sizing:content-box; width:20px !important; height:20px !important; padding:13px; border-radius:50%; background:#f2ece5; color:#3d322c !important; transition:all .25s var(--ease) !important; }
+.folder-header:hover .chevron, .folder-card.open .chevron{ background:#1a1412 !important; color:#fff !important; }
+.pill b{ color:#c23f10 !important; }
+</style>
+</head>
+<body class="has-fab">
+
+
+<header class="site-header">
+<div class="header-inner">
+<div class="brand-row">
+<div class="brand">
+<div class="brand-icon"><img src="channel-dp.jpg" alt="" onerror="this.parentNode.textContent='C'"></div>
+<div class="brand-text">
+<h1>Maths Mania · 100 Hour</h1>
+<p>VOD + IMR 1.0 + IMR 2.0 + Art of Skipping · Section-wise Library</p>
+</div>
+</div>
+<div class="stat-pills">
+<div class="pill"><b id="statFolders">0</b><span>Sections</span></div>
+<div class="pill"><b id="statFiles">0</b><span>Lectures</span></div>
+</div>
+</div>
+<div class="search-row">
+<div class="search-box">
+<svg class="icon-search" fill="none" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input autocomplete="off" id="searchInput" placeholder="Search sections or lectures…" type="text"/>
+<button aria-label="Clear search" class="clear-btn" id="clearBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-linecap="round" stroke-width="2.4"></path></svg>
+</button>
+</div>
+<div class="icon-btn-group">
+<button class="icon-btn" id="expandAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Expand</span>
+</button>
+<button class="icon-btn" id="collapseAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1"></path></svg>
+<span class="label">Collapse</span>
+</button>
+</div>
+</div>
+<div class="breadcrumb" id="breadcrumb"></div>
+</div>
+</header>
+<div class="wrap">
+<div class="folder-grid" id="folderGrid"></div>
+</div>
+<script>
+// ================================================================
+// 1. DATA
+// ================================================================
+const rawData = [{"key": "vod", "icon": "📹", "name": "Maths VOD Recorded", "items": [{"title": "Percentage", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c6e938ccc3549c91054dd", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6ea88ccc3549c91054df"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6eb48ccc3549c91054e1"}, {"label": "PS 2.0", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6ec38ccc3549c91054e3"}]}, {"title": "Profit & Loss", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c6ed08ccc3549c91054e5", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6edd8ccc3549c91054e7"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6ee88ccc3549c91054e9"}, {"label": "PS 2.0", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6ef88ccc3549c91054eb"}]}, {"title": "Discount", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c6f098ccc3549c91054ed", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6f218ccc3549c91054ef"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6f498ccc3549c91054f1"}, {"label": "PS 2.0", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6f6d8ccc3549c91054f3"}]}, {"title": "Simple Interest", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c6f838ccc3549c91054f5", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6fa58ccc3549c91054f7"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6fd58ccc3549c91054f9"}, {"label": "PS 2.0", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c6ffa8ccc3549c91054fb"}]}, {"title": "Compound Interest", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c700b8ccc3549c91054fd", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c70268ccc3549c91054ff"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c70448ccc3549c9105501"}, {"label": "PS 2.0", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c70588ccc3549c9105503"}]}, {"title": "SI Installment", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c70888ccc3549c9105505", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c709e8ccc3549c9105507"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c70c68ccc3549c9105509"}]}, {"title": "CI Installment", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c70f78ccc3549c910550b", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c710f8ccc3549c910550d"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c71258ccc3549c910550f"}, {"label": "PS 2.0", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c713f8ccc3549c9105511"}]}, {"title": "Ratio & Proportion", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c71588ccc3549c9105513", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c71c58ccc3549c9105515"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c71db8ccc3549c9105517"}]}, {"title": "Partnership", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c71f18ccc3549c9105519", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72018ccc3549c910551b"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c720d8ccc3549c910551d"}]}, {"title": "Average", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c72198ccc3549c910551f", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72268ccc3549c9105521"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72328ccc3549c9105523"}]}, {"title": "Time & Work", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c72408ccc3549c9105525", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c724a8ccc3549c9105527"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72578ccc3549c9105529"}]}, {"title": "Pipe & Cistern", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c72638ccc3549c910552b", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72708ccc3549c910552d"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c727a8ccc3549c910552f"}]}, {"title": "Work & Wage", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c72868ccc3549c9105531", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72918ccc3549c9105533"}]}, {"title": "Time, Speed & Distance", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c729d8ccc3549c9105535", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72ab8ccc3549c9105537"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72b58ccc3549c9105539"}]}, {"title": "Boat & Stream", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c72c18ccc3549c910553c", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72ce8ccc3549c910553e"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72db8ccc3549c9105540"}]}, {"title": "Race", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c72e98ccc3549c9105542", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c72f58ccc3549c9105544"}]}, {"title": "Mixture & Alligation", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c72ff8ccc3549c9105546", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c730c8ccc3549c9105548"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c73198ccc3549c910554a"}]}, {"title": "Number System", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c73268ccc3549c910554c", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c73348ccc3549c910554e"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c73428ccc3549c9105550"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c734c8ccc3549c9105552"}]}, {"title": "LCM & HCF", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c73798ccc3549c9105554", "pdfs": [{"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c73838ccc3549c9105556"}, {"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c738e8ccc3549c9105558"}, {"label": "PS 2.0", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c739a8ccc3549c910555a"}]}, {"title": "Trigonometry", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c74968ccc3549c910555e", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c74ad8ccc3549c9105562"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c74bb8ccc3549c9105564"}]}, {"title": "How to learn Trigonometry Table", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c74a28ccc3549c9105560", "pdfs": []}, {"title": "Height and Distance", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c74c78ccc3549c9105566", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c74d08ccc3549c9105568"}, {"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c74db8ccc3549c910556a"}]}, {"title": "Polynomials", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c74e68ccc3549c910556c", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c74f08ccc3549c910556e"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c74fa8ccc3549c9105570"}]}, {"title": "Sequence & Series", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c75088ccc3549c9105572", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c75158ccc3549c9105574"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c75208ccc3549c9105576"}]}, {"title": "Coordinate Geometry", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c752b8ccc3549c9105578", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c75378ccc3549c910557a"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c754c8ccc3549c910557c"}]}, {"title": "Mensuration 2D", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c75588ccc3549c910557e", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c75618ccc3549c9105580"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c75e68ccc3549c9105583"}]}, {"title": "Mensuration 3D", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c75f58ccc3549c9105585", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c76008ccc3549c9105587"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c760a8ccc3549c9105589"}]}, {"title": "Polygon", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c76148ccc3549c910558b", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c761e8ccc3549c910558d"}]}, {"title": "Simplification", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c762b8ccc3549c910558f", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c76378ccc3549c9105591"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c76448ccc3549c9105593"}]}, {"title": "Algebra Lecture - 1", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c764f8ccc3549c9105595", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c77708ccc3549c910559f"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c777c8ccc3549c91055a1"}]}, {"title": "Algebra Lecture - 2", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c765c8ccc3549c9105597", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c77708ccc3549c910559f"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c777c8ccc3549c91055a1"}]}, {"title": "Algebra Lecture - 3", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c77598ccc3549c910559b", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c77708ccc3549c910559f"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c777c8ccc3549c91055a1"}]}, {"title": "Algebra Lecture - 4", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c77678ccc3549c910559d", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c77708ccc3549c910559f"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c777c8ccc3549c91055a1"}]}, {"title": "Lines & Angles", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c77868ccc3549c91055a3", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c77928ccc3549c91055a5"}]}, {"title": "Quadrilaterals", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c781b8ccc3549c91055aa", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c78288ccc3549c91055ac"}]}, {"title": "Circles", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78358ccc3549c91055ae", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c78438ccc3549c91055b0"}]}, {"title": "Triangle", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c785b8ccc3549c91055b4", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c78698ccc3549c91055b6"}]}, {"title": "Data Interpretation", "quality": "VOD", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78738ccc3549c91055b8", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c787f8ccc3549c91055ba"}, {"label": "PS", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c788a8ccc3549c91055bc"}]}]}, {"key": "imr1", "icon": "⚡", "name": "Intense Maths Revision 1.0", "items": [{"title": "Lecture - 1", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78978ccc3549c91055be", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c79678ccc3549c91055e2"}]}, {"title": "Lecture - 2", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78a58ccc3549c91055c0", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c79728ccc3549c91055e4"}]}, {"title": "Lecture - 3", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78af8ccc3549c91055c2", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c79b78ccc3549c91055e6"}]}, {"title": "Lecture - 4", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78b98ccc3549c91055c4", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c79c18ccc3549c91055e8"}]}, {"title": "Lecture - 5", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78ce8ccc3549c91055c6", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c79cf8ccc3549c91055ea"}]}, {"title": "Lecture - 6", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78da8ccc3549c91055c8", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c79da8ccc3549c91055ec"}]}, {"title": "Lecture - 7", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78e78ccc3549c91055ca", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c79e58ccc3549c91055ee"}]}, {"title": "Lecture - 8", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78f08ccc3549c91055cc", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c79f08ccc3549c91055f0"}]}, {"title": "Lecture - 9", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c78fb8ccc3549c91055ce", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c79fa8ccc3549c91055f2"}]}, {"title": "Lecture - 10", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c79058ccc3549c91055d0", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7a038ccc3549c91055f4"}]}, {"title": "Lecture - 11", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c79118ccc3549c91055d2", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7a108ccc3549c91055f6"}]}, {"title": "Lecture - 12", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c791b8ccc3549c91055d4", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7a1c8ccc3549c91055f8"}]}, {"title": "Lecture - 13", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c79278ccc3549c91055d6", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7a2a8ccc3549c91055fa"}]}, {"title": "Lecture - 14", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c79338ccc3549c91055d8", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7a368ccc3549c91055fc"}]}, {"title": "Lecture - 15", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c793e8ccc3549c91055da", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7a3f8ccc3549c91055fe"}]}, {"title": "Lecture - 16", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c79498ccc3549c91055dc", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7a4c8ccc3549c9105600"}]}, {"title": "Lecture - 17", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c79538ccc3549c91055de", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7a578ccc3549c9105602"}]}, {"title": "Lecture - 18", "quality": "IMR 1.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c795c8ccc3549c91055e0", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7a638ccc3549c9105604"}]}]}, {"key": "imr2", "icon": "🔥", "name": "Intense Maths Revision 2.0", "items": [{"title": "Percentage IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7bf78ccc3549c910562f", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7c048ccc3549c9105631"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7c108ccc3549c9105633"}]}, {"title": "Profit Loss & Discount IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7c198ccc3549c9105635", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7c248ccc3549c9105637"}, {"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7c308ccc3549c9105639"}]}, {"title": "SI - CI IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7c3c8ccc3549c910563b", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7c468ccc3549c910563d"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7c558ccc3549c910563f"}]}, {"title": "Ratio, Proportion & Partnership IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7c5e8ccc3549c9105641", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7c6b8ccc3549c9105643"}, {"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7c778ccc3549c9105645"}]}, {"title": "Time & Work + Pipe & Cistern + Work & Wage IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7c818ccc3549c9105647", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7d058ccc3549c910564a"}, {"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7d878ccc3549c910564d"}]}, {"title": "Time, Speed & Distance IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7e848ccc3549c9105651", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7e8e8ccc3549c9105653"}]}, {"title": "Number System IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7e998ccc3549c9105655", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7ea68ccc3549c9105657"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7fa18ccc3549c910565b"}]}, {"title": "LCM & HCF IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7fad8ccc3549c910565d", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7fb88ccc3549c910565f"}]}, {"title": "Simplification IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7fc28ccc3549c9105661", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7fcb8ccc3549c9105663"}]}, {"title": "Trigonometry IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7fd78ccc3549c9105665", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c805d8ccc3549c9105668"}]}, {"title": "Coordinate Geometry IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c806a8ccc3549c910566a", "pdfs": [{"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c80758ccc3549c910566c"}, {"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c80f98ccc3549c910566f"}]}, {"title": "Mensuration IMR 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c81048ccc3549c9105671", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c810f8ccc3549c9105673"}, {"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c81198ccc3549c9105675"}]}, {"title": "Geometry 2.0", "quality": "IMR 2.0", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c81268ccc3549c9105677", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c81328ccc3549c9105679"}, {"label": "Notes", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c813f8ccc3549c910567b"}]}]}, {"key": "aos", "icon": "🎯", "name": "Art of Skipping", "items": [{"title": "SSC CGL PRE 2024 HARDEST SHIFT - 1", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7a708ccc3549c9105606", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7b0e8ccc3549c910561a"}]}, {"title": "SSC CGL PRE 2024 HARDEST SHIFT - 2", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7a7d8ccc3549c9105608", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7b198ccc3549c910561c"}]}, {"title": "SSC CGL PRE 2024 HARDEST SHIFT - 3", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7a8a8ccc3549c910560a", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7b228ccc3549c910561e"}]}, {"title": "SSC CGL PRE 2024 HARDEST SHIFT - 4", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7a958ccc3549c910560c", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7b2c8ccc3549c9105620"}]}, {"title": "SSC CGL PRE 2024 HARDEST SHIFT - 5", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7aa18ccc3549c910560e", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7b398ccc3549c9105622"}]}, {"title": "SSC CGL PRE 2023 HARDEST SHIFT - 1", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7aab8ccc3549c9105610", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7b468ccc3549c9105624"}]}, {"title": "SSC CGL PRE 2023 HARDEST SHIFT - 2", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7ae28ccc3549c9105612", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7bcb8ccc3549c9105627"}]}, {"title": "SSC CGL PRE 2023 HARDEST SHIFT - 3", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7aed8ccc3549c9105614", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7bd88ccc3549c9105629"}]}, {"title": "SSC CGL PRE 2023 HARDEST SHIFT - 4", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7afa8ccc3549c9105616", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7be28ccc3549c910562b"}]}, {"title": "SSC CGL PRE 2023 HARDEST SHIFT - 5", "quality": "AOS", "video": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a9c7b058ccc3549c9105618", "pdfs": [{"label": "Annotated", "url": "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a9c7bea8ccc3549c910562d"}]}]}];
+
+// ================================================================
+// 2. ICONS
+// ================================================================
+const ICONS = {
+  video: '<svg viewBox="0 0 24 24" fill="none"><path d="M15 10.5 19.2 8a1 1 0 0 1 1.5.87v6.26a1 1 0 0 1-1.5.87L15 13.5" stroke="none" fill="currentColor"/><rect x="3" y="6.5" width="12" height="11" rx="2.2" fill="currentColor"/></svg>',
+  pdf: '<svg viewBox="0 0 24 24" fill="none"><path d="M7 3.5h7.5L19 8v11.5A1.5 1.5 0 0 1 17.5 21h-10A1.5 1.5 0 0 1 6 19.5v-14A1.5 1.5 0 0 1 7 3.5Z" fill="currentColor"/></svg>',
+  chevron: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  external: '<svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  emptyBox: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 8l8-4 8 4-8 4-8-4Zm0 0v8l8 4m0-12v12m8-12v8l-8 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+// ================================================================
+// 3. DOM refs
+// ================================================================
+const folderGridEl = document.getElementById('folderGrid');
+const searchInputEl = document.getElementById('searchInput');
+const clearBtnEl = document.getElementById('clearBtn');
+const expandAllBtnEl = document.getElementById('expandAllBtn');
+const collapseAllBtnEl = document.getElementById('collapseAllBtn');
+const statFoldersEl = document.getElementById('statFolders');
+const statFilesEl = document.getElementById('statFiles');
+const breadcrumbEl = document.getElementById('breadcrumb');
+
+// ================================================================
+// 4. Prep data
+// ================================================================
+const folders = rawData.map(function(folder, folderIndex){
+  const items = folder.items.map(function(item, itemIndex){
+    return {
+      id: folderIndex + '-' + itemIndex,
+      title: item.title,
+      lower: item.title.toLowerCase(),
+      quality: item.quality || '',
+      video: item.video || null,
+      pdfs: item.pdfs || []
+    };
+  });
+  return {
+    index: folderIndex,
+    key: folder.key,
+    icon: folder.icon,
+    name: folder.name,
+    lower: folder.name.toLowerCase(),
+    items: items,
+    itemCount: items.length,
+    open: false,
+    bodyEl: null,
+    listEl: null,
+    cardEl: null,
+    built: false
+  };
+});
+
+const TOTAL_FOLDERS = folders.length;
+const TOTAL_FILES = folders.reduce(function(sum, f){ return sum + f.itemCount; }, 0);
+statFoldersEl.textContent = TOTAL_FOLDERS;
+statFilesEl.textContent = TOTAL_FILES;
+
+// ================================================================
+// 5. Helpers
+// ================================================================
+function escapeHTML(str){
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function highlight(text, query){
+  const safe = escapeHTML(text);
+  if (!query) return safe;
+  const lowerText = text.toLowerCase();
+  const idx = lowerText.indexOf(query);
+  if (idx === -1) return safe;
+  const before = escapeHTML(text.slice(0, idx));
+  const match = escapeHTML(text.slice(idx, idx + query.length));
+  const after = escapeHTML(text.slice(idx + query.length));
+  return before + '<mark>' + match + '</mark>' + after;
+}
+
+function createFileItemEl(item, query){
+  const el = document.createElement('div');
+  el.className = 'file-item';
+
+  const nameBlock = document.createElement('div');
+  nameBlock.className = 'file-name-block';
+
+  const name = document.createElement('div');
+  name.className = 'file-name';
+  name.innerHTML = highlight(item.title, query);
+  name.title = item.title;
+  nameBlock.appendChild(name);
+
+  if (item.quality){
+    const badge = document.createElement('span');
+    badge.className = 'quality-badge';
+    badge.textContent = item.quality;
+    nameBlock.appendChild(badge);
+  }
+  el.appendChild(nameBlock);
+
+  const actions = document.createElement('div');
+  actions.className = 'file-actions';
+  if (item.video){
+    const a = document.createElement('a');
+    a.className = 'open-btn video';
+    a.href = item.video; a.target = '_blank'; a.rel = 'noopener';
+    a.innerHTML = ICONS.video + '<span>Video</span>';
+    actions.appendChild(a);
+  }
+  if (item.pdfs && item.pdfs.length){
+    item.pdfs.forEach(function(p){
+      if (!p.url) return;
+      const a = document.createElement('a');
+      a.className = 'open-btn pdf';
+      a.href = p.url; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = ICONS.pdf + '<span>' + escapeHTML(p.label) + '</span>';
+      actions.appendChild(a);
+    });
+  }
+  el.appendChild(actions);
+  return el;
+}
+
+function populateFileList(folder, query, subsetItems){
+  const items = subsetItems || folder.items;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < items.length; i++){
+    frag.appendChild(createFileItemEl(items[i], query));
+  }
+  folder.listEl.innerHTML = '';
+  folder.listEl.appendChild(frag);
+}
+
+function setFolderOpen(folder, open, query, subsetItems){
+  folder.open = open;
+  folder.cardEl.classList.toggle('open', open);
+  if (open && !folder.built){
+    populateFileList(folder, query, subsetItems);
+    folder.built = true;
+  }
+  folder.bodyEl.style.maxHeight = open ? folder.bodyEl.scrollHeight + 400 + 'px' : '0px';
+}
+
+function toggleFolder(folder){
+  setFolderOpen(folder, !folder.open, searchInputEl.value.trim().toLowerCase());
+}
+
+function createFolderCardEl(folder){
+  const card = document.createElement('div');
+  card.className = 'folder-card';
+  folder.cardEl = card;
+
+  const header = document.createElement('div');
+  header.className = 'folder-header';
+  header.innerHTML =
+    '<div class="folder-icon-wrap">' + folder.icon + '</div>' +
+    '<div class="folder-title-block"><h3 class="folder-title" data-title></h3></div>' +
+    '<div class="folder-meta"><span class="file-count-badge" data-count>' + folder.itemCount + ' items</span>' +
+    '<span class="chevron">' + ICONS.chevron + '</span></div>';
+  header.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+  header.addEventListener('click', function(){ toggleFolder(folder); });
+  card.appendChild(header);
+
+  const body = document.createElement('div');
+  body.className = 'folder-body';
+  folder.bodyEl = body;
+  const bodyInner = document.createElement('div');
+  bodyInner.className = 'folder-body-inner';
+  const list = document.createElement('div');
+  list.className = 'file-list';
+  folder.listEl = list;
+  bodyInner.appendChild(list);
+  body.appendChild(bodyInner);
+  card.appendChild(body);
+
+  return card;
+}
+
+function renderAllFolderShells(){
+  const frag = document.createDocumentFragment();
+  folders.forEach(function(folder){
+    frag.appendChild(createFolderCardEl(folder));
+  });
+  folderGridEl.appendChild(frag);
+}
+renderAllFolderShells();
+
+// ================================================================
+// 6. Search
+// ================================================================
+function renderEmptyState(){
+  folderGridEl.innerHTML = '';
+  const el = document.createElement('div');
+  el.className = 'empty-state';
+  el.innerHTML = ICONS.emptyBox + '<h3>No results found</h3><p>Try a different search term.</p>';
+  folderGridEl.appendChild(el);
+}
+
+let emptyShown = false;
+function restoreFolderGrid(){
+  if (emptyShown){
+    folderGridEl.innerHTML = '';
+    folders.forEach(function(folder){ folderGridEl.appendChild(folder.cardEl); });
+    emptyShown = false;
+  }
+}
+
+function updateBreadcrumb(query){
+  if (!query){ breadcrumbEl.textContent = ''; return; }
+  let matches = 0;
+  folders.forEach(function(f){
+    if (f.lower.indexOf(query) !== -1) matches += f.itemCount;
+    else f.items.forEach(function(it){ if (it.lower.indexOf(query) !== -1) matches++; });
+  });
+  breadcrumbEl.textContent = matches + ' result' + (matches === 1 ? '' : 's') + ' for "' + query + '"';
+}
+
+function applySearch(rawQuery){
+  const query = rawQuery.trim().toLowerCase();
+  clearBtnEl.classList.toggle('show', query.length > 0);
+  updateBreadcrumb(query);
+
+  if (!query){
+    restoreFolderGrid();
+    folders.forEach(function(folder){
+      folder.cardEl.classList.remove('hidden-card');
+      folder.cardEl.querySelector('[data-title]').innerHTML = escapeHTML(folder.name);
+      folder.cardEl.querySelector('[data-count]').textContent = folder.itemCount + ' items';
+      if (folder.built) populateFileList(folder, '');
+    });
+    return;
+  }
+
+  restoreFolderGrid();
+  let anyVisible = false;
+  folders.forEach(function(folder){
+    const nameMatches = folder.lower.indexOf(query) !== -1;
+    const matchedItems = folder.items.filter(function(it){ return it.lower.indexOf(query) !== -1; });
+    const show = nameMatches || matchedItems.length > 0;
+    folder.cardEl.classList.toggle('hidden-card', !show);
+    if (!show) return;
+    anyVisible = true;
+    folder.cardEl.querySelector('[data-title]').innerHTML = highlight(folder.name, query);
+    const subset = nameMatches && matchedItems.length === 0 ? folder.items : matchedItems;
+    folder.cardEl.querySelector('[data-count]').textContent = subset.length + ' items';
+    setFolderOpen(folder, true, query, subset);
+  });
+
+  if (!anyVisible){ renderEmptyState(); emptyShown = true; }
+}
+
+function handleSearchInput(){ applySearch(searchInputEl.value); }
+searchInputEl.addEventListener('input', handleSearchInput);
+clearBtnEl.addEventListener('click', function(){
+  searchInputEl.value = '';
+  applySearch('');
+  searchInputEl.focus();
+});
+
+function expandAll(){
+  folders.forEach(function(f){ if (!f.cardEl.classList.contains('hidden-card')) setFolderOpen(f, true, searchInputEl.value.trim().toLowerCase()); });
+}
+function collapseAll(){
+  folders.forEach(function(f){ setFolderOpen(f, false); });
+}
+expandAllBtnEl.addEventListener('click', expandAll);
+collapseAllBtnEl.addEventListener('click', collapseAll);
+
+</script>
+
+<!-- BACK TO MATHS -->
+<a href="maths.html" id="mathsBackBtn" aria-label="Back to Maths" style="position:fixed;left:14px;bottom:18px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;background:linear-gradient(180deg,#f2602a,#d24a14);color:#fff;font:800 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 8px 22px -6px rgba(194,63,16,.6);-webkit-tap-highlight-color:transparent;">&#8592; Maths</a>
+<script>
+(function(){var b=document.getElementById('mathsBackBtn');if(!b)return;
+b.addEventListener('click',function(e){
+  try{ if(document.referrer && document.referrer.indexOf('maths')>-1 && history.length>1){ e.preventDefault(); history.back(); } }catch(_){}
+});})();
+</script>
+
+<div id="cm-join" style="text-align:center;padding:26px 16px 90px;">
+  <a href="https://whatsapp.com/channel/0029VbBqYvh2phHSBhGVGD08" target="_blank" rel="noopener" style="display:inline-block;padding:13px 26px;border-radius:999px;background:linear-gradient(180deg,#34d399,#10b981);color:#03261c;font:800 15px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 10px 24px -8px rgba(16,185,129,.7);">&#128172; 𝕁𝕠𝕚𝕟 𝕎𝕙𝕒𝕥𝕤𝕒𝕡𝕡 ℂ𝕙𝕒𝕟𝕟𝕖𝕝</a>
+</div>
+<script id="cm-theme-js">
+(function(){
+  function tidy(root){
+    (root||document).querySelectorAll('.folder-card').forEach(function(c){
+      var tb=c.querySelector('.folder-title-block'), badge=c.querySelector('.file-count-badge');
+      if(tb && badge && badge.parentNode!==tb){ tb.appendChild(badge); }
+      if(badge && /^1 (items|files)$/.test(badge.textContent.trim())) badge.textContent='1 item';
+      var t=c.querySelector('.folder-title');
+      if(t){ var n=t.lastChild; if(n && n.nodeType===3){ var s=n.nodeValue.replace(/\s*\(\d+\)\s*$/,''); if(s!==n.nodeValue) n.nodeValue=s; } }
+    });
+  }
+  function start(){
+    tidy();
+    document.querySelectorAll('.folder-grid').forEach(function(g){
+      new MutationObserver(function(){ tidy(g); }).observe(g,{childList:true,subtree:true});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+})();
+</script>
+
+<!-- UPDATES BELL -->
+<style id="cm-bell-css">
+.brand-row{ padding-right:56px !important; }
+#cmBell{ position:fixed; top:12px; right:12px; z-index:2147482000; width:46px; height:46px; border-radius:50%; border:1px solid #eee4d8; background:#fff; color:#c23f10; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 8px 20px -8px rgba(90,40,10,.45); -webkit-tap-highlight-color:transparent; }
+#cmBell svg{ width:22px; height:22px; }
+#cmBellDot{ position:absolute; top:-3px; right:-3px; min-width:18px; height:18px; padding:0 5px; border-radius:999px; background:#e0473e; color:#fff; font:800 10px/18px -apple-system,'Segoe UI',sans-serif; text-align:center; border:2px solid #fff; box-sizing:content-box; }
+#cmBellDot.hide{ display:none; }
+#cmInbox{ position:fixed; inset:0; z-index:2147483200; background:rgba(26,20,18,.55); display:none; align-items:flex-end; justify-content:center; padding:16px; }
+#cmInbox.open{ display:flex; }
+#cmInbox .card{ width:100%; max-width:480px; background:#fff; border-radius:26px; padding:18px 18px 20px; box-shadow:0 30px 60px -20px rgba(0,0,0,.5); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; color:#1a1412; }
+#cmInbox .hd{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+#cmInbox .hd h3{ font-size:17px; font-weight:800; }
+#cmInbox .x{ width:36px; height:36px; border-radius:50%; border:0; background:#f2ece5; font-size:20px; line-height:1; cursor:pointer; color:#3d322c; }
+#cmInbox .item{ border:1px solid #eee4d8; border-radius:18px; padding:14px; background:#faf5ef; }
+#cmInbox .tag{ display:inline-block; font:800 10px/1 ui-monospace,Menlo,monospace; letter-spacing:.12em; text-transform:uppercase; color:#c23f10; background:#ffe9dc; border:1px solid #ffd2b8; padding:5px 9px; border-radius:6px; }
+#cmInbox .msg{ margin-top:10px; font-size:14px; line-height:1.6; color:#3d322c; }
+#cmInbox .msg a{ color:#c23f10; font-weight:800; }
+</style>
+<button id="cmBell" type="button" aria-label="Updates">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M12 3a5 5 0 0 0-5 5v2.6c0 .6-.2 1.2-.6 1.7L5 14.2c-.8 1-.1 2.5 1.2 2.5h11.6c1.3 0 2-1.5 1.2-2.5l-1.4-1.9c-.4-.5-.6-1.1-.6-1.7V8a5 5 0 0 0-5-5Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg>
+  <span id="cmBellDot">1</span>
+</button>
+<div id="cmInbox" role="dialog" aria-label="Updates">
+  <div class="card">
+    <div class="hd"><h3>&#128276; Updates</h3><button class="x" id="cmInboxX" type="button" aria-label="Close">&times;</button></div>
+    <div class="item">
+      <span class="tag">WhatsApp</span>
+      <p class="msg">Updates ke liye hamara WhatsApp Channel join karo &mdash; <a href="https://whatsapp.com/channel/0029VbBqYvh2phHSBhGVGD08" target="_blank" rel="noopener">tap here to open</a>.</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='cm_updates_seen_v1', bell=document.getElementById('cmBell'), dot=document.getElementById('cmBellDot'), box=document.getElementById('cmInbox');
+  try{ if(localStorage.getItem(KEY)==='1') dot.classList.add('hide'); }catch(_){}
+  function open(){ box.classList.add('open'); dot.classList.add('hide'); try{ localStorage.setItem(KEY,'1'); }catch(_){} }
+  function close(){ box.classList.remove('open'); }
+  bell.addEventListener('click',open);
+  document.getElementById('cmInboxX').addEventListener('click',close);
+  box.addEventListener('click',function(e){ if(e.target===box) close(); });
+})();
+</script>
+</body>
+</html>

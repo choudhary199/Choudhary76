@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>📚 Aditya Ranjan VOD 3.0</title>
+<meta content="Fast, modern study resource explorer — videos and PDFs organized by chapter." name="description"/>
+<style>
+  /* ============================================================
+     DESIGN TOKENS
+     ============================================================ */
+  :root{
+    --blue-50:#eef6ff;
+    --blue-100:#e0f0ff;
+    --blue-200:#c7e3ff;
+    --blue-300:#a3d1ff;
+    --blue-500:#2f8bff;
+    --blue-600:#1f6fe0;
+    --blue-700:#1656b3;
+    --blue-900:#0d3a75;
+    --ink-900:#0b1a33;
+    --ink-700:#33455e;
+    --ink-500:#5b6b85;
+    --ink-300:#8a97ac;
+    --surface:#ffffff;
+    --surface-soft:#f4f9ff;
+    --border:#dfeaf7;
+    --pdf:#e0473e;
+    --video:#2f8bff;
+    --radius-lg:22px;
+    --radius-md:16px;
+    --radius-sm:10px;
+    --shadow-sm:0 1px 2px rgba(13,58,117,0.06), 0 1px 1px rgba(13,58,117,0.04);
+    --shadow-md:0 6px 20px rgba(20,70,140,0.08), 0 2px 6px rgba(20,70,140,0.05);
+    --shadow-lg:0 16px 40px rgba(20,70,140,0.14), 0 4px 12px rgba(20,70,140,0.06);
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color:var(--ink-900);
+    background:
+      radial-gradient(1100px 600px at 90% -10%, rgba(47,139,255,0.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(47,139,255,0.08), transparent 55%),
+      linear-gradient(180deg, #f2f8ff 0%, #eaf3fd 100%);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--blue-200); }
+
+  /* scrollbar (webkit) */
+  ::-webkit-scrollbar{ width:10px; height:10px; }
+  ::-webkit-scrollbar-track{ background:transparent; }
+  ::-webkit-scrollbar-thumb{ background:var(--blue-200); border-radius:20px; }
+  ::-webkit-scrollbar-thumb:hover{ background:var(--blue-300); }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 1rem 3rem; }
+
+  /* ============================================================
+     HEADER
+     ============================================================ */
+  .site-header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(14px) saturate(160%);
+    -webkit-backdrop-filter:blur(14px) saturate(160%);
+    background:rgba(244,249,255,0.82);
+    border-bottom:1px solid rgba(47,139,255,0.14);
+  }
+  .header-inner{
+    max-width:1180px; margin:0 auto; padding:0.9rem 1rem 1rem;
+  }
+  .brand-row{
+    display:flex; align-items:center; justify-content:space-between; gap:0.75rem;
+    margin-bottom:0.85rem;
+  }
+  .brand{
+    display:flex; align-items:center; gap:0.65rem; min-width:0;
+  }
+  .brand-icon{
+    flex:none;
+    width:42px; height:42px; border-radius:13px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, var(--blue-500), var(--blue-700));
+    box-shadow:0 6px 16px rgba(31,111,224,0.35);
+    color:#fff;
+  }
+  .brand-icon svg{ width:22px; height:22px; }
+  .brand-text{ min-width:0; }
+  .brand-text h1{
+    margin:0; font-size:1.15rem; font-weight:800; letter-spacing:-0.01em;
+    color:var(--ink-900);
+    white-space:normal; overflow-wrap:anywhere; line-height:1.25;
+  }
+  .brand-text p{
+    margin:0.1rem 0 0; font-size:0.78rem; color:var(--ink-500); font-weight:500;
+  }
+
+  .stat-pills{ display:flex; gap:0.5rem; flex:none; }
+  .pill{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:0.3rem 0.7rem; border-radius:12px;
+    background:var(--surface); border:1px solid var(--border);
+    box-shadow:var(--shadow-sm);
+    min-width:56px;
+  }
+  .pill b{ font-size:0.95rem; color:var(--blue-700); line-height:1.1; }
+  .pill span{ font-size:0.62rem; color:var(--ink-500); font-weight:600; text-transform:uppercase; letter-spacing:.04em; }
+
+  /* search */
+  .search-row{ display:flex; gap:0.55rem; align-items:center; }
+  .search-box{
+    position:relative; flex:1; min-width:0;
+  }
+  .search-box svg.icon-search{
+    position:absolute; left:14px; top:50%; transform:translateY(-50%);
+    width:18px; height:18px; color:var(--ink-300); pointer-events:none;
+  }
+  .search-box input{
+    width:100%; padding:0.75rem 2.6rem 0.75rem 2.6rem;
+    font-size:0.95rem; font-weight:500;
+    border-radius:14px; border:1.5px solid var(--border);
+    background:var(--surface); color:var(--ink-900);
+    box-shadow:var(--shadow-sm);
+    outline:none;
+    transition:border-color .18s var(--ease), box-shadow .18s var(--ease);
+  }
+  .search-box input::placeholder{ color:var(--ink-300); font-weight:500; }
+  .search-box input:focus{
+    border-color:var(--blue-500);
+    box-shadow:0 0 0 4px rgba(47,139,255,0.14), var(--shadow-sm);
+  }
+  .clear-btn{
+    position:absolute; right:8px; top:50%; transform:translateY(-50%);
+    width:26px; height:26px; border-radius:50%; border:none;
+    background:var(--blue-100); color:var(--blue-700);
+    display:none; align-items:center; justify-content:center; cursor:pointer;
+    transition:background .15s;
+  }
+  .clear-btn svg{ width:14px; height:14px; }
+  .clear-btn.show{ display:flex; }
+  .clear-btn:hover{ background:var(--blue-200); }
+
+  .icon-btn-group{ display:flex; gap:0.4rem; flex:none; }
+  .icon-btn{
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; gap:0.35rem;
+    padding:0 0.8rem; height:44px; border-radius:14px; border:1.5px solid var(--border);
+    background:var(--surface); color:var(--ink-700); font-weight:700; font-size:0.82rem;
+    cursor:pointer; white-space:nowrap;
+    box-shadow:var(--shadow-sm);
+    transition:transform .12s var(--ease), box-shadow .12s var(--ease), border-color .12s;
+  }
+  .icon-btn svg{ width:17px; height:17px; flex:none; }
+  .icon-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); border-color:var(--blue-300); }
+  .icon-btn:active{ transform:translateY(0); }
+  .icon-btn .label{ display:inline; }
+
+  /* breadcrumb */
+  .breadcrumb{
+    display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap;
+    font-size:0.8rem; color:var(--ink-500); font-weight:600;
+    margin-top:0.65rem; min-height:1.1rem;
+  }
+  .breadcrumb .crumb{ color:var(--blue-700); cursor:pointer; }
+  .breadcrumb .crumb:hover{ text-decoration:underline; }
+  .breadcrumb .sep{ color:var(--ink-300); }
+
+  /* ============================================================
+     FOLDER GRID
+     ============================================================ */
+  .folder-grid{
+    display:flex; flex-direction:column; gap:0.85rem;
+    margin-top:1.4rem;
+  }
+
+  .folder-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-sm);
+    overflow:hidden;
+    animation:fadeIn .35s var(--ease) both;
+    transition:box-shadow .18s var(--ease), border-color .18s var(--ease);
+  }
+  .folder-card:hover{ box-shadow:var(--shadow-md); border-color:var(--blue-200); }
+  .folder-card.hidden-card{ display:none; }
+
+  .folder-header{
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; gap:0.8rem;
+    padding:0.95rem 1.1rem;
+    cursor:pointer; user-select:none;
+    background:transparent;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .folder-header:hover{ background:var(--surface-soft); }
+
+  .folder-icon-wrap{
+    flex:none; width:44px; height:44px; border-radius:13px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(150deg, var(--blue-100), var(--blue-50));
+    color:var(--blue-600);
+    transition:transform .28s var(--ease), background .28s var(--ease), color .28s;
+  }
+  .folder-icon-wrap svg{ width:22px; height:22px; }
+  .folder-card.open .folder-icon-wrap{
+    background:linear-gradient(150deg, var(--blue-500), var(--blue-700));
+    color:#fff;
+    transform:scale(1.03);
+  }
+
+  .folder-title-block{ flex:1; min-width:0; }
+  .folder-title{
+    margin:0; font-size:0.98rem; font-weight:700; color:var(--ink-900);
+    letter-spacing:-0.01em;
+    white-space:normal; overflow-wrap:anywhere; word-break:break-word;
+  }
+  .folder-title mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+  .folder-sub{ margin:0.15rem 0 0; font-size:0.75rem; color:var(--ink-500); font-weight:600; }
+
+  .folder-meta{ display:flex; align-items:center; gap:0.5rem; flex:none; }
+  .file-count-badge{
+    background:var(--blue-50); color:var(--blue-700);
+    font-size:0.72rem; font-weight:800;
+    padding:0.28rem 0.6rem; border-radius:20px;
+    border:1px solid var(--blue-100);
+    white-space:nowrap;
+  }
+  .chevron{
+    flex:none; width:20px; height:20px; color:var(--ink-300);
+    transition:transform .28s var(--ease), color .2s;
+  }
+  .folder-card.open .chevron{ transform:rotate(180deg); color:var(--blue-600); }
+
+  /* collapsible body */
+  .folder-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .32s var(--ease);
+  }
+  .folder-body-inner{
+    padding:0 1.1rem 1rem;
+    border-top:1px solid var(--border);
+    margin-top:0;
+  }
+  .file-list{
+    display:flex; flex-direction:column; gap:0.45rem; padding-top:0.85rem;
+  }
+
+  /* ripple */
+  .ripple{
+    position:absolute; border-radius:50%; pointer-events:none;
+    background:rgba(47,139,255,0.28);
+    transform:scale(0); animation:rippleAnim .55s var(--ease);
+  }
+  @keyframes rippleAnim{ to{ transform:scale(1); opacity:0; } }
+
+  /* ============================================================
+     FILE CARD
+     ============================================================ */
+  .file-item{
+    display:flex; align-items:flex-start; gap:0.7rem;
+    padding:0.65rem 0.7rem;
+    border-radius:var(--radius-md);
+    background:var(--surface-soft);
+    border:1px solid transparent;
+    animation:slideDown .28s var(--ease) both;
+    transition:transform .14s var(--ease), box-shadow .14s var(--ease), border-color .14s, background .14s;
+  }
+  .file-item:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-md);
+    border-color:var(--blue-200);
+    background:var(--surface);
+  }
+  .file-icon{
+    flex:none; width:36px; height:36px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; margin-top:0.1rem;
+  }
+  .file-icon svg{ width:18px; height:18px; }
+  .file-icon.video{ background:linear-gradient(150deg,#4d9bff,#1f6fe0); }
+  .file-icon.pdf{ background:linear-gradient(150deg,#ff6b61,#e0473e); }
+  .file-icon.other{ background:linear-gradient(150deg,#9aa7bd,#6b788f); }
+
+  .file-name{
+    flex:1; min-width:0; font-size:0.86rem; font-weight:600; color:var(--ink-700);
+    white-space:normal; overflow-wrap:anywhere; word-break:break-word; line-height:1.35;
+  }
+  .file-name mark{ background:#ffe27a; color:inherit; border-radius:3px; padding:0 1px; }
+
+  .open-btn{
+    position:relative; overflow:hidden; flex:none;
+    display:flex; align-items:center; gap:0.3rem;
+    padding:0.42rem 0.75rem; border-radius:10px;
+    background:var(--surface); border:1.5px solid var(--border);
+    color:var(--blue-700); font-size:0.75rem; font-weight:800;
+    text-decoration:none; white-space:nowrap;
+    transition:background .15s, color .15s, border-color .15s, transform .12s;
+  }
+  .open-btn svg{ width:13px; height:13px; }
+  .open-btn:hover{
+    background:linear-gradient(135deg, var(--blue-500), var(--blue-600));
+    color:#fff; border-color:transparent; transform:translateY(-1px);
+  }
+  .open-btn:active{ transform:translateY(0); }
+
+  /* ============================================================
+     STATES: empty / no-results
+     ============================================================ */
+  .empty-state{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:3.5rem 1rem; text-align:center; color:var(--ink-500);
+    animation:fadeIn .3s var(--ease) both;
+  }
+  .empty-state svg{ width:64px; height:64px; color:var(--blue-200); margin-bottom:1rem; }
+  .empty-state h3{ margin:0 0 0.35rem; color:var(--ink-900); font-size:1.05rem; }
+  .empty-state p{ margin:0; font-size:0.85rem; max-width:320px; }
+
+  /* ============================================================
+     ANIMATIONS
+     ============================================================ */
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
+  @keyframes slideDown{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width:640px){
+    .brand-text h1{ font-size:1rem; }
+    .brand-text p{ display:none; }
+    .stat-pills{ display:none; }
+    .icon-btn .label{ display:none; }
+    .icon-btn{ padding:0 0.65rem; width:44px; }
+    .folder-title{ font-size:0.9rem; }
+    .file-name{ font-size:0.8rem; }
+    .wrap{ padding:0 0.65rem 2.5rem; }
+    .header-inner{ padding:0.75rem 0.65rem 0.85rem; }
+  }
+  /* ============================================================
+     SOCIAL ROW (WhatsApp / Telegram quick links)
+     ============================================================ */
+  .social-row{ display:flex; gap:0.6rem; margin-top:0.85rem; }
+  .social-btn{
+    position:relative; overflow:hidden;
+    flex:1; display:flex; align-items:center; justify-content:center; gap:0.45rem;
+    height:46px; border-radius:14px; border:none; cursor:pointer;
+    color:#fff; font-weight:800; font-size:0.82rem; text-decoration:none;
+    box-shadow:var(--shadow-sm);
+    transition:transform .12s var(--ease), box-shadow .12s var(--ease);
+  }
+  .social-btn svg{ width:18px; height:18px; flex:none; }
+  .social-btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-md); }
+  .social-btn:active{ transform:translateY(0); }
+  .social-btn.wa{ background:linear-gradient(135deg,#25d366,#1aa851); }
+  .social-btn.tg{ background:linear-gradient(135deg,#34b3f1,#1683c9); }
+
+  /* floating bell */
+  .bell-fab{
+    position:fixed; top:16px; right:16px; z-index:60;
+    width:48px; height:48px; border-radius:50%; border:1px solid var(--border);
+    background:var(--surface); color:var(--blue-600);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow-md); cursor:pointer;
+    transition:transform .15s var(--ease);
+  }
+  .bell-fab:hover{ transform:translateY(-2px) scale(1.04); }
+  .bell-fab svg{ width:21px; height:21px; }
+  .bell-dot{
+    position:absolute; top:5px; right:5px; min-width:16px; height:16px; padding:0 3px;
+    border-radius:50%; background:#e0473e; color:#fff; font-size:9px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; border:2px solid var(--surface);
+  }
+  .bell-dot.hidden{ display:none; }
+
+  /* modal overlays (popup + inbox) */
+  .overlay{
+    position:fixed; inset:0; z-index:70;
+    background:rgba(11,26,51,0.45);
+    display:flex; align-items:center; justify-content:center; padding:1rem;
+    backdrop-filter:blur(2px);
+  }
+  .overlay.hidden{ display:none; }
+  .modal-card{
+    background:var(--surface); border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-lg); max-width:380px; width:100%;
+    padding:1.6rem 1.4rem; text-align:center;
+    animation:fadeIn .3s var(--ease) both;
+  }
+  .modal-card .emoji{ font-size:2.6rem; margin-bottom:0.5rem; }
+  .modal-card h3{ margin:0 0 0.35rem; font-size:1.05rem; color:var(--ink-900); }
+  .modal-card p{ margin:0 0 1.1rem; font-size:0.85rem; color:var(--ink-500); line-height:1.5; }
+  .modal-card .dismiss{
+    margin-top:0.8rem; background:none; border:none; color:var(--ink-300);
+    font-size:0.78rem; font-weight:700; text-decoration:underline; cursor:pointer;
+  }
+
+  .inbox-overlay{ align-items:flex-start; overflow-y:auto; }
+  .inbox-card{
+    max-width:460px; width:100%; text-align:left; padding:0;
+    margin-top:2.2rem; margin-bottom:2.2rem;
+  }
+  .inbox-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.1rem 1.3rem; border-bottom:1px solid var(--border);
+    background:var(--blue-50); border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .inbox-head h3{ margin:0; font-size:0.85rem; font-weight:800; color:var(--blue-700); text-transform:uppercase; letter-spacing:0.04em; }
+  .inbox-close{ background:none; border:none; font-size:1.6rem; line-height:1; color:var(--ink-300); cursor:pointer; }
+  .inbox-body{ padding:1rem 1.3rem 1.3rem; display:flex; flex-direction:column; gap:0.8rem; }
+  .inbox-item{
+    border-left:3px solid var(--blue-500); background:var(--surface-soft);
+    border-radius:12px; padding:0.85rem 1rem;
+  }
+  .inbox-item .row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem; gap:0.5rem; }
+  .inbox-item .tag{ font-size:0.65rem; font-weight:800; color:var(--blue-700); background:var(--blue-100); padding:0.15rem 0.5rem; border-radius:8px; text-transform:uppercase; letter-spacing:0.03em; }
+  .inbox-item .date{ font-size:0.68rem; color:var(--ink-300); font-weight:700; white-space:nowrap; }
+  .inbox-item .msg{ font-size:0.83rem; color:var(--ink-700); line-height:1.5; }
+  .inbox-item .msg a{ color:var(--blue-600); font-weight:700; }
+  .inbox-empty{ text-align:center; color:var(--ink-300); font-size:0.85rem; padding:2.5rem 1rem; }
+
+  /* footer */
+  .site-footer{
+    position:fixed; left:0; bottom:0; width:100%; z-index:40;
+    background:rgba(255,255,255,0.92); backdrop-filter:blur(14px);
+    border-top:1px solid var(--border);
+    padding:0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom));
+  }
+  .footer-inner{
+    max-width:1180px; margin:0 auto;
+    display:flex; align-items:center; justify-content:center; gap:2.2rem;
+  }
+  .footer-icon{
+    display:flex; align-items:center; justify-content:center;
+    width:44px; height:44px; border-radius:50%;
+    color:#fff; transition:transform .15s var(--ease);
+  }
+  .footer-icon svg{ width:22px; height:22px; }
+  .footer-icon.wa{ background:linear-gradient(135deg,#25d366,#1aa851); }
+  .footer-icon.tg{ background:linear-gradient(135deg,#34b3f1,#1683c9); }
+  .footer-icon:hover{ transform:translateY(-2px) scale(1.06); }
+
+  body.has-footer .wrap{ padding-bottom:6.5rem; }
+
+  @media (min-width:641px) and (max-width:900px){
+    .brand-text p{ display:none; }
+  }
+</style>
+<style id="cm-theme">
+:root{
+  --blue-50:#fff5ee; --blue-100:#ffe9dc; --blue-200:#ffd2b8; --blue-300:#ffb68e;
+  --blue-500:#f2602a; --blue-600:#e0501c; --blue-700:#c23f10; --blue-900:#5a2208;
+  --ink-900:#1a1412; --ink-700:#3d322c; --ink-500:#6f625a; --ink-300:#a2958b;
+  --surface:#ffffff; --surface-soft:#faf5ef; --border:#eee4d8;
+  --shadow-sm:0 1px 2px rgba(60,30,10,.05); --shadow-md:0 8px 22px rgba(90,40,10,.09); --shadow-lg:0 16px 40px rgba(90,40,10,.14);
+}
+body{ background:radial-gradient(900px 500px at 100% -10%, rgba(242,96,42,.10), transparent 60%), linear-gradient(180deg,#f7f1ea 0%,#f3ebe2 100%) !important; }
+.site-header{ background:rgba(247,241,234,.9) !important; border-bottom:1px solid rgba(242,96,42,.14) !important; }
+.brand-icon{ padding:0 !important; overflow:hidden; background:#fff !important; box-shadow:0 6px 16px rgba(194,63,16,.30) !important; border:2px solid #fff; border-radius:50% !important; display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+.brand-icon img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:50%; }
+.folder-grid{ counter-reset:chap; gap:.8rem !important; }
+.folder-card{ counter-increment:chap; border-radius:26px !important; border:1px solid var(--border) !important; box-shadow:0 1px 0 rgba(255,255,255,.8) inset, var(--shadow-sm) !important; }
+.folder-card.open{ border-color:#e5d3c2 !important; box-shadow:var(--shadow-md) !important; }
+.folder-header{ gap:1rem !important; padding:1.15rem 1.2rem !important; }
+.folder-header:hover{ background:#fffaf5 !important; }
+.folder-icon-wrap{ width:auto !important; height:auto !important; min-width:2.6rem; background:none !important; border-radius:0 !important; transform:none !important; font-size:0 !important; justify-content:flex-start !important; box-shadow:none !important; }
+.folder-icon-wrap svg{ display:none !important; }
+.folder-icon-wrap::before{ content:counter(chap, decimal-leading-zero); font-family:Georgia,'Times New Roman',serif; font-style:italic; font-weight:400; font-size:2.1rem; line-height:1; color:#f2602a; letter-spacing:-.03em; }
+.folder-title{ font-size:1.12rem !important; font-weight:700 !important; line-height:1.25; }
+.folder-title-block .file-count-badge{ display:block; background:none !important; border:0 !important; padding:0 !important; margin-top:.3rem; font-size:.9rem !important; font-weight:500 !important; color:#9d9088 !important; }
+.folder-meta{ gap:0 !important; }
+.chevron{ box-sizing:content-box; width:20px !important; height:20px !important; padding:13px; border-radius:50%; background:#f2ece5; color:#3d322c !important; transition:all .25s var(--ease) !important; }
+.folder-header:hover .chevron, .folder-card.open .chevron{ background:#1a1412 !important; color:#fff !important; }
+.pill b{ color:#c23f10 !important; }
+.social-btn.tg{background:linear-gradient(180deg,#34d399,#10b981) !important;color:#03261c !important;box-shadow:0 8px 18px -8px rgba(16,185,129,.7) !important}
+.footer-icon.tg{background:linear-gradient(180deg,#34d399,#10b981) !important;color:#03261c !important}
+</style>
+</head>
+<body class="has-footer">
+<!-- Floating notification bell -->
+<button aria-label="Updates" class="bell-fab" id="bellFab" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v2.6c0 .6-.2 1.2-.6 1.7L5 14.2c-.8 1-.1 2.5 1.2 2.5h11.6c1.3 0 2-1.5 1.2-2.5l-1.4-1.9c-.4-.5-.6-1.1-.6-1.7V8a5 5 0 0 0-5-5Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"></path><path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path></svg>
+<span class="bell-dot hidden" id="bellDot">1</span>
+</button>
+
+<!-- Notification inbox modal -->
+<div class="overlay inbox-overlay hidden" id="inboxModal">
+<div class="modal-card inbox-card">
+<div class="inbox-head">
+<h3>🔔 Updates</h3>
+<button aria-label="Close" class="inbox-close" id="inboxCloseBtn" type="button">×</button>
+</div>
+<div class="inbox-body" id="inboxBody"></div>
+</div>
+</div>
+<header class="site-header">
+<div class="header-inner">
+<div class="brand-row">
+<div class="brand">
+<div class="brand-icon"><img src="channel-dp.jpg" alt="" onerror="this.parentNode.textContent='C'"></div>
+<div class="brand-text">
+<h1>𝑨𝒅𝒊𝒕𝒚𝒂 𝑹𝒂𝒏𝒋𝒂𝒏 𝑽𝑶𝑫 𝟑.𝟎</h1>
+<p>Chapter-wise videos &amp; PDFs</p>
+</div>
+</div>
+<div class="stat-pills">
+<div class="pill"><b id="statFolders">0</b><span>Folders</span></div>
+<div class="pill"><b id="statFiles">0</b><span>Files</span></div>
+</div>
+</div>
+<div class="social-row">
+<a class="social-btn tg" href="#" id="tgTopBtn" rel="noopener" target="_blank">&#128172; WhatsApp Channel
+      </a>
+</div>
+<div class="search-row" style="margin-top:0.85rem;">
+<div class="search-box">
+<svg class="icon-search" fill="none" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input aria-label="Search resources" autocomplete="off" id="searchInput" placeholder="Search chapters or files…" type="text"/>
+<button aria-label="Clear search" class="clear-btn" id="clearBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-linecap="round" stroke-width="2.4"></path></svg>
+</button>
+</div>
+<div class="icon-btn-group">
+<button class="icon-btn" id="expandAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg>
+<span class="label">Expand</span>
+</button>
+<button class="icon-btn" id="collapseAllBtn" type="button">
+<svg fill="none" viewbox="0 0 24 24"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg>
+<span class="label">Collapse</span>
+</button>
+</div>
+</div>
+<div class="breadcrumb" id="breadcrumb"></div>
+</div>
+</header>
+<main class="wrap">
+<div class="folder-grid" id="folderGrid"></div>
+</main>
+<footer class="site-footer">
+<div class="footer-inner">
+<a aria-label="WhatsApp" class="footer-icon tg" href="#" id="tgFooterBtn" rel="noopener" target="_blank">&#128172;
+</a>
+</div>
+</footer>
+<script>
+(function(){
+'use strict';
+
+// ================================================================
+// 0. SOCIAL LINKS – same channel/bot used across the resource sites.
+//    Replace these two lines if you want to point to a different
+//    Telegram bot/group.
+// ================================================================
+const TG_LINK = "https://whatsapp.com/channel/0029VbBqYvh2phHSBhGVGD08";
+
+// ================================================================
+// 1. DATA – kept exactly as originally supplied. Do not modify.
+// ================================================================
+    const rawData = [
+      { chapter: "How to score 50-50 & 90-90 in Maths", files: [
+          { title: "How to score 50-50 & 90-90 in Maths.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0c1c608de30a68032a95" }
+        ] },
+      { chapter: "Monty Hall Problem", files: [
+          { title: "Monty Hall Problem.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0c25608de30a68032a97" },
+          { title: "MONTY HALL PROBLEMS (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0c34608de30a68032a99" }
+        ] },
+      { chapter: "BINARY NO SYSTEM", files: [
+          { title: "BINARY NO SYSTEM.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0c3e608de30a68032a9b" },
+          { title: "BINARY SYSTEM (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0c4c608de30a68032a9d" }
+        ] },
+      { chapter: "Digital Sum", files: [
+          { title: "Digital Sum (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0c59608de30a68032a9f" },
+          { title: "Digital Sum Class 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0c63608de30a68032aa1" },
+          { title: "Digital Sum Class 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0c7a608de30a68032aa5" }
+        ] },
+      { chapter: "Calculation Square & Square Root", files: [
+          { title: "Calculation Square Part 01.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0c70608de30a68032aa3" },
+          { title: "Calculation Square Part 02.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0c83608de30a68032aa7" },
+          { title: "Calculation Square 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0ca7608de30a68032aad" },
+          { title: "Calculation Square Root 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0c90608de30a68032aa9" },
+          { title: "Calculation Square Root 03.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0c9c608de30a68032aab" },
+          { title: "Calculation Squre Root 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0cbc608de30a68032ab1" }
+        ] },
+      { chapter: "Calculation Cube", files: [
+          { title: "Calculation Cube 04.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0cb1608de30a68032aaf" },
+          { title: "Calculation Cube 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0cce608de30a68032ab5" }
+        ] },
+      { chapter: "Calculation Cube Root", files: [
+          { title: "Calculation Cube Root 05.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0cc5608de30a68032ab3" },
+          { title: "Calculation Cube Root 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0ce5608de30a68032ab9" }
+        ] },
+      { chapter: "Calculation Multiplication Tricks", files: [
+          { title: "Calculation Multiplication Tricks 06.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0cda608de30a68032ab7" },
+          { title: "Calculation Multiplication 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0cf1608de30a68032abb" }
+        ] },
+      { chapter: "Percentage", files: [
+          { title: "Percentage (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0cfe608de30a68032abd" },
+          { title: "Percentage 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d07608de30a68032abf" },
+          { title: "Percentage (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0d0f608de30a68032ac1" },
+          { title: "Percentage 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d19608de30a68032ac3" },
+          { title: "Percentage (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0d22608de30a68032ac5" },
+          { title: "Percentage 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d2d608de30a68032ac7" },
+          { title: "Percentage 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d3a608de30a68032ac9" },
+          { title: "Percentage 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d47608de30a68032acb" },
+          { title: "Percentage 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d52608de30a68032acd" },
+          { title: "Percentage 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d5f608de30a68032acf" },
+          { title: "Percentage 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d6a608de30a68032ad1" },
+          { title: "Percentage 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d75608de30a68032ad3" },
+          { title: "Percentage 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d7e608de30a68032ad5" },
+          { title: "Percentage 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d88608de30a68032ad7" },
+          { title: "Percentage 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d91608de30a68032ad9" },
+          { title: "Percentage 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0d9e608de30a68032adb" },
+          { title: "Percentage 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0da7608de30a68032add" },
+          { title: "Percentage 15.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0db4608de30a68032adf" },
+          { title: "Percentage 16.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0dc1608de30a68032ae1" },
+          { title: "Percentage 17.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0dcc608de30a68032ae3" },
+          { title: "Percentage 18.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0dd5608de30a68032ae5" },
+          { title: "Percentage 19.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0de2608de30a68032ae7" }
+        ] },
+      { chapter: "Profit & Loss", files: [
+          { title: "Profit & Loss (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0deb608de30a68032ae9" },
+          { title: "Profit & Loss 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0df5608de30a68032aeb" },
+          { title: "Profit & Loss (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0dfe608de30a68032aed" },
+          { title: "Profit & Loss 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e07608de30a68032aef" },
+          { title: "Profit and Loss (Pro Level sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0e12608de30a68032af1" },
+          { title: "Profit & Loss 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e1f608de30a68032af3" },
+          { title: "Profit & Loss 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e2c608de30a68032af5" },
+          { title: "Profit & Loss 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e38608de30a68032af7" },
+          { title: "Profit & Loss 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e42608de30a68032af9" },
+          { title: "Profit & Loss 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e4f608de30a68032afb" },
+          { title: "Profit & Loss 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e5a608de30a68032afd" },
+          { title: "Profit & Loss 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e68608de30a68032aff" },
+          { title: "Profit & Loss 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e71608de30a68032b01" },
+          { title: "Profit & Loss 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e7a608de30a68032b03" },
+          { title: "Profit & Loss 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0e9c608de30a68032b05" },
+          { title: "Profit & Loss 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0ea9608de30a68032b07" },
+          { title: "Profit & Loss 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0eb4608de30a68032b09" }
+        ] },
+      { chapter: "Discount", files: [
+          { title: "Discount (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0ec1608de30a68032b0b" },
+          { title: "Discount 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0eca608de30a68032b0d" },
+          { title: "Discount (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0ed7608de30a68032b0f" },
+          { title: "Discount 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0ee2608de30a68032b11" },
+          { title: "Discount (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0eee608de30a68032b13" },
+          { title: "Discount 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0efa608de30a68032b15" },
+          { title: "Discount 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f03608de30a68032b17" },
+          { title: "Discount 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f0c608de30a68032b19" },
+          { title: "Discount 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f17608de30a68032b1b" },
+          { title: "Discount 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f24608de30a68032b1d" },
+          { title: "Discount 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f2e608de30a68032b1f" },
+          { title: "Discount 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f38608de30a68032b21" }
+        ] },
+      { chapter: "Simple Interest", files: [
+          { title: "Simple Interest (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0f45608de30a68032b23" },
+          { title: "Simple Interest 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f51608de30a68032b25" },
+          { title: "Simple Interest (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0f5d608de30a68032b27" },
+          { title: "Simple Interest 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f69608de30a68032b29" },
+          { title: "Simple Interest (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0f72608de30a68032b2b" },
+          { title: "Simple Interest 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f7f608de30a68032b2d" },
+          { title: "S I Installment (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0f88608de30a68032b2f" },
+          { title: "Simple Interest 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0f95608de30a68032b31" },
+          { title: "S I (Installment) Class Notes.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0fa1608de30a68032b33" },
+          { title: "Simple Interest 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0fad608de30a68032b35" },
+          { title: "S I Installment (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0fbb608de30a68032b37" },
+          { title: "Simple Interest 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0fc6608de30a68032b39" },
+          { title: "SSC MATHS 2ND SIMPLE INTEREST English (TYPEWISE).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0fd0608de30a68032b3b" },
+          { title: "Simple Interest 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0fda608de30a68032b3d" },
+          { title: "SSC MATHS 2ND SIMPLE INTEREST Hindi (TYPEWISE).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f0fe8608de30a68032b3f" },
+          { title: "Simple Interest 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0ff3608de30a68032b41" },
+          { title: "Simple Interest 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f0ffd608de30a68032b43" },
+          { title: "Simple Interest 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1007608de30a68032b45" },
+          { title: "Simple Interest 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1013608de30a68032b47" },
+          { title: "Simple Interest 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1023608de30a68032b49" },
+          { title: "Simple Interest 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f102b608de30a68032b4b" },
+          { title: "Simple Interest 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1036608de30a68032b4d" },
+          { title: "S I (Installment) 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1040608de30a68032b4f" },
+          { title: "S I (Installment) 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f104e608de30a68032b51" },
+          { title: "S I (Installment) 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1059608de30a68032b53" },
+          { title: "S I (Installment) 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1062608de30a68032b55" }
+        ] },
+      { chapter: "Compound Interest", files: [
+          { title: "Compound Interest (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1070608de30a68032b57" },
+          { title: "Compound Interest 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1078608de30a68032b59" },
+          { title: "Compound Interest (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1085608de30a68032b5b" },
+          { title: "Compound Interest 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f108f608de30a68032b5d" },
+          { title: "Compound Interest (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1099608de30a68032b5f" },
+          { title: "Compound Interest 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f10a5608de30a68032b61" },
+          { title: "C I Installment (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f10af608de30a68032b63" },
+          { title: "Compound interest 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f10bb608de30a68032b65" },
+          { title: "C I Installment (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f10c5608de30a68032b67" },
+          { title: "Compound Interest 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f10ce608de30a68032b69" },
+          { title: "C I Installment (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f10db608de30a68032b6b" },
+          { title: "Compound Interest 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f10e5608de30a68032b6d" },
+          { title: "Compound Interest 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f10f0608de30a68032b6f" },
+          { title: "Compound Interest 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f10fd608de30a68032b71" },
+          { title: "Compound Interest 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1108608de30a68032b73" },
+          { title: "Compound Interest 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1113608de30a68032b75" },
+          { title: "Compound Interest 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f111e608de30a68032b77" },
+          { title: "Compound Interest 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f112a608de30a68032b79" },
+          { title: "Compound Interest 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1134608de30a68032b7b" },
+          { title: "Compound Interest 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f113f608de30a68032b7d" },
+          { title: "Compound interest 15.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1148608de30a68032b7f" },
+          { title: "Compound Interest 16.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1153608de30a68032b81" },
+          { title: "C I (Installment) 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1160608de30a68032b83" },
+          { title: "C I (Installment) 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f116b608de30a68032b85" }
+        ] },
+      { chapter: "Time & Work", files: [
+          { title: "Time & Work (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1178608de30a68032b87" },
+          { title: "Time & Work 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1183608de30a68032b89" },
+          { title: "Time & Work (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f118d608de30a68032b8b" },
+          { title: "Time & Work 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1197608de30a68032b8d" },
+          { title: "Time & Work (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f11a2608de30a68032b8f" },
+          { title: "Time & Work 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f11ac608de30a68032b91" },
+          { title: "Time & Work 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f11b6608de30a68032b93" },
+          { title: "Time & Work 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f11c3608de30a68032b95" },
+          { title: "Time & Work 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f11ce608de30a68032b97" },
+          { title: "Time & Work 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f11d6608de30a68032b99" },
+          { title: "Time & Work 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f11e0608de30a68032b9b" },
+          { title: "Time & Work 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f11eb608de30a68032b9d" },
+          { title: "Time & Work 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f11f7608de30a68032b9f" },
+          { title: "Time & Work 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1204608de30a68032ba1" },
+          { title: "Time & Work 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f121b608de30a68032ba3" },
+          { title: "Time & Work 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1224608de30a68032ba5" },
+          { title: "Time & Work 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f122e608de30a68032ba7" }
+        ] },
+      { chapter: "Work & Wages", files: [
+          { title: "Work & Wages (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f123b608de30a68032ba9" },
+          { title: "Work & Wages 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1247608de30a68032bab" },
+          { title: "Work & Wages (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1256608de30a68032bad" },
+          { title: "Work & Wages 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1261608de30a68032baf" },
+          { title: "Work & Wages (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f126b608de30a68032bb1" }
+        ] },
+      { chapter: "Pipe & Cistern", files: [
+          { title: "Pipe & Cistern (ClassRoom sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1277608de30a68032bb3" },
+          { title: "Pipe & Cistern 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1283608de30a68032bb5" },
+          { title: "Pipe & Cistern (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f128e608de30a68032bb7" },
+          { title: "Pipe & Cistern 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f129b608de30a68032bb9" },
+          { title: "Pipe & Cistern (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f12a5608de30a68032bbb" },
+          { title: "Pipe & Cistern 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f12af608de30a68032bbd" },
+          { title: "Pipe & Cistern 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f12ba608de30a68032bbf" },
+          { title: "Pipe & Cistern 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f12c3608de30a68032bc1" }
+        ] },
+      { chapter: "Time, Speed & Distance", files: [
+          { title: "Time, Speed & Distance (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f12cd608de30a68032bc3" },
+          { title: "Time, Speed & Distance 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f12d7608de30a68032bc5" },
+          { title: "Time, Speed & Distance (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f12e3608de30a68032bc7" },
+          { title: "Time, Speed & Distance 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f12ed608de30a68032bc9" },
+          { title: "Time, Speed & Distance (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f12f6608de30a68032bcb" },
+          { title: "Time, Speed & Distance 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1304608de30a68032bcd" },
+          { title: "Time, Speed & Distance 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1310608de30a68032bcf" },
+          { title: "Time, Speed & Distance 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f131b608de30a68032bd3" },
+          { title: "Time, Speed & Distance 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1327608de30a68032bd5" },
+          { title: "Time, Speed & Distance 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1331608de30a68032bd7" },
+          { title: "Time, Speed & Distance 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f133a608de30a68032bd9" },
+          { title: "Time, Speed & Distance 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1343608de30a68032bdb" },
+          { title: "Time, Speed & Distance 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f134c608de30a68032bdd" },
+          { title: "Time, Speed & Distance 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f135c608de30a68032be1" },
+          { title: "Time, Speed & Distance 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1368608de30a68032be3" },
+          { title: "Time, Speed & Distance 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1373608de30a68032be7" },
+          { title: "Time, Speed & Distance 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f137e608de30a68032be9" },
+          { title: "Time, Speed & Distance 15.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1387608de30a68032beb" }
+        ] },
+      { chapter: "Train", files: [
+          { title: "Train (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1392608de30a68032bed" },
+          { title: "Train 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f139e608de30a68032bef" },
+          { title: "Train (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f13aa608de30a68032bf3" },
+          { title: "Train 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f13b5608de30a68032bf5" },
+          { title: "Train (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f13c3608de30a68032bf9" },
+          { title: "Train 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f13cf608de30a68032bfb" },
+          { title: "Train 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f13d8608de30a68032bfd" },
+          { title: "Train 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f13e1608de30a68032bff" },
+          { title: "Train 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f13ed608de30a68032c01" }
+        ] },
+      { chapter: "Race & Circular Motion", files: [
+          { title: "Race (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f13fb608de30a68032c03" },
+          { title: "Race Class 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1406608de30a68032c05" },
+          { title: "Race (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1411608de30a68032c07" },
+          { title: "Race Class 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f141e608de30a68032c09" },
+          { title: "Race & Circular Motion (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1427608de30a68032c0d" },
+          { title: "Race Class 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1432608de30a68032c0f" },
+          { title: "Circular Motion (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f143b608de30a68032c11" },
+          { title: "Circular Motion Completed.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1448608de30a68032c13" },
+          { title: "Circular Motion (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1456608de30a68032c15" },
+          { title: "Race & Circular Motion (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1463608de30a68032c17" }
+        ] },
+      { chapter: "Boat & Stream", files: [
+          { title: "Boat & Stream (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f146c608de30a68032c19" },
+          { title: "Boat & Stream 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1479608de30a68032c1f" },
+          { title: "Boat & Stream (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1485608de30a68032c23" },
+          { title: "Boat & Stream 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1491608de30a68032c25" },
+          { title: "Boat & Stream (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f149a608de30a68032c27" },
+          { title: "Boat & Stream 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f14a7608de30a68032c29" },
+          { title: "Boat & Stream 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f14b5608de30a68032c2b" },
+          { title: "Boat & Stream 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f14be608de30a68032c2d" },
+          { title: "Boat & Stream 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f14cc608de30a68032c2f" }
+        ] },
+      { chapter: "Ratio", files: [
+          { title: "Ratio (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f14d8608de30a68032c31" },
+          { title: "Ratio 01.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f14e3608de30a68032c33" },
+          { title: "Ratio (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f14ef608de30a68032c35" },
+          { title: "Ratio 02.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f14f8608de30a68032c37" },
+          { title: "Ratio (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1502608de30a68032c39" },
+          { title: "Ratio 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f150d608de30a68032c3b" },
+          { title: "Ratio 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f151a608de30a68032c3d" },
+          { title: "Ratio 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1524608de30a68032c3f" },
+          { title: "Ratio 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1530608de30a68032c41" },
+          { title: "Ratio 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f153a608de30a68032c43" },
+          { title: "Ratio 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1543608de30a68032c45" },
+          { title: "Ratio 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f154f608de30a68032c47" },
+          { title: "Ratio 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f155a608de30a68032c49" },
+          { title: "Ratio 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1568608de30a68032c4b" }
+        ] },
+      { chapter: "Proportion", files: [
+          { title: "Proportion (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1572608de30a68032c4d" },
+          { title: "Proportion 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f157b608de30a68032c4f" },
+          { title: "Proportion (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1585608de30a68032c51" },
+          { title: "Proportion 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f159e608de30a68032c53" },
+          { title: "Proportion (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f15a8608de30a68032c55" }
+        ] },
+      { chapter: "Ages", files: [
+          { title: "Ages (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f15b2608de30a68032c57" },
+          { title: "Ages 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f15bd608de30a68032c59" },
+          { title: "Ages (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f15cb608de30a68032c5b" },
+          { title: "Ages 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f15d9608de30a68032c5d" },
+          { title: "Age (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f15e3608de30a68032c5f" }
+        ] },
+      { chapter: "Partnership", files: [
+          { title: "Partnership (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f15ec608de30a68032c61" },
+          { title: "Partnership 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f15f9608de30a68032c63" },
+          { title: "Partnership (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1602608de30a68032c65" },
+          { title: "Partnership 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f160e608de30a68032c67" },
+          { title: "Partnership (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1617608de30a68032c69" },
+          { title: "Partnership 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1620608de30a68032c6b" },
+          { title: "Partnership 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f162c608de30a68032c6d" },
+          { title: "Partnership 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1636608de30a68032c6f" },
+          { title: "Partnership 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1646608de30a68032c72" },
+          { title: "Partnership 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1660608de30a68032c85" }
+        ] },
+      { chapter: "Mixture", files: [
+          { title: "Mixture (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1670608de30a68032c89" },
+          { title: "Mixture 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f16a2608de30a68032c9d" },
+          { title: "Mixture (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f16ac608de30a68032ca1" },
+          { title: "Mixture 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f16b6608de30a68032ca5" },
+          { title: "Mixture (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f16c1608de30a68032ca7" },
+          { title: "Mixture 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f16e0608de30a68032ca9" },
+          { title: "Mixture 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f16eb608de30a68032cab" },
+          { title: "Mixture 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f16f6608de30a68032cad" },
+          { title: "Mixture 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1700608de30a68032caf" },
+          { title: "Mixture 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f170f608de30a68032cb1" }
+        ] },
+      { chapter: "Alligation", files: [
+          { title: "Alligation (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f171a608de30a68032cb3" },
+          { title: "Alligation 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1725608de30a68032cb5" },
+          { title: "Alligation (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1732608de30a68032cb7" },
+          { title: "Alligation 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f173e608de30a68032cb9" },
+          { title: "Alligation (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f174b608de30a68032cbb" },
+          { title: "Alligation 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1756608de30a68032cbf" },
+          { title: "Alligation 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f175f608de30a68032cc1" },
+          { title: "Alligation 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1769608de30a68032cc3" },
+          { title: "Alligation 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1776608de30a68032cc5" }
+        ] },
+      { chapter: "Average", files: [
+          { title: "Average (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1782608de30a68032cc7" },
+          { title: "Average 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f178b608de30a68032cc9" },
+          { title: "Average (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1797608de30a68032ccb" },
+          { title: "Average 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f17a4608de30a68032ccd" },
+          { title: "Average (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f17b1608de30a68032ccf" },
+          { title: "Average 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f17bd608de30a68032cd1" },
+          { title: "Average 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f17c6608de30a68032cd3" },
+          { title: "Average 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f17d1608de30a68032cd5" },
+          { title: "Average 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f17dc608de30a68032cd7" },
+          { title: "Average 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f17ea608de30a68032cd9" },
+          { title: "Average 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f17f7608de30a68032cdb" },
+          { title: "Average 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1800608de30a68032cdd" },
+          { title: "Average 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1809608de30a68032cdf" },
+          { title: "Average 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1812608de30a68032ce1" },
+          { title: "Average 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f181d608de30a68032ce3" },
+          { title: "Average 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1828608de30a68032ce5" },
+          { title: "Average 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1833608de30a68032ce7" },
+          { title: "Average 15.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f183d608de30a68032ce9" },
+          { title: "Average 16.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f184a608de30a68032ceb" }
+        ] },
+      { chapter: "Simplification", files: [
+          { title: "Simplification (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1852608de30a68032ced" },
+          { title: "Simplification 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f185f608de30a68032cef" },
+          { title: "Simplification (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f186c608de30a68032cf1" },
+          { title: "Simplification 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1878608de30a68032cf3" },
+          { title: "Simplification (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1881608de30a68032cf5" },
+          { title: "Simplification 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f188c608de30a68032cf7" },
+          { title: "Simplification 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1898608de30a68032cf9" },
+          { title: "Simplification 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f18a3608de30a68032cfb" },
+          { title: "Simplification 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f18af608de30a68032cfd" },
+          { title: "Simplification 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f18bc608de30a68032cff" },
+          { title: "Simplification 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f18c8608de30a68032d01" },
+          { title: "Simplification 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f18d1608de30a68032d03" },
+          { title: "Simplification 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f18db608de30a68032d05" },
+          { title: "Simplification 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f18ea608de30a68032d07" },
+          { title: "Simplification 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f18f7608de30a68032d09" },
+          { title: "Simplification 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1901608de30a68032d0b" }
+        ] },
+      { chapter: "Surds & Indices", files: [
+          { title: "Surds & Indices (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1912608de30a68032d0d" },
+          { title: "Surds & Indices 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1928608de30a68032d0f" },
+          { title: "Surds & Indices (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1934608de30a68032d11" },
+          { title: "Surds & Indices 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1941608de30a68032d13" },
+          { title: "Surds & Indices (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f194e608de30a68032d15" },
+          { title: "Surds & Indices 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f195a608de30a68032d17" },
+          { title: "Surds & Indices 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1965608de30a68032d19" },
+          { title: "Surds & Indices 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1970608de30a68032d1b" },
+          { title: "Surds & Indices 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f197a608de30a68032d1d" },
+          { title: "Surds & Indices 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1983608de30a68032d1f" },
+          { title: "Surds & Indices 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f198d608de30a68032d21" },
+          { title: "Surds & Indices 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1997608de30a68032d23" }
+        ] },
+      { chapter: "Number System", files: [
+          { title: "Classification of Numbers (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f19a4608de30a68032d25" },
+          { title: "Classification of No 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f19b0608de30a68032d27" },
+          { title: "Classification of No (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f19ba608de30a68032d29" },
+          { title: "Classification of No 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f19c3608de30a68032d2b" },
+          { title: "Unit Digit (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f19d0608de30a68032d2d" },
+          { title: "Unit Digit (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f19db608de30a68032d2f" },
+          { title: "Unit Digit 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f19e7608de30a68032d31" },
+          { title: "Divisivility (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f19f0608de30a68032d33" },
+          { title: "Unit Digit 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f19fa608de30a68032d35" },
+          { title: "Divisibility (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1a05608de30a68032d37" },
+          { title: "Unit Digit 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1a0f608de30a68032d39" },
+          { title: "Remainder (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1a1a608de30a68032d3b" },
+          { title: "Divisibility 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1a23608de30a68032d3d" },
+          { title: "Remainder (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1a2d608de30a68032d3f" },
+          { title: "Divisibility 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1a3a608de30a68032d41" },
+          { title: "Factor (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1a45608de30a68032d43" },
+          { title: "Divisibility 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1a4e608de30a68032d45" },
+          { title: "Factor (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1a57608de30a68032d47" },
+          { title: "Divisibility 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1a67608de30a68032d49" },
+          { title: "No of Zeros (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1a70608de30a68032d4b" },
+          { title: "Divisibility 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1a7c608de30a68032d4d" },
+          { title: "No of Zeros (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1a88608de30a68032d4f" },
+          { title: "Divisibility 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1a93608de30a68032d51" },
+          { title: "Number System Pro Level sheet.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1a9e608de30a68032d53" },
+          { title: "Divisibility 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1aa8608de30a68032d55" },
+          { title: "Divisibility 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1ab4608de30a68032d57" },
+          { title: "Divisibility 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1abf608de30a68032d59" },
+          { title: "Divisibility 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1acd608de30a68032d5b" },
+          { title: "Remainder 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1ad9608de30a68032d5d" },
+          { title: "Remainder 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1ae6608de30a68032d5f" },
+          { title: "Remainder 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1af3608de30a68032d61" },
+          { title: "Remainder 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1afc608de30a68032d63" },
+          { title: "Remainder 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b05608de30a68032d65" },
+          { title: "Remainder 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b0f608de30a68032d67" },
+          { title: "Factor 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b1a608de30a68032d69" },
+          { title: "Factor 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b27608de30a68032d6b" },
+          { title: "Factor 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b32608de30a68032d6d" },
+          { title: "Factor 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b3c608de30a68032d6f" },
+          { title: "No of Zeros 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b4a608de30a68032d71" },
+          { title: "No of Zeros 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b56608de30a68032d73" },
+          { title: "No of Zeros 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b61608de30a68032d75" }
+        ] },
+      { chapter: "Arithmetic Progression", files: [
+          { title: "Arithmetic Progression (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1b6b608de30a68032d77" },
+          { title: "Arithmetic Progression (Part-01).mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b73608de30a68032d79" },
+          { title: "Arithmetic Progression (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1b80608de30a68032d7b" },
+          { title: "Arithmetic Progression (Part-02).mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b8b608de30a68032d7d" }
+        ] },
+      { chapter: "Geometric Progression", files: [
+          { title: "Geometric Progression (Classroom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1b94608de30a68032d7f" },
+          { title: "Geometric Progression (Part-01).mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1b9e608de30a68032d81" },
+          { title: "Geometric Progression (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1bab608de30a68032d83" },
+          { title: "Geometric Progression (Part-02).mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1bb9608de30a68032d85" },
+          { title: "Arithmetic & Geometric Progression (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1bc5608de30a68032d87" }
+        ] },
+      { chapter: "HCF & LCM", files: [
+          { title: "HCF & LCM (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1bd1608de30a68032d89" },
+          { title: "HCF & LCM Class 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1bda608de30a68032d8b" },
+          { title: "HCF & LCM (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1be4608de30a68032d8d" },
+          { title: "HCF & LCM Class 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1bf0608de30a68032d8f" },
+          { title: "LCM & HCF (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1bfc608de30a68032d91" },
+          { title: "HCF & LCM Class 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c05608de30a68032d93" },
+          { title: "HCF & LCM Class 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c0d608de30a68032d95" },
+          { title: "HCF & LCM Class 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c17608de30a68032d97" },
+          { title: "HCF & LCM Class 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c22608de30a68032d99" },
+          { title: "HCF & LCM Class 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c2d608de30a68032d9b" },
+          { title: "HCF & LCM Class 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c3a608de30a68032d9d" },
+          { title: "HCF & LCM Class 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c47608de30a68032d9f" },
+          { title: "HCF & LCM Class 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c52608de30a68032da1" }
+        ] },
+      { chapter: "Algebra", files: [
+          { title: "Algebra (ClassRoom Sheet-01).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1c5a608de30a68032da3" },
+          { title: "Algebra 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c64608de30a68032da5" },
+          { title: "Algebra (Class Notes) Sheet-01.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1c71608de30a68032da7" },
+          { title: "Algebra 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c7c608de30a68032da9" },
+          { title: "Algebra (Classroom Sheet-02).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1c85608de30a68032dab" },
+          { title: "Algebra 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1c92608de30a68032dad" },
+          { title: "Algebra (Class Notes) Sheet-02.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1c9e608de30a68032daf" },
+          { title: "Algebra 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1cac608de30a68032db1" },
+          { title: "Algebra (Classroom Sheet-03).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1cb8608de30a68032db3" },
+          { title: "Algebra 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1cc4608de30a68032db5" },
+          { title: "Algebra (Class Notes) Sheet-03.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1cd1608de30a68032db7" },
+          { title: "Algebra 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1cda608de30a68032db9" },
+          { title: "Algebra (Pro level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1ce6608de30a68032dbb" },
+          { title: "Algebra 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1cf0608de30a68032dbd" },
+          { title: "Algebra 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1cfd608de30a68032dbf" },
+          { title: "Algebra 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d08608de30a68032dc1" },
+          { title: "Algebra 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d15608de30a68032dc3" },
+          { title: "Algebra 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d1f608de30a68032dc5" },
+          { title: "Algebra 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d2b608de30a68032dc7" },
+          { title: "Algebra 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d35608de30a68032dc9" },
+          { title: "Algebra 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d40608de30a68032dcb" },
+          { title: "Algebra 15.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d4a608de30a68032dcd" },
+          { title: "Algebra 16.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d52608de30a68032dcf" },
+          { title: "Algebra 17.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d60608de30a68032dd1" },
+          { title: "Algebra 18.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d69608de30a68032dd3" },
+          { title: "Algebra 19.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d77608de30a68032dd5" },
+          { title: "Algebra 20.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d84608de30a68032dd7" }
+        ] },
+      { chapter: "Quadratic Equation", files: [
+          { title: "Quadratic Equation (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1d8e608de30a68032dd9" },
+          { title: "Quadratic Equation Class 01.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1d98608de30a68032ddb" },
+          { title: "Quadratic Equation (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1da1608de30a68032ddd" },
+          { title: "Quadratic Equation Class 02.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1dac608de30a68032ddf" },
+          { title: "Quadratic Equations (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1db7608de30a68032de1" }
+        ] },
+      { chapter: "Trigonometry", files: [
+          { title: "Trigonometry 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1dc3608de30a68032de3" },
+          { title: "Trigonometry Sheet-01 (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1dcc608de30a68032de5" },
+          { title: "Trigonometry 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1ddb608de30a68032de7" },
+          { title: "Trigonometry (ClassRoom Sheet-02).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1de5608de30a68032de9" },
+          { title: "Trigonometry 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1df1608de30a68032deb" },
+          { title: "Trigonometry Sheet-02 (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1dfd608de30a68032ded" },
+          { title: "Trigonometry 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1e08608de30a68032def" },
+          { title: "Trigonometry (ClassRoom Sheet-03).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1e16608de30a68032df1" },
+          { title: "Trigonometry 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1e20608de30a68032df3" },
+          { title: "Trigonometry Sheet-03 (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1e2b608de30a68032df5" },
+          { title: "Trigonometry 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1e36608de30a68032df7" },
+          { title: "Trigonometry (ClassRoom Sheet-04).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1e42608de30a68032df9" },
+          { title: "Trigonometry 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1e4e608de30a68032dfb" },
+          { title: "Trigonometry Sheet-04 (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1e5b608de30a68032dfd" },
+          { title: "Trigonometry 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1e68608de30a68032dff" },
+          { title: "Trigonometry (ClassRoom Sheet-05).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1e72608de30a68032e01" },
+          { title: "Trigonometry 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1e7c608de30a68032e03" },
+          { title: "Trigonometry Sheet-05 (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1e86608de30a68032e05" },
+          { title: "Trigonometry (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1e92608de30a68032e07" },
+          { title: "Trigonometry 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1e9d608de30a68032e09" },
+          { title: "Trigonometry 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1ea9608de30a68032e0b" },
+          { title: "SSC MATHS 2ND TRIGONOMETRY English (TYPEWISE).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1eb6608de30a68032e0d" },
+          { title: "Trigonometry 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1ec1608de30a68032e0f" },
+          { title: "SSC MATHS 2ND TRIGONOMETRY Hindi (TYPEWISE).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1ecf608de30a68032e11" },
+          { title: "Trigonometry 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1edc608de30a68032e13" },
+          { title: "Trigonometry 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1eea608de30a68032e15" },
+          { title: "Trigonometry 15.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1ef6608de30a68032e17" },
+          { title: "Trigonometry 16.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f01608de30a68032e19" },
+          { title: "Trigonometry 17.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f0b608de30a68032e1b" },
+          { title: "Trigonometry 18.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f17608de30a68032e1d" },
+          { title: "Trigonometry 19.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f22608de30a68032e1f" },
+          { title: "Trigonometry 20.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f2b608de30a68032e21" },
+          { title: "Trigonometry 21.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f38608de30a68032e23" },
+          { title: "Trigonometry 22.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f41608de30a68032e25" },
+          { title: "Trigonometry 23.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f4c608de30a68032e27" },
+          { title: "Trigonometry 24.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f59608de30a68032e29" }
+        ] },
+      { chapter: "Maxima & Minima", files: [
+          { title: "Maxima & Minima (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1f62608de30a68032e2b" },
+          { title: "Maxima & Minima Class 01.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f6c608de30a68032e2d" },
+          { title: "Maxima & Minima (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1f76608de30a68032e2f" },
+          { title: "Maxima & Minima Class 02.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f7f608de30a68032e31" },
+          { title: "Maxima & Minima (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1f88608de30a68032e33" }
+        ] },
+      { chapter: "Height & Distance", files: [
+          { title: "Height & Distance (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1f93608de30a68032e35" },
+          { title: "Height & Distance 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1f9f608de30a68032e37" },
+          { title: "Height & Distance (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1faa608de30a68032e39" },
+          { title: "Height & distance 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1fb7608de30a68032e3b" },
+          { title: "Height & Distance (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1fc4608de30a68032e3d" },
+          { title: "Height & Distance 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1fcc608de30a68032e3f" },
+          { title: "Height & Distance (ClassRoom Sheet) (Mains Level).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1fd8608de30a68032e41" },
+          { title: "Height & Distance 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1fe2608de30a68032e43" },
+          { title: "Height & Distance (Class Notes) (Mains Level).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f1fea608de30a68032e45" },
+          { title: "Height & Distance 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1ff4608de30a68032e47" },
+          { title: "Height & Distance Completed.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f1ffe608de30a68032e49" }
+        ] },
+      { chapter: "Lines & Angles", files: [
+          { title: "Line & Angles (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f200c608de30a68032e4b" },
+          { title: "Lines & Angles 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2019608de30a68032e4d" },
+          { title: "Line & Angles (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2028608de30a68032e4f" },
+          { title: "Line & Angles 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2035608de30a68032e51" },
+          { title: "Line & Angles 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f204b608de30a68032e55" },
+          { title: "Line & Angles 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2062608de30a68032e59" }
+        ] },
+      { chapter: "Triangle (Fundamental & Types)", files: [
+          { title: "Fundamental Properties of Triangle (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f203f608de30a68032e53" },
+          { title: "Fundamental Properties of Triangle (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2057608de30a68032e57" },
+          { title: "Fundamental Properties of Triangle 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2077608de30a68032e5d" },
+          { title: "Fundamental Properties of Triangle 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f208c608de30a68032e61" },
+          { title: "Fundamental Properties of Triangle 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f20a4608de30a68032e65" },
+          { title: "Fundamental Properties of Triangle 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f20b7608de30a68032e69" },
+          { title: "Types of Triangle (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f206e608de30a68032e5b" },
+          { title: "Types of Triangle (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2082608de30a68032e5f" },
+          { title: "Types of Triangle 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f20d5608de30a68032e6f" },
+          { title: "Types of Triangle 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f20ec608de30a68032e73" },
+          { title: "Types of Triangle 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2106608de30a68032e77" },
+          { title: "Types of Triangle 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2118608de30a68032e7b" },
+          { title: "Types of Triangle 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2137608de30a68032e81" },
+          { title: "Types of Triangle 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f214f608de30a68032e85" },
+          { title: "Centers of Triangle (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2098608de30a68032e63" },
+          { title: "Centers of Triangle (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f20ae608de30a68032e67" },
+          { title: "Centers of Triangle 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2172608de30a68032e8b" },
+          { title: "Centers of Triangle 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2185608de30a68032e8f" },
+          { title: "Centers of Triangle 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f219b608de30a68032e93" },
+          { title: "Centers of Triangle 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f21a4608de30a68032e95" },
+          { title: "Centers of Triangle 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f21ad608de30a68032e97" },
+          { title: "Centers of Triangle 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f21b9608de30a68032e99" },
+          { title: "Centers of Triangle 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f21c4608de30a68032e9b" },
+          { title: "Centers of Triangle 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f21d1608de30a68032e9d" },
+          { title: "Similarity & Congruency (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f20cc608de30a68032e6d" },
+          { title: "Similarity & Congruency (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f20df608de30a68032e71" },
+          { title: "Similarity & Congruency 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f21da608de30a68032e9f" },
+          { title: "Similarity & Congruency 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f21e3608de30a68032ea1" },
+          { title: "Similarity & Congruency 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f21ed608de30a68032ea3" },
+          { title: "Similarity & Congruency 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f21f7608de30a68032ea5" },
+          { title: "Similarity & Congruency 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2201608de30a68032ea7" },
+          { title: "Similarity & Congruency 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f220a608de30a68032ea9" },
+          { title: "ALL Triangle Pro Level Sheet.pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f20c2608de30a68032e6b" }
+        ] },
+      { chapter: "Quadrilateral", files: [
+          { title: "Quadrilateral (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f20f9608de30a68032e75" },
+          { title: "Quadrilateral (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2110608de30a68032e79" },
+          { title: "Quadrilateral (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f212e608de30a68032e7f" },
+          { title: "Quadrilateral 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2217608de30a68032eab" },
+          { title: "Quadrilateral 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2220608de30a68032ead" },
+          { title: "Quadrilateral 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f222b608de30a68032eaf" },
+          { title: "Quadrilateral 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2236608de30a68032eb1" },
+          { title: "Quadrilateral 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f223f608de30a68032eb3" },
+          { title: "Quadrilateral 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f224a608de30a68032eb5" }
+        ] },
+      { chapter: "Polygon", files: [
+          { title: "Polygon (ClassRoom sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2123608de30a68032e7d" },
+          { title: "Polygon (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2143608de30a68032e83" },
+          { title: "Polygon (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f215c608de30a68032e87" },
+          { title: "Polygon 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2254608de30a68032eb7" },
+          { title: "Polygon 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2261608de30a68032eb9" }
+        ] },
+      { chapter: "Circle", files: [
+          { title: "Circle (Classroom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2166608de30a68032e89" },
+          { title: "Circle (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f217c608de30a68032e8d" },
+          { title: "Circle (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2190608de30a68032e91" },
+          { title: "Circle 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f226b608de30a68032ebb" },
+          { title: "Circle 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2274608de30a68032ebd" },
+          { title: "Circle 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f227e608de30a68032ebf" },
+          { title: "Circle 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f228a608de30a68032ec1" },
+          { title: "Circle 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2296608de30a68032ec3" },
+          { title: "Circle 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f22a1608de30a68032ec5" },
+          { title: "Circle 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f22ad608de30a68032ec8" },
+          { title: "Circle 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f22b7608de30a68032eca" },
+          { title: "Circle 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f22c5608de30a68032ecc" },
+          { title: "Circle 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f22d1608de30a68032ece" },
+          { title: "Circle 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f22da608de30a68032ed0" }
+        ] },
+      { chapter: "Mensuration 2D", files: [
+          { title: "Mensuration 2D (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f22e7608de30a68032ed2" },
+          { title: "Mensuration 2D 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f22f1608de30a68032ed4" },
+          { title: "Mensuration 2D (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f22fe608de30a68032ed6" },
+          { title: "Mensuration 2D 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2308608de30a68032ed8" },
+          { title: "Mensuration 2D (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2313608de30a68032eda" },
+          { title: "Mensuration 2D 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f231f608de30a68032edc" },
+          { title: "Mensuration 2D 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f232b608de30a68032ede" },
+          { title: "Mensuration 2D 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2338608de30a68032ee0" },
+          { title: "Mensuration 2D 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2345608de30a68032ee2" },
+          { title: "Mensuration 2D 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2350608de30a68032ee4" },
+          { title: "Mensuration 2D 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f235b608de30a68032ee6" },
+          { title: "Mensuration 2D 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2368608de30a68032ee8" },
+          { title: "Mensuration 2D 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2371608de30a68032eea" },
+          { title: "Mensuration 2D 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f237c608de30a68032eec" },
+          { title: "Mensuration 2D 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2385608de30a68032eee" },
+          { title: "Mensuration 2D 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2390608de30a68032ef0" },
+          { title: "Mensuration 2D 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2399608de30a68032ef2" }
+        ] },
+      { chapter: "Mensuration 3D", files: [
+          { title: "Mensuration 3D (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f23a5608de30a68032ef4" },
+          { title: "Mensuration 3D Class 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f23b2608de30a68032ef6" },
+          { title: "Mensuration 3D (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f23bb608de30a68032ef8" },
+          { title: "Mensuration 3D Class 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f23c5608de30a68032efa" },
+          { title: "Mensuration 3D (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f23d2608de30a68032efc" },
+          { title: "Mensuration 3D Class 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f23de608de30a68032efe" },
+          { title: "Mensuration 3D Class 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f23e8608de30a68032f00" },
+          { title: "Mensuration 3D Class 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f23f1608de30a68032f02" },
+          { title: "Mensuration 3D Class 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f23fa608de30a68032f04" },
+          { title: "Mensuration 3D Class 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2404608de30a68032f06" },
+          { title: "Mensuration 3D Class 08.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2410608de30a68032f08" },
+          { title: "Mensuration 3D Class 09.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f241d608de30a68032f0a" },
+          { title: "Mensuration 3D Class 10.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2426608de30a68032f0c" },
+          { title: "Mensuration 3D Class 11.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2433608de30a68032f0e" },
+          { title: "Mensuration 3D Class 12.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2440608de30a68032f10" },
+          { title: "Mensuration 3D Class 13.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f244d608de30a68032f12" },
+          { title: "Mensuration 3D Class 14.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2456608de30a68032f14" },
+          { title: "Mensuration 3D Class 15.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2463608de30a68032f16" },
+          { title: "Mensuration 3D Class 16.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f246d608de30a68032f18" },
+          { title: "Mensuration 3D Class 17.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2476608de30a68032f1a" },
+          { title: "Mensuration 3D Class 18.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2480608de30a68032f1c" },
+          { title: "Mensuration 3D Class 19.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f248c608de30a68032f1e" },
+          { title: "Mensuration 3D Class 20.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2498608de30a68032f24" },
+          { title: "Mensuration 3D Class 21.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f24a9608de30a68032f26" }
+        ] },
+      { chapter: "Co-ordinate Geometry", files: [
+          { title: "Co-ordinate Geometry (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f24b2608de30a68032f28" },
+          { title: "Co-Ordinate Geometry Class 01.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f24bb608de30a68032f2a" },
+          { title: "Co-Ordinate Geometry (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f24c6608de30a68032f2c" },
+          { title: "Co-Ordinate Geometry Class 02.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f24d2608de30a68032f2e" },
+          { title: "Co-ordinate Geometry (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f24df608de30a68032f30" },
+          { title: "Co-Ordinate Geometry Class 03.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f24ec608de30a68032f32" },
+          { title: "Co-Ordinate Geometry Class 04.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f24f5608de30a68032f34" },
+          { title: "Co-Ordinate Geometry Class 05.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2501608de30a68032f36" },
+          { title: "Co-Ordinate Geometry Class 06.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f250c608de30a68032f38" },
+          { title: "Co-Ordinate Geometry Class 07.mkv", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2516608de30a68032f3a" }
+        ] },
+      { chapter: "Probability", files: [
+          { title: "Probability (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2524608de30a68032f3c" },
+          { title: "Probability Class 01.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f252e608de30a68032f3e" },
+          { title: "Probability (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f253a608de30a68032f40" },
+          { title: "Probability Class 02.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2548608de30a68032f42" },
+          { title: "Probability (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2552608de30a68032f44" },
+          { title: "Probability Class 03.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f255b608de30a68032f46" },
+          { title: "Probability Class 04.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2566608de30a68032f48" },
+          { title: "Probability Class 05.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2572608de30a68032f4a" },
+          { title: "Probability Class 06.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f257e608de30a68032f4c" },
+          { title: "Probability Class 07.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2589608de30a68032f4e" },
+          { title: "Probability Class 08.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2595608de30a68032f50" },
+          { title: "Probability Class 09.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f259f608de30a68032f52" }
+        ] },
+      { chapter: "Data Interpretation", files: [
+          { title: "Tabular D I (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f25b1608de30a68032f54" },
+          { title: "Data Interpretation Class 01 (INTRODUCTION OF DI).mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f25be608de30a68032f56" },
+          { title: "Tabular D I (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f25cc608de30a68032f58" },
+          { title: "Tabular D I Class 02.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f25d8608de30a68032f5a" },
+          { title: "Tabular D I Class 03.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f25e3608de30a68032f5c" },
+          { title: "Tabular D I Class 04.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f25f9608de30a68032f60" },
+          { title: "Tabular D I Class 05.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f260d608de30a68032f64" },
+          { title: "Bar Graph D I (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f25ec608de30a68032f5e" },
+          { title: "Bar Graph D I (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2602608de30a68032f62" },
+          { title: "Bar Graph Class 01.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2627608de30a68032f68" },
+          { title: "Bar Graph Class 02.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f263a608de30a68032f6c" },
+          { title: "Pie Chart D I (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f261a608de30a68032f66" },
+          { title: "Pie Chart D I (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2630608de30a68032f6a" },
+          { title: "Pie Chart Class 01.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f264e608de30a68032f70" },
+          { title: "Pie Chart Class 02.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2664608de30a68032f74" },
+          { title: "Pie Chart Class 03.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2679608de30a68032f78" },
+          { title: "Pie Chart Class 04.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2697608de30a68032f7e" },
+          { title: "Pie Chart Class 05.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f26a2608de30a68032f80" },
+          { title: "Line Graph D I (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2644608de30a68032f6e" },
+          { title: "Line Graph D I (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2659608de30a68032f72" },
+          { title: "Line Graph D I.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f26ab608de30a68032f82" },
+          { title: "Histogram & Missing D I (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2670608de30a68032f76" },
+          { title: "Histogram & Missing D I (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2683608de30a68032f7a" },
+          { title: "Histogram D I Class 01.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f26b5608de30a68032f84" },
+          { title: "Histogram D I Class 02.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f26c2608de30a68032f86" },
+          { title: "Missing D I Class.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f26ce608de30a68032f88" },
+          { title: "Data Intepretation (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f268d608de30a68032f7c" }
+        ] },
+      { chapter: "Statistics", files: [
+          { title: "Statistics (ClassRoom Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f26d8608de30a68032f8a" },
+          { title: "STATISTICS (सांख्यिकी) 01.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f26e1608de30a68032f8c" },
+          { title: "Statistics (Class Notes).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f26ec608de30a68032f8e" },
+          { title: "STATISTICS (सांख्यिकी) 02.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f26f8608de30a68032f90" },
+          { title: "Statistics (Pro Level Sheet).pdf", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?dl=6a5f2703608de30a68032f92" },
+          { title: "STATISTICS (सांख्यिकी) 03.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f270e608de30a68032f94" },
+          { title: "STATISTICS (सांख्यिकी) 04.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f271b608de30a68032f96" },
+          { title: "STATISTICS (सांख्यिकी) 05.mp4", url: "https://publicbotshub.blogspot.com/p/file-stream-bot.html?watch=6a5f2729608de30a68032f98" }
+        ] }
+    ];
+
+// ================================================================
+// 2. ICONS – small inline SVG strings reused across file cards
+// ================================================================
+const ICONS = {
+  video: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h8A1.5 1.5 0 0 1 15 6.5v11A1.5 1.5 0 0 1 13.5 19h-8A1.5 1.5 0 0 1 4 17.5v-11Z" fill="currentColor"/><path d="M17 9.7l3.1-2.1c.6-.4 1.4.02 1.4.75v7.3c0 .73-.8 1.15-1.4.75L17 14.3" fill="currentColor"/></svg>',
+  pdf: '<svg viewBox="0 0 24 24" fill="none"><path d="M7 3.5h7.5L19 8v11.5A1.5 1.5 0 0 1 17.5 21h-10A1.5 1.5 0 0 1 6 19.5v-14A1.5 1.5 0 0 1 7 3.5Z" fill="currentColor"/><path d="M14 3.5V8h4.5" fill="rgba(255,255,255,0.35)"/></svg>',
+  other: '<svg viewBox="0 0 24 24" fill="none"><path d="M7 3.5h7.5L19 8v11.5A1.5 1.5 0 0 1 17.5 21h-10A1.5 1.5 0 0 1 6 19.5v-14A1.5 1.5 0 0 1 7 3.5Z" fill="currentColor"/></svg>',
+  folder: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5C4 4.67 4.67 4 5.5 4H10l2 2h6.5c.83 0 1.5.67 1.5 1.5v11c0 .83-.67 1.5-1.5 1.5h-13C4.67 20 4 19.33 4 18.5v-13Z" fill="currentColor"/></svg>',
+  chevron: '<svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  external: '<svg viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  emptyBox: '<svg viewBox="0 0 24 24" fill="none"><path d="M4 8l8-4 8 4-8 4-8-4Zm0 0v8l8 4m0-12v12m8-12v8l-8 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+// ================================================================
+// 3. DOM REFERENCES
+// ================================================================
+const folderGridEl   = document.getElementById('folderGrid');
+const searchInputEl  = document.getElementById('searchInput');
+const clearBtnEl     = document.getElementById('clearBtn');
+const expandAllBtnEl = document.getElementById('expandAllBtn');
+const collapseAllBtnEl = document.getElementById('collapseAllBtn');
+const statFoldersEl  = document.getElementById('statFolders');
+const statFilesEl    = document.getElementById('statFiles');
+const breadcrumbEl   = document.getElementById('breadcrumb');
+
+// ================================================================
+// 4. PREP DATA (once) – precompute lowercase search keys & file
+//    metadata so search + rendering never re-does this work.
+// ================================================================
+function getFileExt(title){
+  const idx = title.lastIndexOf('.');
+  return idx === -1 ? '' : title.slice(idx + 1).toLowerCase();
+}
+
+function getFileKind(ext){
+  if (ext === 'pdf') return 'pdf';
+  if (['mkv','mp4','mov','avi','webm','m4v'].indexOf(ext) !== -1) return 'video';
+  return 'other';
+}
+
+// Strip the trailing file extension (e.g. ".pdf", ".mkv") for display only.
+// The original title/url are kept untouched everywhere else.
+function stripExtension(title){
+  const idx = title.lastIndexOf('.');
+  if (idx === -1) return title;
+  return title.slice(0, idx).trim();
+}
+
+const folders = rawData.map(function(folder, folderIndex){
+  const files = folder.files.map(function(file, fileIndex){
+    const ext = getFileExt(file.title);
+    const displayTitle = stripExtension(file.title);
+    return {
+      id: folderIndex + '-' + fileIndex,
+      title: file.title,
+      displayTitle: displayTitle,
+      url: file.url,
+      ext: ext,
+      kind: getFileKind(ext),
+      lower: displayTitle.toLowerCase()
+    };
+  });
+  return {
+    index: folderIndex,
+    chapter: folder.chapter,
+    lower: folder.chapter.toLowerCase(),
+    files: files,
+    fileCount: files.length,
+    // lazy-render bookkeeping
+    built: false,          // has the file-list DOM been built at least once?
+    open: false,            // is the folder currently expanded?
+    bodyEl: null,           // reference to .folder-body (set on card creation)
+    listEl: null,           // reference to .file-list (set on first build)
+    cardEl: null            // reference to .folder-card
+  };
+});
+
+const TOTAL_FOLDERS = folders.length;
+const TOTAL_FILES = folders.reduce(function(sum, f){ return sum + f.fileCount; }, 0);
+statFoldersEl.textContent = TOTAL_FOLDERS;
+statFilesEl.textContent = TOTAL_FILES;
+
+// ================================================================
+// 5. HELPERS
+// ================================================================
+
+// Escape a string for safe insertion as HTML text.
+function escapeHTML(str){
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// Wrap the matching substring of `text` in <mark> (case-insensitive).
+// Falls back to escaped plain text when there is no query.
+function highlight(text, query){
+  const safe = escapeHTML(text);
+  if (!query) return safe;
+  const lowerText = text.toLowerCase();
+  const idx = lowerText.indexOf(query);
+  if (idx === -1) return safe;
+  const before = escapeHTML(text.slice(0, idx));
+  const match  = escapeHTML(text.slice(idx, idx + query.length));
+  const after  = escapeHTML(text.slice(idx + query.length));
+  return before + '<mark>' + match + '</mark>' + after;
+}
+
+// Lightweight ripple effect for tappable elements.
+function spawnRipple(container, evt){
+  const rect = container.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height) * 1.6;
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  const x = (evt.touches ? evt.touches[0].clientX : evt.clientX) - rect.left - size / 2;
+  const y = (evt.touches ? evt.touches[0].clientY : evt.clientY) - rect.top - size / 2;
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  container.appendChild(ripple);
+  setTimeout(function(){ ripple.remove(); }, 600);
+}
+
+// Build a single file-item DOM node.
+function createFileItemEl(file, query){
+  const item = document.createElement('div');
+  item.className = 'file-item';
+
+  const icon = document.createElement('div');
+  icon.className = 'file-icon ' + file.kind;
+  icon.innerHTML = ICONS[file.kind];
+
+  const name = document.createElement('div');
+  name.className = 'file-name';
+  name.innerHTML = highlight(file.displayTitle, query);
+  name.title = file.displayTitle;
+
+  const openBtn = document.createElement('a');
+  openBtn.className = 'open-btn';
+  openBtn.href = file.url;
+  openBtn.target = '_blank';
+  openBtn.rel = 'noopener';
+  openBtn.innerHTML = '<span>Open</span>' + ICONS.external;
+  openBtn.addEventListener('click', function(e){ e.stopPropagation(); });
+
+  item.appendChild(icon);
+  item.appendChild(name);
+  item.appendChild(openBtn);
+  return item;
+}
+
+// Render (or re-render) the file list of one folder into a fragment,
+// optionally restricted to a filtered subset (used during search).
+function populateFileList(folder, query, subsetFiles){
+  const files = subsetFiles || folder.files;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < files.length; i++){
+    frag.appendChild(createFileItemEl(files[i], query));
+  }
+  folder.listEl.innerHTML = '';
+  folder.listEl.appendChild(frag);
+  folder.built = true;
+}
+
+// Set a folder's open/closed visual state (with smooth max-height animation).
+function setFolderOpen(folder, open, query, subsetFiles){
+  folder.open = open;
+  if (open){
+    if (!folder.built || query !== undefined){
+      populateFileList(folder, query, subsetFiles);
+    }
+    folder.cardEl.classList.add('open');
+    // measure natural height for smooth transition
+    folder.bodyEl.style.maxHeight = folder.bodyEl.scrollHeight + 'px';
+  } else {
+    folder.cardEl.classList.remove('open');
+    folder.bodyEl.style.maxHeight = '0px';
+  }
+}
+
+function toggleFolder(folder){
+  setFolderOpen(folder, !folder.open);
+}
+
+// ================================================================
+// 6. FOLDER CARD CREATION (shells only — files render lazily)
+// ================================================================
+function createFolderCardEl(folder){
+  const card = document.createElement('div');
+  card.className = 'folder-card';
+  card.style.animationDelay = (Math.min(folder.index, 20) * 18) + 'ms';
+
+  const header = document.createElement('div');
+  header.className = 'folder-header';
+  header.setAttribute('role', 'button');
+  header.setAttribute('tabindex', '0');
+  header.setAttribute('aria-expanded', 'false');
+
+  const iconWrap = document.createElement('div');
+  iconWrap.className = 'folder-icon-wrap';
+  iconWrap.innerHTML = ICONS.folder;
+
+  const titleBlock = document.createElement('div');
+  titleBlock.className = 'folder-title-block';
+  const titleEl = document.createElement('h3');
+  titleEl.className = 'folder-title';
+  titleEl.textContent = folder.chapter;
+  const subEl = document.createElement('p');
+  subEl.className = 'folder-sub';
+  subEl.textContent = 'Chapter ' + (folder.index + 1);
+  titleBlock.appendChild(titleEl);
+  titleBlock.appendChild(subEl);
+
+  const meta = document.createElement('div');
+  meta.className = 'folder-meta';
+  const badge = document.createElement('span');
+  badge.className = 'file-count-badge';
+  badge.textContent = folder.fileCount + (folder.fileCount === 1 ? ' file' : ' files');
+  const chevron = document.createElement('span');
+  chevron.className = 'chevron';
+  chevron.innerHTML = ICONS.chevron;
+  meta.appendChild(badge);
+  meta.appendChild(chevron);
+
+  header.appendChild(iconWrap);
+  header.appendChild(titleBlock);
+  header.appendChild(meta);
+
+  const body = document.createElement('div');
+  body.className = 'folder-body';
+  const bodyInner = document.createElement('div');
+  bodyInner.className = 'folder-body-inner';
+  const list = document.createElement('div');
+  list.className = 'file-list';
+  bodyInner.appendChild(list);
+  body.appendChild(bodyInner);
+
+  card.appendChild(header);
+  card.appendChild(body);
+
+  // wire references for lazy rendering
+  folder.cardEl = card;
+  folder.bodyEl = body;
+  folder.listEl = list;
+  folder.titleEl = titleEl;
+  folder.badgeEl = badge;
+
+  // interaction: click/tap toggles; ripple for tactile feedback
+  header.addEventListener('click', function(evt){
+    spawnRipple(header, evt);
+    toggleFolder(folder);
+  });
+  header.addEventListener('keydown', function(evt){
+    if (evt.key === 'Enter' || evt.key === ' '){
+      evt.preventDefault();
+      toggleFolder(folder);
+    }
+  });
+
+  return card;
+}
+
+// ================================================================
+// 7. INITIAL RENDER – folder shells only (instant, no file DOM yet)
+// ================================================================
+function renderAllFolderShells(){
+  const frag = document.createDocumentFragment();
+  folders.forEach(function(folder){
+    folder.cardEl = null; folder.bodyEl = null; folder.listEl = null; folder.built = false; folder.open = false;
+    folder.titleEl = null;
+    const card = createFolderCardEl(folder);
+    card.classList.remove('hidden-card');
+    frag.appendChild(card);
+  });
+  folderGridEl.innerHTML = '';
+  folderGridEl.appendChild(frag);
+  updateBreadcrumb('');
+}
+
+// ================================================================
+// 8. SEARCH — instant, optimized, with highlighting + empty state
+// ================================================================
+let searchDebounceHandle = null;
+
+function updateBreadcrumb(query){
+  if (!query){
+    breadcrumbEl.innerHTML = '<span class="crumb" id="crumbHome">All Chapters</span>';
+    return;
+  }
+  breadcrumbEl.innerHTML =
+    '<span class="crumb" id="crumbHome">All Chapters</span><span class="sep">›</span><span>Results for “' +
+    escapeHTML(query) + '”</span>';
+  const home = document.getElementById('crumbHome');
+  if (home) home.addEventListener('click', clearSearch);
+}
+
+function renderEmptyState(){
+  folderGridEl.innerHTML =
+    '<div class="empty-state">' + ICONS.emptyBox +
+    '<h3>No results found</h3>' +
+    '<p>We couldn\'t find any chapter or file matching your search. Try a different keyword.</p>' +
+    '</div>';
+}
+
+function applySearch(rawQuery){
+  const query = rawQuery.trim().toLowerCase();
+  clearBtnEl.classList.toggle('show', rawQuery.length > 0);
+  updateBreadcrumb(query);
+
+  if (!query){
+    renderAllFolderShells();
+    return;
+  }
+
+  let visibleFolderCount = 0;
+  const frag = document.createDocumentFragment();
+
+  folders.forEach(function(folder){
+    folder.cardEl = null; folder.bodyEl = null; folder.listEl = null; folder.built = false; folder.open = false;
+    folder.titleEl = null;
+
+    const chapterMatches = folder.lower.indexOf(query) !== -1;
+    const matchedFiles = chapterMatches
+      ? folder.files
+      : folder.files.filter(function(f){ return f.lower.indexOf(query) !== -1; });
+
+    if (matchedFiles.length === 0) return;
+
+    visibleFolderCount++;
+    const card = createFolderCardEl(folder);
+    // reflect highlighted chapter title
+    folder.titleEl.innerHTML = highlight(folder.chapter, chapterMatches ? query : '');
+    folder.badgeEl.textContent = matchedFiles.length + (matchedFiles.length === 1 ? ' match' : ' matches');
+    frag.appendChild(card);
+
+    // auto-expand folders that contain matches so results are visible immediately
+    setFolderOpen(folder, true, query, matchedFiles);
+  });
+
+  folderGridEl.innerHTML = '';
+  if (visibleFolderCount === 0){
+    renderEmptyState();
+    return;
+  }
+  folderGridEl.appendChild(frag);
+}
+
+function handleSearchInput(){
+  const value = searchInputEl.value;
+  clearBtnEl.classList.toggle('show', value.length > 0);
+  if (searchDebounceHandle) clearTimeout(searchDebounceHandle);
+  // tiny debounce keeps typing perfectly smooth even at thousands of files
+  searchDebounceHandle = setTimeout(function(){ applySearch(value); }, 90);
+}
+
+function clearSearch(){
+  searchInputEl.value = '';
+  clearBtnEl.classList.remove('show');
+  applySearch('');
+  searchInputEl.focus();
+}
+
+// ================================================================
+// 9. EXPAND ALL / COLLAPSE ALL
+// ================================================================
+function expandAll(){
+  folders.forEach(function(folder){
+    if (folder.cardEl) setFolderOpen(folder, true);
+  });
+}
+function collapseAll(){
+  folders.forEach(function(folder){
+    if (folder.cardEl) setFolderOpen(folder, false);
+  });
+}
+
+// ================================================================
+// 10. EVENT WIRING
+// ================================================================
+searchInputEl.addEventListener('input', handleSearchInput);
+clearBtnEl.addEventListener('click', clearSearch);
+expandAllBtnEl.addEventListener('click', function(evt){ spawnRipple(expandAllBtnEl, evt); expandAll(); });
+collapseAllBtnEl.addEventListener('click', function(evt){ spawnRipple(collapseAllBtnEl, evt); collapseAll(); });
+
+// keep open folders' max-height correct on resize (font/line wraps can change height)
+let resizeRaf = null;
+window.addEventListener('resize', function(){
+  if (resizeRaf) cancelAnimationFrame(resizeRaf);
+  resizeRaf = requestAnimationFrame(function(){
+    folders.forEach(function(folder){
+      if (folder.open && folder.bodyEl) folder.bodyEl.style.maxHeight = folder.bodyEl.scrollHeight + 'px';
+    });
+  });
+});
+
+// ================================================================
+// 11. SOCIAL LINKS
+// ================================================================
+['tgTopBtn', 'tgFooterBtn'].forEach(function(id){
+  const el = document.getElementById(id);
+  if (el) el.href = TG_LINK;
+});
+
+// ================================================================
+// 13. NOTIFICATION BELL + INBOX
+// ================================================================
+const NOTIFICATIONS = [
+  {
+    tag: 'WhatsApp',
+    date: 'New',
+    message: 'Updates ke liye hamara WhatsApp Channel join karo — <a href="' + TG_LINK + '" target="_blank" rel="noopener">tap here to open</a>.'
+  }
+];
+
+const bellFabEl = document.getElementById('bellFab');
+const bellDotEl = document.getElementById('bellDot');
+const inboxModalEl = document.getElementById('inboxModal');
+const inboxBodyEl = document.getElementById('inboxBody');
+const inboxCloseBtnEl = document.getElementById('inboxCloseBtn');
+
+function renderInbox(){
+  if (NOTIFICATIONS.length === 0){
+    inboxBodyEl.innerHTML = '<div class="inbox-empty">No new updates</div>';
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  NOTIFICATIONS.forEach(function(n){
+    const item = document.createElement('div');
+    item.className = 'inbox-item';
+    item.innerHTML =
+      '<div class="row"><span class="tag">' + escapeHTML(n.tag) + '</span><span class="date">' + escapeHTML(n.date) + '</span></div>' +
+      '<div class="msg">' + n.message + '</div>';
+    frag.appendChild(item);
+  });
+  inboxBodyEl.innerHTML = '';
+  inboxBodyEl.appendChild(frag);
+}
+
+function openInbox(){
+  renderInbox();
+  inboxModalEl.classList.remove('hidden');
+  bellDotEl.classList.add('hidden');
+}
+function closeInbox(){
+  inboxModalEl.classList.add('hidden');
+}
+
+bellFabEl.addEventListener('click', openInbox);
+inboxCloseBtnEl.addEventListener('click', closeInbox);
+inboxModalEl.addEventListener('click', function(evt){
+  if (evt.target === inboxModalEl) closeInbox();
+});
+
+if (NOTIFICATIONS.length > 0){
+  bellDotEl.textContent = NOTIFICATIONS.length;
+  bellDotEl.classList.remove('hidden');
+}
+
+// ================================================================
+// 14. INITIAL PAINT
+// ================================================================
+renderAllFolderShells();
+
+})();
+</script>
+
+<!-- BACK TO MATHS -->
+<a href="maths.html" id="mathsBackBtn" aria-label="Back to Maths" style="position:fixed;left:14px;bottom:18px;z-index:2147483000;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;background:linear-gradient(180deg,#f2602a,#d24a14);color:#fff;font:800 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 8px 22px -6px rgba(194,63,16,.6);-webkit-tap-highlight-color:transparent;">&#8592; Maths</a>
+<script>
+(function(){var b=document.getElementById('mathsBackBtn');if(!b)return;
+b.addEventListener('click',function(e){
+  try{ if(document.referrer && document.referrer.indexOf('maths')>-1 && history.length>1){ e.preventDefault(); history.back(); } }catch(_){}
+});})();
+</script>
+
+<div id="cm-join" style="text-align:center;padding:26px 16px 90px;">
+  <a href="https://whatsapp.com/channel/0029VbBqYvh2phHSBhGVGD08" target="_blank" rel="noopener" style="display:inline-block;padding:13px 26px;border-radius:999px;background:linear-gradient(180deg,#34d399,#10b981);color:#03261c;font:800 15px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-decoration:none;box-shadow:0 10px 24px -8px rgba(16,185,129,.7);">&#128172; 𝕁𝕠𝕚𝕟 𝕎𝕙𝕒𝕥𝕤𝕒𝕡𝕡 ℂ𝕙𝕒𝕟𝕟𝕖𝕝</a>
+</div>
+<script id="cm-theme-js">
+(function(){
+  function tidy(root){
+    (root||document).querySelectorAll('.folder-card').forEach(function(c){
+      var tb=c.querySelector('.folder-title-block'), badge=c.querySelector('.file-count-badge');
+      if(tb && badge && badge.parentNode!==tb){ tb.appendChild(badge); }
+      if(badge && /^1 (items|files)$/.test(badge.textContent.trim())) badge.textContent='1 item';
+      var t=c.querySelector('.folder-title');
+      if(t){ var n=t.lastChild; if(n && n.nodeType===3){ var s=n.nodeValue.replace(/\s*\(\d+\)\s*$/,''); if(s!==n.nodeValue) n.nodeValue=s; } }
+    });
+  }
+  function start(){
+    tidy();
+    document.querySelectorAll('.folder-grid').forEach(function(g){
+      new MutationObserver(function(){ tidy(g); }).observe(g,{childList:true,subtree:true});
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+})();
+</script>
+</body>
+</html>
