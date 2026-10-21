@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f7f1ea">
+<title>𝐏𝐫𝐞𝐦𝐢𝐮𝐦 𝐌𝐚𝐠𝐳𝐢𝐧𝐞𝐬 · Choudhary Mehfil</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{margin:0;padding:0}
+body{background:radial-gradient(900px 500px at 100% -10%,rgba(242,96,42,.12),transparent 60%),linear-gradient(180deg,#f7f1ea,#f3ebe2);color:#1a1412;font-family:'Segoe UI',system-ui,-apple-system,Roboto,'Noto Sans Math','Noto Sans Symbols 2',sans-serif;min-height:100vh;padding:0 16px 40px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;padding:16px 0 0}
+.nav{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:999px;background:#fff;border:1px solid #eee4d8;color:#3d322c;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 1px 2px rgba(60,30,10,.06);cursor:pointer;font-family:inherit}
+.dp{width:44px;height:44px;border-radius:50%;overflow:hidden;background:#fff;border:2px solid #fff;box-shadow:0 6px 16px rgba(194,63,16,.3);display:flex;align-items:center;justify-content:center;font-size:20px}
+.dp img{width:100%;height:100%;object-fit:cover;display:block}
+header{text-align:center;padding:26px 0 18px}
+.badge{display:inline-block;font:700 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.2em;color:#c23f10;background:#ffe9dc;border:1px solid #ffd2b8;padding:7px 13px;border-radius:999px;margin-bottom:14px;text-transform:uppercase}
+h1{font-size:28px;font-weight:800;letter-spacing:-.03em;line-height:1.2}
+h1 span{font-family:Georgia,serif;font-style:italic;font-weight:400;color:#f2602a}
+.sub{margin-top:8px;color:#8a7d73;font-size:13.5px}
+.list{display:flex;flex-direction:column;gap:.8rem;counter-reset:t}
+.row{counter-increment:t;display:flex;align-items:center;gap:1rem;padding:1.15rem 1.2rem;border-radius:26px;background:#fff;border:1px solid #eee4d8;text-decoration:none;color:inherit;box-shadow:0 1px 2px rgba(60,30,10,.05);transition:.2s;cursor:pointer;width:100%;text-align:left;font-family:inherit}
+.row:active{transform:scale(.985)}
+.num{min-width:2.8rem}
+.num::before{content:counter(t,decimal-leading-zero);font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:2.1rem;line-height:1;color:#f2602a;letter-spacing:-.03em}
+.txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:.3rem}
+.t{font-size:1.1rem;font-weight:700;letter-spacing:-.01em;line-height:1.3;overflow-wrap:anywhere}
+.m{font-size:.85rem;color:#9d9088}
+.arr{width:46px;height:46px;border-radius:50%;background:#f2ece5;color:#3d322c;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.25s}
+.row:hover .arr,.row:active .arr{background:#1a1412;color:#fff}
+.row.soon{opacity:.75}
+.row.soon .arr{font-size:10px;font-weight:800;letter-spacing:.04em;width:auto;border-radius:999px;padding:0 12px;height:34px;background:#ffe9dc;color:#c23f10}
+/* month rows */
+.mrow{display:flex;align-items:center;gap:.8rem;padding:1rem 1.1rem;border-radius:22px;background:#fff;border:1px solid #eee4d8;box-shadow:0 1px 2px rgba(60,30,10,.05)}
+.mrow .t{font-size:1.02rem}
+.btns{display:flex;gap:8px;flex-shrink:0}
+.pill{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 15px;border-radius:999px;font-weight:800;font-size:12.5px;text-decoration:none;font-family:inherit;border:0;cursor:pointer}
+.pill.open{background:linear-gradient(180deg,#f2602a,#d24a14);color:#fff;box-shadow:0 6px 14px -6px rgba(242,96,42,.8)}
+.pill.soon{background:#ffe9dc;color:#c23f10;font-size:11px;letter-spacing:.06em;cursor:default}
+.pill.dl{background:#f2ece5;color:#3d322c;width:40px;padding:0;justify-content:center}
+.crumb{font:600 11px/1.4 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#a2958b;text-align:center;margin-top:6px}
+.join{text-align:center;padding:30px 0 6px}
+.join a{display:inline-block;padding:13px 26px;border-radius:999px;background:linear-gradient(180deg,#34d399,#10b981);color:#03261c;font:800 15px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans Math',sans-serif;text-decoration:none;box-shadow:0 10px 24px -8px rgba(16,185,129,.7)}
+.topr{display:flex;align-items:center;gap:10px}
+.bell{position:relative;width:44px;height:44px;border-radius:50%;border:1px solid #eee4d8;background:#fff;color:#c23f10;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 16px -8px rgba(90,40,10,.45)}
+.bdot{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#e0473e;color:#fff;font:800 10px/14px -apple-system,'Segoe UI',sans-serif;text-align:center;border:2px solid #fff;box-sizing:border-box}
+.bdot.hide{display:none}
+.inbox{position:fixed;inset:0;z-index:100;background:rgba(26,20,18,.55);display:none;align-items:flex-end;justify-content:center;padding:16px}
+.inbox.open{display:flex}
+.icard{width:100%;max-width:480px;background:#fff;border-radius:26px;padding:18px 18px 20px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+.ihd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ihd h3{font-size:17px;font-weight:800}
+.ix{width:36px;height:36px;border-radius:50%;border:0;background:#f2ece5;font-size:20px;line-height:1;cursor:pointer;color:#3d322c}
+.iitem{border:1px solid #eee4d8;border-radius:18px;padding:14px;background:#faf5ef}
+.itag{display:inline-block;font:800 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;color:#c23f10;background:#ffe9dc;border:1px solid #ffd2b8;padding:5px 9px;border-radius:6px}
+.imsg{margin-top:10px;font-size:15px;line-height:1.6;color:#3d322c}
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,40px);background:#1a1412;color:#fff;padding:12px 20px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;transition:.3s;pointer-events:none;z-index:99}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:380px){.mrow{flex-wrap:wrap}.btns{width:100%}.pill.open{flex:1;justify-content:center}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <button class="nav" id="backBtn" type="button">&#8592; Back</button>
+    <div class="topr">
+      <button class="bell" id="bellBtn" type="button" aria-label="Updates" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 3a5 5 0 0 0-5 5v2.6c0 .6-.2 1.2-.6 1.7L5 14.2c-.8 1-.1 2.5 1.2 2.5h11.6c1.3 0 2-1.5 1.2-2.5l-1.4-1.9c-.4-.5-.6-1.1-.6-1.7V8a5 5 0 0 0-5-5Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"/><path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/></svg>
+        <span class="bdot" id="bellDot">1</span>
+      </button>
+      <div class="dp"><img src="channel-dp.jpg" alt="" onerror="this.parentNode.textContent='C'"></div>
+    </div>
+  </div>
+  <header>
+    <div class="badge" id="badge">MAGAZINES</div>
+    <h1 id="title">𝐏𝐫𝐞𝐦𝐢𝐮𝐦 <span>𝐌𝐚𝐠𝐳𝐢𝐧𝐞𝐬</span></h1>
+    <p class="sub" id="sub">Apna section chuno</p>
+    <p class="crumb" id="crumb"></p>
+  </header>
+  <div class="list" id="list"></div>
+  <div class="join"><a href="https://whatsapp.com/channel/0029VbBqYvh2phHSBhGVGD08" target="_blank" rel="noopener">&#128172; 𝕁𝕠𝕚𝕟 𝕎𝕙𝕒𝕥𝕤𝕒𝕡𝕡 ℂ𝕙𝕒𝕟𝕟𝕖𝕝</a></div>
+</div>
+<div class="inbox" id="inbox" role="dialog" aria-label="Updates">
+  <div class="icard">
+    <div class="ihd"><h3>&#128276; Updates</h3><button class="ix" id="inboxX" type="button" aria-label="Close">&times;</button></div>
+    <div class="iitem"><span class="itag">NOTE</span><p class="imsg" id="inboxMsg"></p></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  /* =========================================================
+     SETTINGS  (yahin se sab kuch control hota hai)
+     ========================================================= */
+  var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  // Har saal me kitne mahine ki PDF hai
+  var YEARS={ '2025':12, '2026':9 };
+
+  // =====  PDF FILE MAP  =====
+  // 'bhasha-saal-mahina' : 'file ka naam'   (ya poora https:// link)
+  // null  = abhi PDF nahi hai -> "JALDI" dikhega
+  var FILES={
+    // ---- 2025 HINDI ----
+    'hindi-2025-01':'JANUARY 2025 hindi.pdf',
+    'hindi-2025-02':'FEBRUARY 2025 hindi.pdf',
+    'hindi-2025-03':'MARCH - 2025 hindi.pdf',
+    'hindi-2025-04':'APRIL 2025 hindi.pdf',
+    'hindi-2025-05':'MAY - 2025 hindi.pdf',
+    'hindi-2025-06':'JUNE - 2025 hindi.pdf',
+    'hindi-2025-07':'JULY 2025 hindi.pdf',
+    'hindi-2025-08':'AUGUST 2025 hindi.pdf',
+    'hindi-2025-09':'SEPTEMBER 2025 hindi.pdf',
+    'hindi-2025-10':'OCTOBER 2025 Hindi.pdf',
+    'hindi-2025-11':'PARMAR CURRENT NOVEMBER.pdf',
+    'hindi-2025-12':'DECEMBER HINDI CURRENT AFFAIRS MAGAZINE.pdf',
+    // ---- 2025 ENGLISH ----
+    'english-2025-01':'JANUARY 2025.pdf',
+    'english-2025-02':'FEBRUARY 2025.pdf',
+    'english-2025-03':'MARCH 2025.pdf',
+    'english-2025-04':'APRIL 2025.pdf',
+    'english-2025-05':'MAY 2025.pdf',
+    'english-2025-06':'JUNE 2025.pdf',
+    'english-2025-07':'JULY 2025.pdf',
+    'english-2025-08':'AUGUST 2025.pdf',
+    'english-2025-09':'SEPTEMBER 2025.pdf',
+    'english-2025-10':'OCTOBER 2025 English.pdf',
+    'english-2025-11':'NOVEMBER CURRENT AFFAIRS English (1).pdf',
+    'english-2025-12':'DECEMBER_ENGLISH_2025.pdf',
+    // ---- 2026 HINDI ----
+    'hindi-2026-01':null,   // 127 MB -- bahut badi
+    'hindi-2026-02':'parmar-hindi-2026-02.pdf',
+    'hindi-2026-03':'parmar-hindi-2026-03.pdf',
+    'hindi-2026-04':'parmar-hindi-2026-04.pdf',
+    'hindi-2026-05':'parmar-hindi-2026-05.pdf',
+    'hindi-2026-06':null,
+    'hindi-2026-07':'parmar-hindi-2026-07.pdf',
+    'hindi-2026-08':'parmar-hindi-2026-08.pdf',
+    'hindi-2026-09':null,
+    // ---- 2026 ENGLISH ----
+    'english-2026-01':null, // 126 MB -- bahut badi
+    'english-2026-02':'parmar-english-2026-02.pdf',
+    'english-2026-03':'parmar-english-2026-03.pdf',
+    'english-2026-04':'parmar-english-2026-04.pdf',
+    'english-2026-05':'parmar-english-2026-05.pdf',
+    'english-2026-06':'parmar-english-2026-06.pdf',
+    'english-2026-07':'parmar-english-2026-07.pdf',
+    'english-2026-08':'parmar-english-2026-08.pdf',
+    'english-2026-09':null
+  };
+
+  // ===== PARCHAM CLASSES (sirf 2026) =====
+  var PARCHAM_FILES={
+    '2026-01':"Monthly Magazine January'26.pdf",
+    '2026-02':"Monthly Magazine February'26.pdf",
+    '2026-03':"Monthly Magazine March'26.pdf",
+    '2026-04':"Monthly Magazine April'26.pdf",
+    '2026-05':"Monthly Magazine May'26.pdf",
+    '2026-06':"Monthly Magazine June'26.pdf",
+    '2026-07':"Monthly Magazine July'26.pdf",
+    '2026-08':"Monthly Magazine August'26.pdf",
+    '2026-09':"Monthly Magazine September'26.pdf"
+  };
+  var PARCHAM_YEARS={ '2026':9 };
+  var PARCHAM_NOTE='baby hindi me ni aati inki \ud83e\udd2d';
+
+
+  // ===== NTPC PYQ =====  (file = pdf ka naam ya https:// link ; null = JALDI)
+  var NTPC={
+    polity:{label:'Polity', lecs:{1:{},2:{},3:{},4:{},5:{},6:{},7:{},8:{},9:{},10:{}}}
+  };
+  // File ka naam apne aap banta hai:  ntpc-<subject>-<lec 2 digit>-<format>.<ext>
+  //   ntpc-polity-01-hindi.pdf | ntpc-polity-01-english.pdf | ntpc-polity-01-quiz.html | ntpc-polity-01-ppt.pdf
+  // Agar kisi ka naam alag rakhna ho to upar lecs me likho, jaise: 1:{quiz:'https://...'}
+  var NTPC_FMT=[
+    {k:'hindi',   label:'Hindi PDF',   ext:'pdf',  dl:true},
+    {k:'english', label:'English PDF', ext:'pdf',  dl:true},
+    {k:'quiz',    label:'Quiz',        ext:'html', dl:false},
+    {k:'ppt',     label:'Class PPT',   ext:'pdf',  dl:true}
+  ];
+  function ntpcFile(sub,n,fm){
+    var o=NTPC[sub].lecs[n][fm.k];
+    return o||('ntpc-'+sub+'-'+('0'+n).slice(-2)+'-'+fm.k+'.'+fm.ext);
+  }
+
+  var LANGS={
+    hindi:   {label:'𝙷𝙸𝙽𝙳𝙸 𝙼𝙰𝙶𝚉𝙸𝙽𝙴',   short:'Hindi'},
+    english: {label:'𝙴𝙽𝙶𝙻𝙸𝚂𝙷 𝙼𝙰𝙶𝚉𝙸𝙽𝙴', short:'English'}
+  };
+
+  // Pehla page ke cards
+  var SECTIONS=[
+    {key:'parmar',  label:'𝐏𝐚𝐫𝐦𝐚𝐫 𝐒𝐒𝐂',        sub:'Parmar CA · NTPC PYQ', ready:true},
+    {key:'parcham', label:'𝗣𝗮𝗿𝗰𝗵𝗮𝗺 𝗖𝗹𝗮𝘀𝘀𝗲𝘀',   sub:'Monthly Magazines 2026',     ready:true},
+    {key:'indologous', label:'𝗜𝗻𝗱𝗼𝗹𝗼𝗴𝗼𝘂𝘀 𝗖𝗔', sub:'Current Affairs',            ready:false},
+    {key:'other',   label:'𝗢𝘁𝗵𝗲𝗿 𝗖𝗔',         sub:'Current Affairs',            ready:false}
+  ];
+
+  /* ========================================================= */
+  var $=function(id){return document.getElementById(id);};
+  var list=$('list');
+  var ARROW='<svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var DL='<svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 4v11M7 11l5 5 5-5M5 20h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},2200);}
+  function go(h){location.hash=h;}
+  function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+  function head(title,sub,badge,crumb){
+    $('title').innerHTML=title; $('sub').textContent=sub||''; $('badge').textContent=badge||'MAGAZINES'; $('crumb').textContent=crumb||'';
+  }
+  function card(label,sub,onclick,opts){
+    opts=opts||{};
+    var el=document.createElement('button');
+    el.type='button'; el.className='row'+(opts.soon?' soon':'');
+    el.innerHTML='<span class="num"></span><span class="txt"><span class="t">'+esc(label)+'</span><span class="m">'+esc(sub||'')+'</span></span><span class="arr">'+(opts.soon?'JALDI':ARROW)+'</span>';
+    el.addEventListener('click',onclick); list.appendChild(el);
+  }
+
+  function render(){
+    var p=(location.hash||'#/').replace(/^#\/?/,'').split('/').filter(Boolean);
+    list.innerHTML=''; window.scrollTo(0,0);
+    var back=$('backBtn');
+    var showBell=(p[0]==='parcham' && p[1]==='2026' && p.length===2);
+    $('bellBtn').style.display=showBell?'flex':'none';
+    if(!showBell) $('inbox').classList.remove('open');
+    back.textContent = p.length ? '← Back' : '← Home';
+
+    if(p.length===0){
+      head('𝐏𝐫𝐞𝐦𝐢𝐮𝐦 <span>𝐌𝐚𝐠𝐳𝐢𝐧𝐞𝐬</span>','Apna section chuno','MAGAZINES','');
+      SECTIONS.forEach(function(s){
+        card(s.label,s.sub,function(){ s.ready?go('/'+s.key):toast('Ye section jaldi aa raha hai'); },{soon:!s.ready});
+      });
+      return;
+    }
+    if(p[0]==='parcham' && p.length===1){
+      head('𝗣𝗮𝗿𝗰𝗵𝗮𝗺 <span>𝗖𝗹𝗮𝘀𝘀𝗲𝘀</span>','Saal chuno','PARCHAM','');
+      Object.keys(PARCHAM_YEARS).forEach(function(y){
+        card(y,'Monthly Magazines \u00b7 '+PARCHAM_YEARS[y]+' PDFs',function(){go('/parcham/'+y);});
+      });
+      return;
+    }
+    if(p[0]==='parcham' && PARCHAM_YEARS[p[1]] && p.length===2){
+      var py=p[1];
+      head('Parcham <span>'+py+'</span>','Mahina chuno aur PDF kholo','PARCHAM '+py,'PARCHAM \u203a '+py);
+      for(var k=0;k<PARCHAM_YEARS[py];k++){
+        (function(k){
+          var f=PARCHAM_FILES[py+'-'+('0'+(k+1)).slice(-2)];
+          var row=document.createElement('div'); row.className='mrow';
+          var actions;
+          if(f){
+            var u=/^https?:\/\//i.test(f)?f:encodeURI(f);
+            actions='<a class="pill open" href="'+u+'" target="_blank" rel="noopener">Open</a><a class="pill dl" href="'+u+'" download aria-label="Download">'+DL+'</a>';
+          }else{ actions='<span class="pill soon">JALDI</span>'; }
+          row.innerHTML='<span class="txt"><span class="t">'+MONTHS[k]+' '+py+'</span><span class="m">Parcham Classes \u00b7 PDF</span></span><span class="btns">'+actions+'</span>';
+          list.appendChild(row);
+        })(k);
+      }
+      return;
+    }
+    if(p[0]==='parmar' && p.length===1){
+      head('𝐏𝐚𝐫𝐦𝐚𝐫 <span>𝐒𝐒𝐂</span>','Apna section chuno','PARMAR SSC','');
+      card('Parmar CA','Monthly Magazines · 2025 & 2026',function(){go('/parmar/ca');});
+      card('NTPC PYQ','Subject-wise lectures · PDF & Quiz',function(){go('/parmar/ntpc');});
+      return;
+    }
+    if(p[0]==='parmar' && p[1]==='ntpc'){
+      var subs=Object.keys(NTPC);
+      if(p.length===2){
+        head('NTPC <span>PYQ</span>','Subject chuno','NTPC PYQ','PARMAR SSC › NTPC PYQ');
+        subs.forEach(function(s2){
+          var n=Object.keys(NTPC[s2].lecs).length;
+          card(NTPC[s2].label,n+(n===1?' lecture':' lectures'),function(){go('/parmar/ntpc/'+s2);});
+        });
+        return;
+      }
+      var sb=NTPC[p[2]];
+      if(sb && p.length===3){
+        head(sb.label.replace(/^(\S+)/,'<span>$1</span>'),'Lecture chuno','NTPC PYQ','PARMAR SSC › NTPC PYQ › '+sb.label.toUpperCase());
+        Object.keys(sb.lecs).forEach(function(n){
+          card('Lec - '+('0'+n).slice(-2),'Hindi PDF · English PDF · Quiz · Class PPT',function(){go('/parmar/ntpc/'+p[2]+'/'+n);});
+        });
+        return;
+      }
+      if(sb && sb.lecs[p[3]] && p.length===4){
+        var lec=sb.lecs[p[3]], ln='Lec - '+('0'+p[3]).slice(-2);
+        head(sb.label+' <span>'+ln+'</span>','Format chuno','NTPC PYQ','PARMAR SSC › NTPC PYQ › '+sb.label.toUpperCase()+' › '+ln.toUpperCase());
+        NTPC_FMT.forEach(function(fm){
+          var file=ntpcFile(p[2],p[3],fm),row=document.createElement('div');
+          row.className='mrow';
+          var u=/^https?:\/\//i.test(file)?file:encodeURI(file);
+          function setOpen(){
+            row.querySelector('.btns').innerHTML='<a class="pill open" href="'+u+'" target="_blank" rel="noopener">Open</a>'+(fm.dl?'<a class="pill dl" href="'+u+'" download aria-label="Download">'+DL+'</a>':'');
+          }
+          function setSoon(){ row.querySelector('.btns').innerHTML='<span class="pill soon">JALDI</span>'; }
+          row.innerHTML='<span class="txt"><span class="t">'+fm.label+'</span><span class="m">'+sb.label+' \u00b7 '+ln+'</span></span><span class="btns"><span class="pill soon">...</span></span>';
+          list.appendChild(row);
+          if(/^https?:\/\//i.test(file)){ setOpen(); return; }
+          fetch(u,{method:'HEAD',cache:'no-store'}).then(function(r){ (r.status===404)?setSoon():setOpen(); }).catch(function(){ setOpen(); });
+        });
+        return;
+      }
+    }
+    if(p[0]==='parmar' && p[1]==='ca'){
+      var q=p.slice(2);
+      if(q.length===0){
+        head('Parmar <span>CA</span>','Saal chuno','PARMAR CA','PARMAR SSC › PARMAR CA');
+        Object.keys(YEARS).forEach(function(y){
+          card(y,'Hindi & English Magazines · '+(YEARS[y]*2)+' PDFs',function(){go('/parmar/ca/'+y);});
+        });
+        return;
+      }
+      if(YEARS[q[0]] && q.length===1){
+        head('Parmar <span>'+q[0]+'</span>','Language chuno','PARMAR CA','PARMAR SSC › PARMAR CA › '+q[0]);
+        Object.keys(LANGS).forEach(function(l){
+          card(LANGS[l].label,YEARS[q[0]]+' months',function(){go('/parmar/ca/'+q[0]+'/'+l);});
+        });
+        return;
+      }
+      if(YEARS[q[0]] && LANGS[q[1]] && q.length===2){
+        var y=q[0],l=q[1];
+        head(LANGS[l].label,'Mahina chuno aur PDF kholo','PARMAR '+y,'PARMAR CA › '+y+' › '+LANGS[l].short.toUpperCase());
+        for(var i=0;i<YEARS[y];i++){
+          (function(i){
+            var mm=('0'+(i+1)).slice(-2),key=l+'-'+y+'-'+mm;
+            var file=FILES[key]||('parmar-'+l+'-'+y+'-'+mm+'.pdf');
+            var auto=!FILES[key];
+            var row=document.createElement('div'); row.className='mrow';
+            var url=/^https?:\/\//i.test(file)?file:encodeURI(file);
+            function setOpen(){ row.querySelector('.btns').innerHTML='<a class="pill open" href="'+url+'" target="_blank" rel="noopener">Open</a><a class="pill dl" href="'+url+'" download aria-label="Download">'+DL+'</a>'; }
+            function setSoon(){ row.querySelector('.btns').innerHTML='<span class="pill soon">JALDI</span>'; }
+            row.innerHTML='<span class="txt"><span class="t">'+MONTHS[i]+' '+y+'</span><span class="m">'+LANGS[l].short+' Magazine \u00b7 PDF</span></span><span class="btns"><span class="pill soon">'+(auto?'...':'JALDI')+'</span></span>';
+            list.appendChild(row);
+            if(!auto){ setOpen(); return; }
+            fetch(url,{method:'HEAD',cache:'no-store'}).then(function(r){ (r.status===404)?setSoon():setOpen(); }).catch(function(){ setSoon(); });
+          })(i);
+        }
+        return;
+      }
+    }
+    go('/');
+  }
+
+  $('backBtn').addEventListener('click',function(){
+    var p=(location.hash||'#/').replace(/^#\/?/,'').split('/').filter(Boolean);
+    if(!p.length){ location.href='index.html'; return; }
+    p.pop(); location.hash='/'+p.join('/');
+  });
+  // notification bell (Parcham 2026)
+  var NOTIF_KEY='cm_parcham_note_seen_v1';
+  $('inboxMsg').textContent=PARCHAM_NOTE;
+  try{ if(localStorage.getItem(NOTIF_KEY)==='1') $('bellDot').classList.add('hide'); }catch(_){}
+  $('bellBtn').addEventListener('click',function(){
+    $('inbox').classList.add('open'); $('bellDot').classList.add('hide');
+    try{ localStorage.setItem(NOTIF_KEY,'1'); }catch(_){}
+  });
+  $('inboxX').addEventListener('click',function(){ $('inbox').classList.remove('open'); });
+  $('inbox').addEventListener('click',function(e){ if(e.target===$('inbox')) $('inbox').classList.remove('open'); });
+
+  window.addEventListener('hashchange',render);
+  render();
+})();
+</script>
+</body>
+</html>
